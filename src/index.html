@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -7,24 +7,34 @@
   <title>Neighboood Map Project</title>
   <link rel="stylesheet" href="./components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <!--<link href="http://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">-->
+  <link href="http://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
 </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        	Test
-        </div>
-      </div>
-    </div>
-    <div id="map">
-    </div>
+  	<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map" ></div>
     <script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./components/knockout/dist/knockout.js"></script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initAutocomplete">
     </script>
     <script type="text/javascript" src="./js/main.js"></script>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Places Searchbox</title>
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+    <script src="./js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&libraries=places&callback=initAutocomplete"
+         async defer></script>
   </body>
 </html>
