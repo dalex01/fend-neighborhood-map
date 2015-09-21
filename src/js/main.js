@@ -3,7 +3,7 @@
 // pick list containing a mix of places and predicted search terms.
 
 $(function () {
-    $("#map").css("height", $(window).height());
+    //$("#map").css("height", $(window).height());
     $("#info").css("height", $(window).height()-30);
 });
 

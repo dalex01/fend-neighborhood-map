@@ -6,11 +6,11 @@ body {
 }
 
 #map {
-  height: 400px;
-}
-
-#wrapper {
-	position: relative;
+  position:absolute;
+  bottom:0;
+  top:0;
+  left:0;
+  right:0;
 }
 
 .controls {
@@ -27,14 +27,13 @@ body {
 }
 
 #search {
-	position: absolute;
 	background-color: transparent;
 	left: 120px;
 	z-index: 99;
 }
 
 #info {
-	position: absolute;
+	float: right;
 	background-color: #fff;
   	font-family: Roboto;
   	font-size: 15px;
