@@ -22,114 +22,200 @@ function initMap() {
 
   var myLocations = [
   	{
-  		name: 'France/Paris',
+  		country: 'France',
+  		city: 'Paris',
+  		type: 'exact',
   		lat: 48.854759,
   		lng: 2.305080
   	},
   	{
-  		name: 'Israel-Palestina/Ierusalim-Bhyfleem',
+  		country: 'Israel',
+  		city: 'Bhethlehem',
+  		type: 'so-so',
   		lat: 31.709661,
   		lng: 35.202141
   	},
   	{
-  		name: 'Egypt/Hurgada',
+  		country: 'Israel',
+  		city: 'Jerusalem',
+  		type: 'so-so',
+  		lat: 31.778245,
+  		lng: 35.229397
+  	},
+  	{
+  		country: 'Israel',
+  		city: 'Jericho',
+  		type: 'so-so',
+  		lat: 31.855132,
+  		lng: 35.458276
+  	},
+  	{
+  		country: 'Egypt',
+  		city: 'Luxor',
+  		type: 'so-so',
+  		lat: 25.714124,
+  		lng: 32.649766
+  	},
+  	{
+  		country: 'Egypt',
+  		city: 'Hurgada',
+  		type: 'so-so',
   		lat: 27.082086,
   		lng: 33.860678
   	},
   	{
-  		name: 'Egypt/Sharm-el-Sheikh',
+  		country: 'Egypt',
+  		city: 'Sharm-el-Sheikh',
+  		type: 'exact',
   		lat: 27.861737,
   		lng: 34.317525
   	},
   	{
-  		name: 'Thailand/Bangkok',
-  		lat: 13.757128,
-  		lng: 100.502351
+  		country: 'Thailand',
+  		city: 'Bangkok',
+  		type: 'exact',
+  		lat: 13.757137,
+  		lng: 100.502789
   	},
   	{
-  		name: 'Thailand/Pattaya',
-  		lat: 12.930780,
-  		lng: 100.880055
+  		country: 'Thailand',
+  		city: 'Pattaya',
+  		type: 'exact',
+  		lat: 12.930813,
+  		lng: 100.880119
   	},
   	{
-  		name: 'USA/New York',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'USA',
+  		city: 'New York',
+  		type: 'so-so',
+  		lat: 40.621153,
+  		lng: -73.998114
   	},
   	{
-  		name: 'USA/Chicago',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'USA',
+  		city: 'Chicago',
+  		type: 'so-so',
+  		lat: 41.883543,
+  		lng: -87.795953
   	},
   	{
-  		name: 'USA/Boston',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'USA',
+  		city: 'Boston',
+  		type: 'so-so',
+  		lat: 42.362860,
+  		lng: -71.118612
   	},
   	{
-  		name: 'Germany/Berlin',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'USA',
+  		city: 'Boston',
+  		type: 'so-so',
+  		lat: 43.090628,
+  		lng: -79.058927
   	},
   	{
-  		name: 'Finland/Helsinki',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Germany',
+  		city: 'Berlin',
+  		type: 'exact',
+  		lat: 52.501939,
+  		lng: 13.384981
   	},
   	{
-  		name: 'Norway/Oslo',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Finland',
+  		city: 'Helsinki',
+  		type: 'so-so',
+  		lat: 60.171040,
+  		lng: 24.939737
   	},
   	{
-  		name: 'Sweden/Stockholm',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Norway',
+  		city: 'Oslo',
+  		type: 'so-so',
+  		lat: 59.913331,
+  		lng: 10.749411
   	},
   	{
-  		name: 'Lithuania/Vilnus',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Sweden',
+  		city: 'Stockholm',
+  		type: 'so-so',
+  		lat: 59.327510,
+  		lng: 18.070844
   	},
   	{
-  		name: 'Belarus/Minsk',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Lithuania',
+  		city: 'Kaunas',
+  		type: 'so-so',
+  		lat: 54.898163,
+  		lng: 23.897247
   	},
   	{
-  		name: 'Russia/Moscow',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Lithuania',
+  		city: 'Vilnus',
+  		type: 'exact',
+  		lat: 54.674072,
+  		lng: 25.285036
   	},
   	{
-  		name: 'Russia/Saint-Petersburg',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Belarus',
+  		city: 'Minsk',
+  		type: 'exact',
+  		lat: 53.627318,
+  		lng: 27.977858
   	},
   	{
-  		name: 'Russia/Kursk',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Russia',
+  		city: 'Moscow',
+  		type: 'so-so',
+  		lat: 55.775691,
+  		lng: 37.586972
   	},
   	{
-  		name: 'Russia/Belgorod',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Russia',
+  		city: 'Vladimir',
+  		type: 'so-so',
+  		lat: 56.128201,
+  		lng: 40.403193
   	},
   	{
-  		name: 'UAE/Dubai',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Russia',
+  		city: 'Saint-Petersburg',
+  		type: 'exact',
+  		lat: 59.932236,
+  		lng: 30.353496
   	},
   	{
-  		name: 'Kazakhstan/Almata',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Russia',
+  		city: 'Kursk',
+  		type: 'exact',
+  		lat: 51.748547,
+  		lng: 36.189659
   	},
   	{
-  		name: 'Turkey/Istambul',
-  		lat: 55.217734,
-  		lng: 37.172017
+  		country: 'Russia',
+  		city: 'Belgorod',
+  		type: 'so-so',
+  		lat: 50.599392,
+  		lng: 36.591674
+  	},
+  	{
+  		country: 'UAE',
+  		city: 'Dubai',
+  		type: 'so-so',
+  		lat: 25.203156,
+  		lng: 55.270310
+  	},
+  	{
+  		country: 'Kazakhstan',
+  		city: 'Almata',
+  		type: 'exact',
+  		lat: 43.382937,
+  		lng: 77.128332
+  	},
+  	{
+  		country: 'Turkey',
+  		city: 'Istambul',
+  		type: 'exact',
+  		lat: 41.010213,
+  		lng: 28.977798
   	}
   ];
 
@@ -139,7 +225,7 @@ function initMap() {
   	var marker = new google.maps.Marker({
     	position: myLocations[loc],
     	map: map,
-    	title: myLocations[loc].name
+    	title: myLocations[loc].country + '/' + myLocations[loc].city
   	});
   	markers.push(marker);
   }
