@@ -1,4 +1,18 @@
-## To install
+# Places in the World I've visited with my family
+This map represent different cities all over the world I have visited with my family since 2009.
+
+## How to use
+Here is link to the map: TBD
+
+## Features
+Visited cities are marked at the load of the map.
+TBD
+
+## APIs used
+Google Maps Javascript API
+TBD
+
+## TBD
 
 ### Bower
 1. Bootstrap
