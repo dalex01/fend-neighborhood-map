@@ -13,6 +13,9 @@
     	<div class="row">
     		<div id="search" class="col-md-6"><input id="pac-input" class="controls" type="text" placeholder="Search Box"></div>
 			<div id="info" class="col-md-6 controls">
+				<h1 class="header">Visited Places</h1>
+				<div id="info-list">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -20,9 +23,11 @@
 
 	<script type="text/template" data-template="place">
         <div class="place">
-        	<span class="country">{{Country}}</span>, <span class="city">{{City}}</span><br>
-        	<span class="date">This place was visited on {{date}}</span>
-        	<hr>
+        	<p>
+        		<span class="country">{{Country}}</span>, <span class="city">{{City}}</span><br>
+        		<span class="date">This place was visited on {{date}}</span>
+        	</p>
+        	<hr class="line">
         </div>
 
     </script>

@@ -305,7 +305,7 @@ var addMarkers = function (map) {
 var viewModel = function () {
 	$("#info").css("height", $(window).height()-30);
 
-	placesList = $('#info');
+	placesList = $('#info-list');
 	placesList.html('');
     placeTemplate = $('script[data-template="place"]').html();
     var loc;
