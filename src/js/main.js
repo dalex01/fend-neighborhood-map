@@ -308,6 +308,7 @@ var addMarkers = function (map) {
 
 var viewModel = function () {
 	$("#info").css("height", $(window).height()-30);
+	$("body").css("max-width", $(window).width());
 
 	placesList = $('#info-list');
 	placesList.html('');

@@ -45,6 +45,7 @@ body {
 	filter: alpha(opacity=80);
 	padding: 0 0 0 5px;
 	transition: transform 0.5s;
+	position: fixed;
 }
 
 #pac-input {
@@ -112,13 +113,10 @@ body {
 .header {
 	color: #8F8F8F;
 	font-weight: normal;
-	display: block;
 	text-align: right;
 }
 
-.wrap {
-	position: relative;
-}
+
 
 .line {
 	margin: 0;
@@ -155,7 +153,6 @@ body {
 
 .icon-list {
 	position: absolute;
-	display: block;
 }
 
 .icon-list:before {
