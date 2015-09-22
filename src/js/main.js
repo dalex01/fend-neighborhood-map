@@ -319,6 +319,10 @@ var viewModel = function () {
 		thisTemplate = thisTemplate.replace('{{date}}', model.locations[loc].date);
         placesList.append(thisTemplate);
 	}
+
+	$('.icon-list').on('click', function() {
+        $('#info').toggleClass('menu-hidden');
+    });
 };
 
 
