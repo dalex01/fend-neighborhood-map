@@ -309,21 +309,14 @@ var addMarkers = function (map) {
 var viewModel = function () {
 	var self = this;
 	self.isHidden = ko.observable(true);
+
 	this.infoHeight = ko.observable($(window).height()-30);
 	self.toggleHidden = function () {
 		self.isHidden(!self.isHidden());
 	};
 
-	placesList = $('#info-list');
-	placesList.html('');
-    placeTemplate = $('script[data-template="place"]').html();
-    var loc;
-	for (loc in model.locations) {
-		var thisTemplate = placeTemplate.replace('{{Country}}', model.locations[loc].country);
-		thisTemplate = thisTemplate.replace('{{City}}', model.locations[loc].city);
-		thisTemplate = thisTemplate.replace('{{date}}', model.locations[loc].date);
-        placesList.append(thisTemplate);
-	}
+	this.places = model.locations;
+
 };
 
 

@@ -25,17 +25,19 @@
 						<h1 class="header rotated-text__inner">Visited Places</h1>
 					</div>
 				</div>
-				<div id="info-list"></div>
+				<div id="info-list" data-bind="template: { name: 'place-template', foreach: places }"></div>
 			</div>
 		</div>
 	</div>
 	<div id="map"></div>
 
-	<script type="text/template" data-template="place">
+	<script type="text/html" id="place-template">
         <div class="place">
         	<p>
-        		<span class="country">{{Country}}</span>, <span class="city">{{City}}</span><br>
-        		<span class="date">This place was visited on {{date}}</span>
+        		<span class="country" data-bind="text: country"></span>, 
+        		<span class="city" data-bind="text: city"></span>
+        		<br>
+        		<span class="date">This place was visited on <span data-bind="text: date"></span></span>
         	</p>
         	<hr class="line">
         </div>
