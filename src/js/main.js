@@ -14,7 +14,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 48.854759,
-			lng: 2.305080
+			lng: 2.305080,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -23,7 +25,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 31.709661,
-			lng: 35.202141
+			lng: 35.202141,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -32,7 +36,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 31.778245,
-			lng: 35.229397
+			lng: 35.229397,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -41,7 +47,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 31.855132,
-			lng: 35.458276
+			lng: 35.458276,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Africa',
@@ -50,7 +58,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 25.714124,
-			lng: 32.649766
+			lng: 32.649766,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Africa',
@@ -59,7 +69,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 27.082086,
-			lng: 33.860678
+			lng: 33.860678,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Africa',
@@ -68,7 +80,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 27.861737,
-			lng: 34.317525
+			lng: 34.317525,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -77,7 +91,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 13.757137,
-			lng: 100.502789
+			lng: 100.502789,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -86,7 +102,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 12.930813,
-			lng: 100.880119
+			lng: 100.880119,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'North America',
@@ -95,7 +113,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 40.621153,
-			lng: -73.998114
+			lng: -73.998114,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'North America',
@@ -104,7 +124,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 41.883543,
-			lng: -87.795953
+			lng: -87.795953,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'North America',
@@ -113,7 +135,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 42.362860,
-			lng: -71.118612
+			lng: -71.118612,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'North America',
@@ -122,7 +146,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 43.090628,
-			lng: -79.058927
+			lng: -79.058927,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -131,7 +157,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 52.501939,
-			lng: 13.384981
+			lng: 13.384981,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -140,7 +168,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 60.171040,
-			lng: 24.939737
+			lng: 24.939737,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -149,7 +179,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 59.913331,
-			lng: 10.749411
+			lng: 10.749411,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -158,7 +190,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 59.327510,
-			lng: 18.070844
+			lng: 18.070844,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -167,7 +201,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 54.898163,
-			lng: 23.897247
+			lng: 23.897247,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -176,7 +212,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 54.674072,
-			lng: 25.285036
+			lng: 25.285036,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -185,7 +223,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 53.627318,
-			lng: 27.977858
+			lng: 27.977858,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -194,7 +234,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 55.775691,
-			lng: 37.586972
+			lng: 37.586972,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -203,7 +245,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 56.128201,
-			lng: 40.403193
+			lng: 40.403193,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -212,7 +256,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 59.932236,
-			lng: 30.353496
+			lng: 30.353496,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -221,7 +267,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 51.748547,
-			lng: 36.189659
+			lng: 36.189659,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Europe',
@@ -230,7 +278,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 50.599392,
-			lng: 36.591674
+			lng: 36.591674,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -239,7 +289,9 @@ var model = {
 			type: 'so-so',
 			date: 'TBD',
 			lat: 25.203156,
-			lng: 55.270310
+			lng: 55.270310,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -248,7 +300,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 43.382937,
-			lng: 77.128332
+			lng: 77.128332,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -257,7 +311,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 41.010213,
-			lng: 28.977798
+			lng: 28.977798,
+			hotel: 'TBD',
+			show: true
 		},
 		{
 			continent: 'Asia',
@@ -266,7 +322,9 @@ var model = {
 			type: 'exact',
 			date: 'TBD',
 			lat: 13.341384,
-			lng: 103.836862
+			lng: 103.836862,
+			hotel: 'TBD',
+			show: true
 		}
 	],
 	markers: []
@@ -315,7 +373,23 @@ var viewModel = function () {
 		self.isHidden(!self.isHidden());
 	};
 
-	this.places = model.locations;
+	this.places = ko.observableArray();
+	self.searchQuery = ko.observable();
+
+	this.places = ko.computed(function() {
+		var places = [];
+		if (self.searchQuery()) {
+			var query = self.searchQuery().toLowerCase();
+			for (loc in model.locations) {
+				if (model.locations[loc].continent.toLowerCase() === query ||
+					model.locations[loc].country.toLowerCase() === query ||
+					model.locations[loc].city.toLowerCase() == query)
+						places.push(model.locations[loc]);
+			}
+		} else
+			places = model.locations;
+		return places;
+	});
 
 };
 

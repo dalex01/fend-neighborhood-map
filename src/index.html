@@ -12,11 +12,20 @@
     <div class="container-fluid">
     	<div class="row">
     		<div id="search" class="col-md-8">
-    			<input id="pac-input" class="controls" type="text" placeholder="Search Box: enter Continent, Country or City to filter places or any place in the world to find it...">
+    			<input
+    				id="pac-input"
+    				class="controls"
+    				type="text"
+    				placeholder="Search Box: enter Continent, Country or City to filter places"
+    				data-bind="textInput: searchQuery"
+    			>
     		</div>
-			<div id="info" class="col-md-4 controls"
-			data-bind="css: {'menu-hidden' : isHidden},
-					   style: { height: infoHeight()+'px'}">
+			<div
+				id="info"
+				class="col-md-4 controls"
+				data-bind="css: {'menu-hidden' : isHidden},
+						   style: { height: infoHeight()+'px'}"
+			>
 				<a href="#">
 					<i class="icon-list" data-bind="click: toggleHidden"></i>
 				</a>
@@ -28,13 +37,18 @@
 				<div id="info-list" data-bind="template: { name: 'place-template', foreach: places }"></div>
 			</div>
 		</div>
+		<div class="row">
+			<div id="photos" class="col-md-4">
+				Test
+			</div>
+		</div>
 	</div>
 	<div id="map"></div>
 
 	<script type="text/html" id="place-template">
         <div class="place">
         	<p>
-        		<span class="country" data-bind="text: country"></span>, 
+        		<span class="country" data-bind="text: country"></span>,
         		<span class="city" data-bind="text: city"></span>
         		<br>
         		<span class="date">This place was visited on <span data-bind="text: date"></span></span>
