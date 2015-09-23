@@ -41,8 +41,6 @@ body {
 	height: auto;
 	z-index: 99;
 	overflow-y:auto;
-	opacity: 0.8;
-	filter: alpha(opacity=80);
 	padding: 0 0 0 5px;
 	transition: transform 0.5s;
 	position: fixed;
@@ -56,8 +54,8 @@ body {
   	padding: 0 11px 0 13px;
   	text-overflow: ellipsis;
   	width: 100%;
-  	opacity: 0.7;
-	filter: alpha(opacity=70);
+  	opacity: 0.6;
+	filter: alpha(opacity=60);
 }
 
 #pac-input:focus {
@@ -153,6 +151,7 @@ body {
 
 .icon-list {
 	position: absolute;
+	padding-top: 10px;
 }
 
 .icon-list:before {
@@ -161,8 +160,10 @@ body {
 }
 
 .menu-hidden {
-    transform: translate3d(18em, 0, 0);
+    transform: translate3d(17.5em, 0, 0);
     transition: transform 0.5s;
+    opacity: 0.6;
+	filter: alpha(opacity=60);
 }
 
 .rotate {

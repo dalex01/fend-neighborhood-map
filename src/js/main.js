@@ -307,8 +307,12 @@ var addMarkers = function (map) {
 };
 
 var viewModel = function () {
-	$("#info").css("height", $(window).height()-30);
-	$("body").css("max-width", $(window).width());
+	var self = this;
+	self.isHidden = ko.observable(true);
+	this.infoHeight = ko.observable($(window).height()-30);
+	self.toggleHidden = function () {
+		self.isHidden(!self.isHidden());
+	};
 
 	placesList = $('#info-list');
 	placesList.html('');
@@ -320,10 +324,6 @@ var viewModel = function () {
 		thisTemplate = thisTemplate.replace('{{date}}', model.locations[loc].date);
         placesList.append(thisTemplate);
 	}
-
-	$('.icon-list').on('click', function() {
-        $('#info').toggleClass('menu-hidden');
-    });
 };
 
 

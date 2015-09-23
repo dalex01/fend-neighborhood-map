@@ -11,11 +11,19 @@
   <body>
     <div class="container-fluid">
     	<div class="row">
-    		<div id="search" class="col-md-8"><input id="pac-input" class="controls" type="text" placeholder="Search Box"></div>
-			<div id="info" class="col-md-4 controls menu-hidden">
-				<a href="#"><i class="icon-list"></i></a>
+    		<div id="search" class="col-md-8">
+    			<input id="pac-input" class="controls" type="text" placeholder="Search Box: enter Continent, Country or City to filter places or any place in the world to find it...">
+    		</div>
+			<div id="info" class="col-md-4 controls"
+			data-bind="css: {'menu-hidden' : isHidden},
+					   style: { height: infoHeight()+'px'}">
+				<a href="#">
+					<i class="icon-list" data-bind="click: toggleHidden"></i>
+				</a>
 				<div class="rotate">
-					<div class="rotated-text"><h1 class="header rotated-text__inner">Visited Places</h1></div>
+					<div class="rotated-text">
+						<h1 class="header rotated-text__inner">Visited Places</h1>
+					</div>
 				</div>
 				<div id="info-list"></div>
 			</div>
