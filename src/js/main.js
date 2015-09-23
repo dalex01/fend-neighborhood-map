@@ -337,7 +337,7 @@ var initMap = function () {
     	mapTypeControl: true,
     	mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControlOptions: {
-        	position: google.maps.ControlPosition.LEFT_BOTTOM
+        	position: google.maps.ControlPosition.BOTTOM_CENTER
     	},
     	zoomControl: true,
 	    zoomControlOptions: {
@@ -366,14 +366,25 @@ var addMarkers = function (map) {
 
 var viewModel = function () {
 	var self = this;
-	self.isHidden = ko.observable(true);
 
-	this.infoHeight = ko.observable($(window).height()-30);
-	self.toggleHidden = function () {
-		self.isHidden(!self.isHidden());
+	self.infoHeight = ko.observable($(window).height()-70);
+
+	self.isHiddenRight = ko.observable(true);
+	self.toggleHiddenRight = function () {
+		self.isHiddenRight(!self.isHiddenRight());
+		if (!self.isHiddenLeft())
+			this.toggleHiddenLeft();
 	};
 
-	this.places = ko.observableArray();
+	self.isHiddenLeft = ko.observable(true);
+	self.toggleHiddenLeft = function () {
+		self.isHiddenLeft(!self.isHiddenLeft());
+	};
+	self.showPhotos = function () {
+		if (self.isHiddenLeft())
+			self.toggleHiddenLeft();
+	};
+
 	self.searchQuery = ko.observable();
 
 	this.places = ko.computed(function() {

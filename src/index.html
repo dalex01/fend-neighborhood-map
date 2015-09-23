@@ -11,7 +11,7 @@
   <body>
     <div class="container-fluid">
     	<div class="row">
-    		<div id="search" class="col-md-8">
+    		<div id="search" class="col-md-12">
     			<input
     				id="pac-input"
     				class="controls"
@@ -20,14 +20,16 @@
     				data-bind="textInput: searchQuery"
     			>
     		</div>
+		</div>
+		<div class="row">
 			<div
 				id="info"
 				class="col-md-4 controls"
-				data-bind="css: {'menu-hidden' : isHidden},
+				data-bind="css: {'menu-hidden-right' : isHiddenRight},
 						   style: { height: infoHeight()+'px'}"
 			>
 				<a href="#">
-					<i class="icon-list" data-bind="click: toggleHidden"></i>
+					<i class="icon-list" data-bind="click: toggleHiddenRight"></i>
 				</a>
 				<div class="rotate">
 					<div class="rotated-text">
@@ -36,17 +38,73 @@
 				</div>
 				<div id="info-list" data-bind="template: { name: 'place-template', foreach: places }"></div>
 			</div>
-		</div>
-		<div class="row">
-			<div id="photos" class="col-md-4">
-				Test
+			<div
+				id="photos"
+				class="col-md-4 controls"
+				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
+						   style: { height: infoHeight()+'px'}"
+			>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
+				Test<br>
 			</div>
 		</div>
 	</div>
 	<div id="map"></div>
 
 	<script type="text/html" id="place-template">
-        <div class="place">
+        <div class="place" data-bind="click: $parent.showPhotos">
         	<p>
         		<span class="country" data-bind="text: country"></span>,
         		<span class="city" data-bind="text: city"></span>
