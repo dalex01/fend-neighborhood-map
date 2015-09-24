@@ -9,7 +9,7 @@
 
 var model = {
 	locations: [
-		{
+/*		{
 			continent: 'Europe',
 			country: 'France',
 			city: 'Paris',
@@ -48,7 +48,7 @@ var model = {
 			lat: 31.855132,
 			lng: 35.458276,
 			hotel: 'TBD'
-		},
+		},*/
 		{
 			continent: 'Africa',
 			country: 'Egypt',
@@ -69,7 +69,7 @@ var model = {
 			lng: 33.860678,
 			hotel: 'TBD'
 		},
-		{
+/*		{
 			continent: 'Africa',
 			country: 'Egypt',
 			city: 'Sharm-el-Sheikh',
@@ -98,7 +98,7 @@ var model = {
 			lat: 12.930813,
 			lng: 100.880119,
 			hotel: 'TBD'
-		},
+		},*/
 		{
 			continent: 'North America',
 			country: 'USA',
@@ -119,7 +119,7 @@ var model = {
 			lng: -87.795953,
 			hotel: 'TBD'
 		},
-		{
+/*		{
 			continent: 'North America',
 			country: 'USA',
 			city: 'Boston',
@@ -128,18 +128,18 @@ var model = {
 			lat: 42.362860,
 			lng: -71.118612,
 			hotel: 'TBD'
-		},
+		},*/
 		{
 			continent: 'North America',
 			country: 'USA',
-			city: 'Boston',
+			city: 'Niagara Falls',
 			type: 'so-so',
 			date: 'TBD',
 			lat: 43.090628,
 			lng: -79.058927,
 			hotel: 'TBD'
 		},
-		{
+/*		{
 			continent: 'Europe',
 			country: 'Germany',
 			city: 'Berlin',
@@ -188,7 +188,7 @@ var model = {
 			lat: 54.898163,
 			lng: 23.897247,
 			hotel: 'TBD'
-		},
+		},*/
 		{
 			continent: 'Europe',
 			country: 'Lithuania',
@@ -199,7 +199,7 @@ var model = {
 			lng: 25.285036,
 			hotel: 'TBD'
 		},
-		{
+/*		{
 			continent: 'Europe',
 			country: 'Belarus',
 			city: 'Minsk',
@@ -228,7 +228,7 @@ var model = {
 			lat: 56.128201,
 			lng: 40.403193,
 			hotel: 'TBD'
-		},
+		},*/
 		{
 			continent: 'Europe',
 			country: 'Russia',
@@ -259,7 +259,7 @@ var model = {
 			lng: 36.591674,
 			hotel: 'TBD'
 		},
-		{
+/*		{
 			continent: 'Asia',
 			country: 'UAE',
 			city: 'Dubai',
@@ -268,11 +268,11 @@ var model = {
 			lat: 25.203156,
 			lng: 55.270310,
 			hotel: 'TBD'
-		},
+		},*/
 		{
 			continent: 'Asia',
 			country: 'Kazakhstan',
-			city: 'Almata',
+			city: 'Almaty',
 			type: 'exact',
 			date: 'TBD',
 			lat: 43.382937,
@@ -288,7 +288,7 @@ var model = {
 			lat: 41.010213,
 			lng: 28.977798,
 			hotel: 'TBD'
-		},
+		}/*,
 		{
 			continent: 'Asia',
 			country: 'Kambodga',
@@ -298,9 +298,10 @@ var model = {
 			lat: 13.341384,
 			lng: 103.836862,
 			hotel: 'TBD'
-		}
+		}*/
 	],
-	markers: []
+	markers: [],
+	collectionsFlickr: {}
 };
 
 var initMap = function () {
@@ -348,10 +349,9 @@ var addMarkers = function (map) {
 	this.hotel = ko.observable(data.hotel);
 };*/
 
-var photosFlickr = {};
 collections = 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=add569cf17f09054f7b288308a48fc6a&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=db10204ed665b17c3c8126589c667107';
 
-var flickrRequestTimeout = setTimeout( function (){
+var flickrCollectionRequestTimeout = setTimeout( function (){
         alert('Failed to get Flickr resources');
     }, 8000);
 
@@ -359,18 +359,46 @@ $.ajax({
     url: collections,
     dataType: 'json',
     success: function(response) {
-    	handlePhotos(response);
-    	clearTimeout(flickrRequestTimeout);
+    	handleCollections(response);
+    	clearTimeout(flickrCollectionRequestTimeout);
     }
 });
 
-var handlePhotos = function (responseData) {
-    // do what you want with the data
+var handleCollections = function (responseData) {
     var collectionsList = responseData.collections.collection;
 
     for(var i = 0; i < collectionsList.length; i++) {
-      	photosFlickr[collectionsList[i].title] = {'collectionId': collectionsList[i].id};
+      	model.collectionsFlickr[collectionsList[i].title] = {'collectionId': collectionsList[i].id};
     }
+    //console.log(collectionsFlickr);
+};
+
+var findPhotosFromCollection = function(city) {
+	var flickrPhotosRequestTimeout = setTimeout( function (){
+        alert('Failed to get Flickr resources');
+    }, 8000);
+
+	//photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=add569cf17f09054f7b288308a48fc6a&collection_id=' + collectionId + '&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=9b8f107ded86fb6badaf8d7fc4dd259d';
+	photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=add569cf17f09054f7b288308a48fc6a&collection_id=136402781-72157659013876281&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=9b8f107ded86fb6badaf8d7fc4dd259d'
+
+	$.ajax({
+	    url: photos,
+	    dataType: 'json',
+	    success: function(response) {
+	    	handlePhotos(response);
+	    	clearTimeout(flickrPhotosRequestTimeout);
+	    }
+    });
+
+    var handlePhotos = function (responseData) {
+    	//console.log(responseData);
+	    var photosList = responseData.collection.iconphotos.photo;
+
+		//console.log(city);
+	    //console.log(collectionsFlickr[city]);
+	    model.collectionsFlickr[city].photo = photosList;
+	    //console.log(collectionsFlickr[city].photo);
+	};
 };
 
 var viewModel = function () {
@@ -390,8 +418,13 @@ var viewModel = function () {
 		self.isHiddenLeft(!self.isHiddenLeft());
 	};
 
-	self.showPhotos = function () {
+	this.city = ko.observable();
 
+	self.showPhotos = function (place) {
+		//console.log(place);
+		this.city = place.city;
+		//console.log(this.city = place.city);
+		findPhotosFromCollection(place.city);
 		if (self.isHiddenLeft())
 			self.toggleHiddenLeft();
 	};
@@ -419,6 +452,23 @@ var viewModel = function () {
 		return places;
 	});
 
+	//this.photos = ko.computed(function() {
+		this.photos = {
+			imgSrc: [0,0,0],
+			alt: ''
+		};
+	/*	for (ph in model.collectionsFlickr[this.city].photo) {
+			photos.imgSrc.push('https://farm' +
+								ph.farm +
+								'.staticflickr.com/' +
+								ph.server +
+								'/' +
+								ph.id +
+								'_' +
+								ph.secret +
+								'_m.jpg');
+		}
+	});*/
 
 };
 
