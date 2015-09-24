@@ -44,60 +44,16 @@
 				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
 						   style: { height: infoHeight()+'px'}"
 			>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
-				Test<br>
+			<!--<div
+				id="photos"
+				class="col-md-4 controls"
+				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
+						   style: { height: infoHeight()+'px'},
+						   template: {
+						   		name: 'photo-template',
+						   		foreach: photos
+						   	}"
+			>-->
 			</div>
 		</div>
 	</div>
@@ -113,13 +69,18 @@
         	</p>
         	<hr class="line">
         </div>
-
     </script>
 
+    <script type="text/html" id="photo-template">
+        <div class="photo">
+        	<img src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
+        </div>
+    </script>
 	<script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./components/knockout/dist/knockout.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initMap" async defer></script>
     <script src="./js/main.js"></script>
+    <!--<script type="text/javascript" src="https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=add569cf17f09054f7b288308a48fc6a&format=json&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=e7b08a21ec3c1aaf911fc2ec5357cc1c"></script>-->
   </body>
 </html>

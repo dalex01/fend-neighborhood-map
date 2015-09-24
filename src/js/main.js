@@ -5,6 +5,8 @@
 
 
 
+
+
 var model = {
 	locations: [
 		{
@@ -15,8 +17,7 @@ var model = {
 			date: 'TBD',
 			lat: 48.854759,
 			lng: 2.305080,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -26,8 +27,7 @@ var model = {
 			date: 'TBD',
 			lat: 31.709661,
 			lng: 35.202141,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -37,8 +37,7 @@ var model = {
 			date: 'TBD',
 			lat: 31.778245,
 			lng: 35.229397,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -48,8 +47,7 @@ var model = {
 			date: 'TBD',
 			lat: 31.855132,
 			lng: 35.458276,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Africa',
@@ -59,8 +57,7 @@ var model = {
 			date: 'TBD',
 			lat: 25.714124,
 			lng: 32.649766,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Africa',
@@ -70,8 +67,7 @@ var model = {
 			date: 'TBD',
 			lat: 27.082086,
 			lng: 33.860678,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Africa',
@@ -81,8 +77,7 @@ var model = {
 			date: 'TBD',
 			lat: 27.861737,
 			lng: 34.317525,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -92,8 +87,7 @@ var model = {
 			date: 'TBD',
 			lat: 13.757137,
 			lng: 100.502789,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -103,8 +97,7 @@ var model = {
 			date: 'TBD',
 			lat: 12.930813,
 			lng: 100.880119,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'North America',
@@ -114,8 +107,7 @@ var model = {
 			date: 'TBD',
 			lat: 40.621153,
 			lng: -73.998114,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'North America',
@@ -125,8 +117,7 @@ var model = {
 			date: 'TBD',
 			lat: 41.883543,
 			lng: -87.795953,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'North America',
@@ -136,8 +127,7 @@ var model = {
 			date: 'TBD',
 			lat: 42.362860,
 			lng: -71.118612,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'North America',
@@ -147,8 +137,7 @@ var model = {
 			date: 'TBD',
 			lat: 43.090628,
 			lng: -79.058927,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -158,8 +147,7 @@ var model = {
 			date: 'TBD',
 			lat: 52.501939,
 			lng: 13.384981,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -169,8 +157,7 @@ var model = {
 			date: 'TBD',
 			lat: 60.171040,
 			lng: 24.939737,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -180,8 +167,7 @@ var model = {
 			date: 'TBD',
 			lat: 59.913331,
 			lng: 10.749411,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -191,8 +177,7 @@ var model = {
 			date: 'TBD',
 			lat: 59.327510,
 			lng: 18.070844,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -202,8 +187,7 @@ var model = {
 			date: 'TBD',
 			lat: 54.898163,
 			lng: 23.897247,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -213,8 +197,7 @@ var model = {
 			date: 'TBD',
 			lat: 54.674072,
 			lng: 25.285036,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -224,8 +207,7 @@ var model = {
 			date: 'TBD',
 			lat: 53.627318,
 			lng: 27.977858,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -235,8 +217,7 @@ var model = {
 			date: 'TBD',
 			lat: 55.775691,
 			lng: 37.586972,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -246,8 +227,7 @@ var model = {
 			date: 'TBD',
 			lat: 56.128201,
 			lng: 40.403193,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -257,8 +237,7 @@ var model = {
 			date: 'TBD',
 			lat: 59.932236,
 			lng: 30.353496,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -268,8 +247,7 @@ var model = {
 			date: 'TBD',
 			lat: 51.748547,
 			lng: 36.189659,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Europe',
@@ -279,8 +257,7 @@ var model = {
 			date: 'TBD',
 			lat: 50.599392,
 			lng: 36.591674,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -290,8 +267,7 @@ var model = {
 			date: 'TBD',
 			lat: 25.203156,
 			lng: 55.270310,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -301,8 +277,7 @@ var model = {
 			date: 'TBD',
 			lat: 43.382937,
 			lng: 77.128332,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -312,8 +287,7 @@ var model = {
 			date: 'TBD',
 			lat: 41.010213,
 			lng: 28.977798,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		},
 		{
 			continent: 'Asia',
@@ -323,8 +297,7 @@ var model = {
 			date: 'TBD',
 			lat: 13.341384,
 			lng: 103.836862,
-			hotel: 'TBD',
-			show: true
+			hotel: 'TBD'
 		}
 	],
 	markers: []
@@ -364,6 +337,40 @@ var addMarkers = function (map) {
   	}
 };
 
+/*var Place = function (data) {
+	this.continent = ko.observable(data.continent);
+	this.country = ko.observable(data.country);
+	this.city = ko.observable(data.city);
+	this.type = ko.observable(data.type);
+	this.date = ko.observable(data.date);
+	this.lat = ko.observable(data.lat);
+	this.lng = ko.observable(data.lng);
+	this.hotel = ko.observable(data.hotel);
+};*/
+
+	var flickrRequestTimeout = setTimeout( function (){
+	        alert('Failed to get Flickr resources');
+	    }, 8000);
+
+	var photosFlickr = {};
+	collections = 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=add569cf17f09054f7b288308a48fc6a&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=db10204ed665b17c3c8126589c667107';
+	$.ajax({
+	    url: collections,
+	    dataType: 'json',
+	    success: function(response) {
+	        var collectionsList = response.collections.collection;
+
+	        for(var i = 0; i < collectionsList.length; i++) {
+	          	photosFlickr[collectionsList[i].title] = {'collectionId': collectionsList[i].id};
+	        }
+	        console.log(photosFlickr);
+	        clearTimeout(flickrRequestTimeout);
+	        return photosFlickr;
+	    }
+	});
+	console.log(photosFlickr);
+	//return photosFlickr;
+
 var viewModel = function () {
 	var self = this;
 
@@ -380,12 +387,20 @@ var viewModel = function () {
 	self.toggleHiddenLeft = function () {
 		self.isHiddenLeft(!self.isHiddenLeft());
 	};
+
 	self.showPhotos = function () {
+
 		if (self.isHiddenLeft())
 			self.toggleHiddenLeft();
 	};
 
 	self.searchQuery = ko.observable();
+
+	/*this.allPlaces = ko.observableArray([]);
+
+	model.locations.forEach(function(placeItem) {
+		self.allPlaces.push(new Place(placeItem));
+	});*/
 
 	this.places = ko.computed(function() {
 		var places = [];
@@ -401,6 +416,7 @@ var viewModel = function () {
 			places = model.locations;
 		return places;
 	});
+
 
 };
 
