@@ -348,28 +348,30 @@ var addMarkers = function (map) {
 	this.hotel = ko.observable(data.hotel);
 };*/
 
-	var flickrRequestTimeout = setTimeout( function (){
-	        alert('Failed to get Flickr resources');
-	    }, 8000);
+var photosFlickr = {};
+collections = 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=add569cf17f09054f7b288308a48fc6a&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=db10204ed665b17c3c8126589c667107';
 
-	var photosFlickr = {};
-	collections = 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=add569cf17f09054f7b288308a48fc6a&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=db10204ed665b17c3c8126589c667107';
-	$.ajax({
-	    url: collections,
-	    dataType: 'json',
-	    success: function(response) {
-	        var collectionsList = response.collections.collection;
+var flickrRequestTimeout = setTimeout( function (){
+        alert('Failed to get Flickr resources');
+    }, 8000);
 
-	        for(var i = 0; i < collectionsList.length; i++) {
-	          	photosFlickr[collectionsList[i].title] = {'collectionId': collectionsList[i].id};
-	        }
-	        console.log(photosFlickr);
-	        clearTimeout(flickrRequestTimeout);
-	        return photosFlickr;
-	    }
-	});
-	console.log(photosFlickr);
-	//return photosFlickr;
+$.ajax({
+    url: collections,
+    dataType: 'json',
+    success: function(response) {
+    	handlePhotos(response);
+    	clearTimeout(flickrRequestTimeout);
+    }
+});
+
+var handlePhotos = function (responseData) {
+    // do what you want with the data
+    var collectionsList = responseData.collections.collection;
+
+    for(var i = 0; i < collectionsList.length; i++) {
+      	photosFlickr[collectionsList[i].title] = {'collectionId': collectionsList[i].id};
+    }
+};
 
 var viewModel = function () {
 	var self = this;
