@@ -38,23 +38,23 @@
 				</div>
 				<div id="info-list" data-bind="template: { name: 'location-template', foreach: filteredItems}"></div>
 			</div>
-			<div
+			<!--<div
 				id="photos"
 				class="col-md-4 controls"
 				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
 						   style: { height: infoHeight()+'px'}"
-			>
-			<!--<div
+			>-->
+			<div
 				id="photos"
 				class="col-md-4 controls"
 				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
 						   style: { height: infoHeight()+'px'},
 						   template: {
 						   		name: 'photo-template',
-						   		foreach: photos
+						   		foreach: currentPhotos
 						   	}"
 			>
-			</div>-->
+			</div>
 		</div>
 	</div>
 	<div id="map"></div>

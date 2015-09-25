@@ -202,3 +202,8 @@ body {
     float: left;
     margin-top: 100%;
 }
+
+.photo {
+	text-align: center;
+	padding: 2px 0;
+}

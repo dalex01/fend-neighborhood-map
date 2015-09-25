@@ -529,8 +529,8 @@ var viewModel = function() {
 	    }
 	});
 
-
 	this.currentLocation = ko.observable();
+	this.currentPhotos = ko.observableArray([]);
 
 	// show photos in left sidebar according to selected location
     // parameter:
@@ -557,9 +557,7 @@ var viewModel = function() {
 		var handleCollections = function(responseData) {
 		    var collectionsList = responseData.collections.collection;
 		    for (var i = 0; i < collectionsList.length; i++) {
-		    	console.log(i);
 		    	if (collectionsList[i].title == self.currentLocation.city()) {
-		    		console.log('in');
 					var city = collectionsList[i].title;
 			    	var collectionId = collectionsList[i].id;
 			    	//model.collectionsFlickr[city] = {};
@@ -594,8 +592,23 @@ var viewModel = function() {
 	        //console.log(self.currentLocation);
 	        for(var i = 0; i < responseData.collection.iconphotos.photo.length; i++) {
 	        	var ph = responseData.collection.iconphotos.photo[i];
-	        	self.currentLocation.photos.push(
+	        	// TODO: photos may be should be removed from locations
+	        	/*self.currentLocation.photos.push(
 	        	//model.collectionsFlickr[city].photo.push(
+	        		{
+					imgAlt: ko.observable(ph.title),
+					imgSrc: ko.observable('https://farm' +
+	    					 ph.farm +
+	    					 '.staticflickr.com/' +
+	    					 ph.server +
+	    					 '/' +
+	    					 ph.id +
+	    					 '_' +
+	    					 ph.secret +
+	    					 '_m.jpg')
+	    			}
+	        	);*/
+	        	self.currentPhotos.push(
 	        		{
 					imgAlt: ph.title,
 					imgSrc: 'https://farm' +
@@ -610,7 +623,7 @@ var viewModel = function() {
 	    			}
 	        	);
 	        }
-	        console.log(self.currentLocation.photos());
+	        //console.log(self.currentLocation.photos());
 	    };
 
 		// show left sidebar if it is hidden
