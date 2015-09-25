@@ -23,7 +23,8 @@ var model = {
         			date: 'TBD',
         			lat: 48.854759,
         			lng: 2.305080,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Asia',
@@ -33,7 +34,8 @@ var model = {
         			date: 'TBD',
         			lat: 31.709661,
         			lng: 35.202141,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Asia',
@@ -43,7 +45,8 @@ var model = {
         			date: 'TBD',
         			lat: 31.778245,
         			lng: 35.229397,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Asia',
@@ -53,7 +56,8 @@ var model = {
         			date: 'TBD',
         			lat: 31.855132,
         			lng: 35.458276,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},*/
         {
             continent: 'Africa',
@@ -63,8 +67,10 @@ var model = {
             date: 'TBD',
             lat: 25.714124,
             lng: 32.649766,
-            hotel: 'TBD'
-        }, {
+            hotel: 'TBD',
+        	photos: []
+        },
+        {
             continent: 'Africa',
             country: 'Egypt',
             city: 'Hurgada',
@@ -72,7 +78,8 @@ var model = {
             date: 'TBD',
             lat: 27.082086,
             lng: 33.860678,
-            hotel: 'TBD'
+            hotel: 'TBD',
+        	photos: []
         },
         /*		{
         			continent: 'Africa',
@@ -82,7 +89,8 @@ var model = {
         			date: 'TBD',
         			lat: 27.861737,
         			lng: 34.317525,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Asia',
@@ -92,7 +100,8 @@ var model = {
         			date: 'TBD',
         			lat: 13.757137,
         			lng: 100.502789,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Asia',
@@ -102,7 +111,8 @@ var model = {
         			date: 'TBD',
         			lat: 12.930813,
         			lng: 100.880119,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},*/
         {
             continent: 'North America',
@@ -112,8 +122,10 @@ var model = {
             date: 'TBD',
             lat: 40.621153,
             lng: -73.998114,
-            hotel: 'TBD'
-        }, {
+            hotel: 'TBD',
+        	photos: []
+        },
+        {
             continent: 'North America',
             country: 'USA',
             city: 'Chicago',
@@ -121,7 +133,8 @@ var model = {
             date: 'TBD',
             lat: 41.883543,
             lng: -87.795953,
-            hotel: 'TBD'
+            hotel: 'TBD',
+        	photos: []
         },
         /*		{
         			continent: 'North America',
@@ -131,7 +144,8 @@ var model = {
         			date: 'TBD',
         			lat: 42.362860,
         			lng: -71.118612,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},*/
         {
             continent: 'North America',
@@ -141,7 +155,8 @@ var model = {
             date: 'TBD',
             lat: 43.090628,
             lng: -79.058927,
-            hotel: 'TBD'
+            hotel: 'TBD',
+        	photos: []
         },
         /*		{
         			continent: 'Europe',
@@ -151,7 +166,8 @@ var model = {
         			date: 'TBD',
         			lat: 52.501939,
         			lng: 13.384981,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Europe',
@@ -161,7 +177,8 @@ var model = {
         			date: 'TBD',
         			lat: 60.171040,
         			lng: 24.939737,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Europe',
@@ -171,7 +188,8 @@ var model = {
         			date: 'TBD',
         			lat: 59.913331,
         			lng: 10.749411,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Europe',
@@ -181,7 +199,8 @@ var model = {
         			date: 'TBD',
         			lat: 59.327510,
         			lng: 18.070844,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Europe',
@@ -191,7 +210,8 @@ var model = {
         			date: 'TBD',
         			lat: 54.898163,
         			lng: 23.897247,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},*/
         {
             continent: 'Europe',
@@ -201,7 +221,8 @@ var model = {
             date: 'TBD',
             lat: 54.674072,
             lng: 25.285036,
-            hotel: 'TBD'
+            hotel: 'TBD',
+        	photos: []
         },
         /*		{
         			continent: 'Europe',
@@ -211,7 +232,8 @@ var model = {
         			date: 'TBD',
         			lat: 53.627318,
         			lng: 27.977858,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Europe',
@@ -221,7 +243,8 @@ var model = {
         			date: 'TBD',
         			lat: 55.775691,
         			lng: 37.586972,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},
         		{
         			continent: 'Europe',
@@ -231,8 +254,9 @@ var model = {
         			date: 'TBD',
         			lat: 56.128201,
         			lng: 40.403193,
-        			hotel: 'TBD'
-        		},
+        			hotel: 'TBD',
+        			photos: []
+        		},*/
         {
             continent: 'Europe',
             country: 'Russia',
@@ -241,8 +265,9 @@ var model = {
             date: 'TBD',
             lat: 59.932236,
             lng: 30.353496,
-            hotel: 'TBD'
-        },*/
+            hotel: 'TBD',
+        	photos: []
+        },
         {
             continent: 'Europe',
             country: 'Russia',
@@ -251,8 +276,10 @@ var model = {
             date: 'TBD',
             lat: 51.748547,
             lng: 36.189659,
-            hotel: 'TBD'
-        }, {
+            hotel: 'TBD',
+        	photos: []
+        },
+        {
             continent: 'Europe',
             country: 'Russia',
             city: 'Belgorod',
@@ -260,7 +287,8 @@ var model = {
             date: 'TBD',
             lat: 50.599392,
             lng: 36.591674,
-            hotel: 'TBD'
+            hotel: 'TBD',
+        	photos: []
         },
         /*		{
         			continent: 'Asia',
@@ -270,7 +298,8 @@ var model = {
         			date: 'TBD',
         			lat: 25.203156,
         			lng: 55.270310,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		},*/
         {
             continent: 'Asia',
@@ -280,8 +309,10 @@ var model = {
             date: 'TBD',
             lat: 43.382937,
             lng: 77.128332,
-            hotel: 'TBD'
-        }, {
+            hotel: 'TBD',
+        	photos: []
+        },
+        {
             continent: 'Asia',
             country: 'Turkey',
             city: 'Istambul',
@@ -289,7 +320,8 @@ var model = {
             date: 'TBD',
             lat: 41.010213,
             lng: 28.977798,
-            hotel: 'TBD'
+            hotel: 'TBD',
+        	photos: []
         }
         /*,
         		{
@@ -300,7 +332,8 @@ var model = {
         			date: 'TBD',
         			lat: 13.341384,
         			lng: 103.836862,
-        			hotel: 'TBD'
+        			hotel: 'TBD',
+        			photos: []
         		}*/
     ],
     // arrau with markers to display
@@ -320,7 +353,8 @@ var model = {
     //					]
     //		}
     //}
-    collectionsFlickr: {}
+    collectionsFlickr: {},
+    columns: ['continent', 'country', 'city']
 };
 
 // initialize Google Map via API
@@ -370,7 +404,7 @@ var addMarkers = function(map) {
     }
 };
 
-/*var Place = function (data) {
+var Location = function (data) {
 	this.continent = ko.observable(data.continent);
 	this.country = ko.observable(data.country);
 	this.city = ko.observable(data.city);
@@ -379,7 +413,9 @@ var addMarkers = function(map) {
 	this.lat = ko.observable(data.lat);
 	this.lng = ko.observable(data.lng);
 	this.hotel = ko.observable(data.hotel);
-};*/
+	this.photos = ko.observableArray([]);
+	this.show = ko.observable(data.show);
+};
 
 var getPhotos = function(city, collectionId) {
 	//	console.log(model.collectionsFlickr);
@@ -424,9 +460,75 @@ var getPhotos = function(city, collectionId) {
     };
 };
 
-
 var viewModel = function() {
     var self = this;
+
+	this.locationsList = ko.observableArray([]);
+
+	model.locations.forEach(function(locationItem) {
+		self.locationsList.push(new Location(locationItem));
+	});
+
+    // set height property to left and right sidebars
+    self.infoHeight = ko.observable($(window).height() - 70);
+
+    // set hiding logic for right sidebar
+    self.isHiddenRight = ko.observable(true);
+    self.toggleHiddenRight = function() {
+    	// if it is hidden show it and vice versa
+        self.isHiddenRight(!self.isHiddenRight());
+        // if left menu is shown hide it
+        if (!self.isHiddenLeft())
+            this.toggleHiddenLeft();
+    };
+
+	// set hiding logic for left sidebar
+    self.isHiddenLeft = ko.observable(true);
+    self.toggleHiddenLeft = function() {
+        self.isHiddenLeft(!self.isHiddenLeft());
+    };
+
+    // selected location from right sidebar
+    // !!! may be removed later
+    this.city = ko.observable();
+
+    // observable for search input
+    self.searchQuery = ko.observable();
+
+	self.columnsToSearch = ko.observableArray(model.columns);
+
+    // locations array to display in right sidebar accordint to search input value
+    // if search is empty - display all locations
+    // if search is not empty and there are continent, country or city in search that
+    // is presented in array of locations then display locations according to this search
+    // otherwise don't display anything
+	this.filteredItems = ko.computed(function() {
+		var filter = self.searchQuery();
+		if (self.searchQuery())
+	    	filter = filter.toLowerCase();
+	    if (!filter) {
+	        return self.locationsList();
+	    } else {
+	        return ko.utils.arrayFilter(self.locationsList(), function(item) {
+	        	// !!! experementing
+	        	var matching = -1;
+	        	ko.utils.arrayForEach(self.columnsToSearch(), function (c) {
+                    var val = item[c]();
+                    if (typeof val === 'number') {
+                        val = val.toString();
+                    }
+                    matching+= val.toLowerCase().indexOf(filter.toLowerCase())+1;
+                });
+                return matching>=0;
+	            //return stringStartsWith(item.city().toLowerCase(), filter);
+	        });
+	    }
+	});
+
+
+	// show photos in left sidebar according to selected location
+    // parameter:
+    // 		place - selected from right sidebar location
     this.showPhotos = function(place) {
 		var flickrCollectionRequestTimeout = setTimeout(function() {
 			console.log('fail in flickrCollectionRequestTimeout');
@@ -460,74 +562,10 @@ var viewModel = function() {
 		    	}
 			}
 		};
+		// show left sidebar if it is hidden
 		if (self.isHiddenLeft())
             self.toggleHiddenLeft();
 	};
-
-    // set height property to left and right sidebars
-    self.infoHeight = ko.observable($(window).height() - 70);
-
-    // set hiding logic for right sidebar
-    self.isHiddenRight = ko.observable(true);
-    self.toggleHiddenRight = function() {
-    	// if it is hidden show it and vice versa
-        self.isHiddenRight(!self.isHiddenRight());
-        // if left menu is shown hide it
-        if (!self.isHiddenLeft())
-            this.toggleHiddenLeft();
-    };
-
-	// set hiding logic for left sidebar
-    self.isHiddenLeft = ko.observable(true);
-    self.toggleHiddenLeft = function() {
-        self.isHiddenLeft(!self.isHiddenLeft());
-    };
-
-    // selected location from right sidebar
-    // !!! may be removed later
-    this.city = ko.observable();
-
-    // show photos in left sidebar according to selected location
-    // parameter:
-    // 		place - selected from right sidebar location
-    // !!! don't work now
-    // !!! may be refactor later
-    //self.showPhotos = function(place) {
-        //this.city = place.city;
-        //findPhotosFromCollection(place.city);
-        // show left sidebar if it is hidden
-    //    if (self.isHiddenLeft())
-    //        self.toggleHiddenLeft();
-    //};
-
-    // observable for search input
-    self.searchQuery = ko.observable();
-
-    // locations array to display in right sidebar accordint to search input value
-    // if search is empty - display all locations
-    // if search is not empty and there are continent, country or city in search that
-    // is presented in array of locations then display locations according ti this search
-    // otherwise don't display anything
-    this.places = ko.computed(function() {
-        var places = [];
-        // if search is NOT empty
-        if (self.searchQuery()) {
-            var query = self.searchQuery().toLowerCase();
-            for (var loc in model.locations) {
-            	// and search query equal to some value of continent, country of city of locations
-                if (model.locations[loc].continent.toLowerCase() === query ||
-                    model.locations[loc].country.toLowerCase() === query ||
-                    model.locations[loc].city.toLowerCase() == query)
-                    // display this location
-                    places.push(model.locations[loc]);
-            }
-        // if search query is empty
-        } else
-        	// display all locations
-            places = model.locations;
-        // otherwise places array is empty, don't display anything
-        return places;
-    });
 
 };
 

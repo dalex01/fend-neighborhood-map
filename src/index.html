@@ -36,14 +36,14 @@
 						<h1 class="header rotated-text__inner">Visited Places</h1>
 					</div>
 				</div>
-				<div id="info-list" data-bind="template: { name: 'place-template', foreach: places }"></div>
+				<div id="info-list" data-bind="template: { name: 'place-template', foreach: filteredItems}"></div>
 			</div>
-			<div
+			<!--<div
 				id="photos"
 				class="col-md-4 controls"
 				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
 						   style: { height: infoHeight()+'px'}"
-			>
+			>-->
 			<!--<div
 				id="photos"
 				class="col-md-4 controls"
@@ -53,14 +53,14 @@
 						   		name: 'photo-template',
 						   		foreach: photos
 						   	}"
-			>-->
-			</div>
+			>
+			</div>-->
 		</div>
 	</div>
 	<div id="map"></div>
 
 	<script type="text/html" id="place-template">
-        <div class="place" data-bind="click: $parent.showPhotos">
+        <div class="place" data-bind="click: $parent.showPhotos, if: show">
         	<p>
         		<span class="country" data-bind="text: country"></span>,
         		<span class="city" data-bind="text: city"></span>
