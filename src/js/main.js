@@ -7,6 +7,10 @@
 // 3. Popup big photo after clicking on small icon
 // 4. Create feature to add new locations via UI
 // 5. Error handling during working with Flickr API
+// 6. !!! Filter markers on the map by search bar
+// 7. !!! Click on location activate its marker
+// 8. !!! Animate marker when clicked
+// 9. !!! Show information on marker when clicked or location choused in the list
 
 var model = {
     // array with all visited locations
@@ -228,7 +232,7 @@ var model = {
         			lat: 56.128201,
         			lng: 40.403193,
         			hotel: 'TBD'
-        		},*/
+        		},
         {
             continent: 'Europe',
             country: 'Russia',
@@ -238,7 +242,8 @@ var model = {
             lat: 59.932236,
             lng: 30.353496,
             hotel: 'TBD'
-        }, {
+        },*/
+        {
             continent: 'Europe',
             country: 'Russia',
             city: 'Kursk',
@@ -315,9 +320,7 @@ var model = {
     //					]
     //		}
     //}
-    collectionsFlickr: {},
-    // url ti use Flickr API to receive all my collections
-    collections: 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=add569cf17f09054f7b288308a48fc6a&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=db10204ed665b17c3c8126589c667107'
+    collectionsFlickr: {}
 };
 
 // initialize Google Map via API
@@ -378,37 +381,15 @@ var addMarkers = function(map) {
 	this.hotel = ko.observable(data.hotel);
 };*/
 
-
-var flickrCollectionRequestTimeout = setTimeout(function() {
-    alert('Failed to get Flickr resources');
-}, 8000);
-
-$.ajax({
-    url: model.collections,
-    dataType: 'json',
-    success: function(response) {
-        handleCollections(response);
-        clearTimeout(flickrCollectionRequestTimeout);
-    }
-});
-
-var handleCollections = function(responseData) {
-    var collectionsList = responseData.collections.collection;
-
-    for (var i = 0; i < collectionsList.length; i++) {
-        model.collectionsFlickr[collectionsList[i].title] = {
-            'collectionId': collectionsList[i].id
-        };
-    }
-};
-
-var findPhotosFromCollection = function(city) {
-    var flickrPhotosRequestTimeout = setTimeout(function() {
+var getPhotos = function(city, collectionId) {
+	//	console.log(model.collectionsFlickr);
+	var flickrPhotosRequestTimeout = setTimeout(function() {
+    	console.log('fail in flickrPhotosRequestTimeout');
         alert('Failed to get Flickr resources');
     }, 8000);
 
-    photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=add569cf17f09054f7b288308a48fc6a&collection_id=' + model.collectionsFlickr[city].collectionId + '&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=9b8f107ded86fb6badaf8d7fc4dd259d';
-    //photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=add569cf17f09054f7b288308a48fc6a&collection_id=136402781-72157659013876281&format=json&nojsoncallback=1&auth_token=72157659011492662-3a26f5b289fe074d&api_sig=9b8f107ded86fb6badaf8d7fc4dd259d'
+	//photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=' + /*model.collectionsFlickr[city].*/collectionId + '&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
+    photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=136402781-72157659013876281&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
 
     $.ajax({
         url: photos,
@@ -420,13 +401,68 @@ var findPhotosFromCollection = function(city) {
     });
 
     var handlePhotos = function(responseData) {
-        var photosList = responseData.collection.iconphotos.photo;
-        model.collectionsFlickr[city].photo = photosList;
+    	//console.log(responseData);
+        model.collectionsFlickr[city].photo = [];
+        for(var j = 0; j < responseData.collection.iconphotos.photo.length; j++) {
+        	var ph = responseData.collection.iconphotos.photo[j];
+        	model.collectionsFlickr[city].photo.push(
+        		{
+				imgAlt: ko.observable(ph.title),
+				imgSrc: ko.observable('https://farm' +
+    					 ph.farm +
+    					 '.staticflickr.com/' +
+    					 ph.server +
+    					 '/' +
+    					 ph.id +
+    					 '_' +
+    					 ph.secret +
+    					 '_m.jpg')
+        	});
+        }
+
+        console.log(model.collectionsFlickr);
     };
 };
 
+
 var viewModel = function() {
     var self = this;
+    this.showPhotos = function(place) {
+		var flickrCollectionRequestTimeout = setTimeout(function() {
+			console.log('fail in flickrCollectionRequestTimeout');
+		    alert('Failed to get Flickr resources');
+		}, 8000);
+
+
+		// url to use Flickr API to receive all my collections
+		collections = 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=6123d03adcf80439f7f840ff40e2cf5f&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=b3cfdfe69623ac3a5eeb49d7fee15e05';
+		$.ajax({
+		    url: collections,
+		    dataType: 'json',
+		    success: function(response) {
+		        handleCollections(response);
+		        clearTimeout(flickrCollectionRequestTimeout);
+		    }
+		});
+
+		var handleCollections = function(responseData) {
+			//console.log(responseData);
+		    var collectionsList = responseData.collections.collection;
+
+		    for (var i = 0; i < collectionsList.length; i++) {
+		    	if (collectionsList[i].title == place.city ) {
+					var city = collectionsList[i].title;
+			    	var collectionId = collectionsList[i].id;
+			    	model.collectionsFlickr[city] = {};
+			        model.collectionsFlickr[city].collectionId = collectionId;
+			        model.collectionsFlickr[city].photo = {};
+			        getPhotos(city, collectionId);
+		    	}
+			}
+		};
+		if (self.isHiddenLeft())
+            self.toggleHiddenLeft();
+	};
 
     // set height property to left and right sidebars
     self.infoHeight = ko.observable($(window).height() - 70);
@@ -456,13 +492,13 @@ var viewModel = function() {
     // 		place - selected from right sidebar location
     // !!! don't work now
     // !!! may be refactor later
-    self.showPhotos = function(place) {
-        this.city = place.city;
-        findPhotosFromCollection(place.city);
+    //self.showPhotos = function(place) {
+        //this.city = place.city;
+        //findPhotosFromCollection(place.city);
         // show left sidebar if it is hidden
-        if (self.isHiddenLeft())
-            self.toggleHiddenLeft();
-    };
+    //    if (self.isHiddenLeft())
+    //        self.toggleHiddenLeft();
+    //};
 
     // observable for search input
     self.searchQuery = ko.observable();
@@ -474,36 +510,24 @@ var viewModel = function() {
     // otherwise don't display anything
     this.places = ko.computed(function() {
         var places = [];
+        // if search is NOT empty
         if (self.searchQuery()) {
             var query = self.searchQuery().toLowerCase();
             for (var loc in model.locations) {
+            	// and search query equal to some value of continent, country of city of locations
                 if (model.locations[loc].continent.toLowerCase() === query ||
                     model.locations[loc].country.toLowerCase() === query ||
                     model.locations[loc].city.toLowerCase() == query)
+                    // display this location
                     places.push(model.locations[loc]);
             }
+        // if search query is empty
         } else
+        	// display all locations
             places = model.locations;
+        // otherwise places array is empty, don't display anything
         return places;
     });
-
-    //this.photos = ko.computed(function() {
-    this.photos = {
-        imgSrc: [0, 0, 0],
-        alt: ''
-    };
-    /*	for (ph in model.collectionsFlickr[this.city].photo) {
-    		photos.imgSrc.push('https://farm' +
-    							ph.farm +
-    							'.staticflickr.com/' +
-    							ph.server +
-    							'/' +
-    							ph.id +
-    							'_' +
-    							ph.secret +
-    							'_m.jpg');
-    	}
-    });*/
 
 };
 
