@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="./components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Visited places</title>
+    <title>Visited locations</title>
   </head>
   <body>
     <div class="container-fluid">
@@ -16,7 +16,7 @@
     				id="pac-input"
     				class="controls"
     				type="text"
-    				placeholder="Search Box: enter Continent, Country or City to filter places"
+    				placeholder="Search Box: enter Continent, Country or City to filter location"
     				data-bind="textInput: searchQuery"
     			>
     		</div>
@@ -33,17 +33,17 @@
 				</a>
 				<div class="rotate">
 					<div class="rotated-text">
-						<h1 class="header rotated-text__inner">Visited Places</h1>
+						<h1 class="header rotated-text__inner">Visited Locations</h1>
 					</div>
 				</div>
-				<div id="info-list" data-bind="template: { name: 'place-template', foreach: filteredItems}"></div>
+				<div id="info-list" data-bind="template: { name: 'location-template', foreach: filteredItems}"></div>
 			</div>
-			<!--<div
+			<div
 				id="photos"
 				class="col-md-4 controls"
 				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
 						   style: { height: infoHeight()+'px'}"
-			>-->
+			>
 			<!--<div
 				id="photos"
 				class="col-md-4 controls"
@@ -59,13 +59,13 @@
 	</div>
 	<div id="map"></div>
 
-	<script type="text/html" id="place-template">
-        <div class="place" data-bind="click: $parent.showPhotos, if: show">
+	<script type="text/html" id="location-template">
+        <div class="location" data-bind="click: $parent.showPhotos">
         	<p>
         		<span class="country" data-bind="text: country"></span>,
         		<span class="city" data-bind="text: city"></span>
         		<br>
-        		<span class="date">This place was visited on <span data-bind="text: date"></span></span>
+        		<span class="date">This location was visited on <span data-bind="text: date"></span></span>
         	</p>
         	<hr class="line">
         </div>

@@ -7,10 +7,11 @@
 // 3. Popup big photo after clicking on small icon
 // 4. Create feature to add new locations via UI
 // 5. Error handling during working with Flickr API
-// 6. !!! Filter markers on the map by search bar
+// 6. ---DONE!!! Filter markers on the map by search bar
 // 7. !!! Click on location activate its marker
 // 8. !!! Animate marker when clicked
 // 9. !!! Show information on marker when clicked or location choused in the list
+// 10. Create feature to choose on which field we want to search.
 
 var model = {
     // array with all visited locations
@@ -404,6 +405,9 @@ var addMarkers = function(map) {
     }
 };
 
+// function to create new location object
+// parameter:
+//		data - data to create location (continent, country, city and so on...)
 var Location = function (data) {
 	this.continent = ko.observable(data.continent);
 	this.country = ko.observable(data.country);
@@ -417,15 +421,14 @@ var Location = function (data) {
 	this.show = ko.observable(data.show);
 };
 
-var getPhotos = function(city, collectionId) {
-	//	console.log(model.collectionsFlickr);
-	var flickrPhotosRequestTimeout = setTimeout(function() {
-    	console.log('fail in flickrPhotosRequestTimeout');
-        alert('Failed to get Flickr resources');
-    }, 8000);
-
-	//photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=' + /*model.collectionsFlickr[city].*/collectionId + '&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
-    photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=136402781-72157659013876281&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
+//var getPhotos = function(city, collectionId) {
+//	var flickrPhotosRequestTimeout = setTimeout(function() {
+//    	console.log('fail in flickrPhotosRequestTimeout');
+//        alert('Failed to get Flickr resources');
+//    }, 8000);
+//
+//	//photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=' + /*model.collectionsFlickr[city].*/collectionId + '&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
+/*    photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=136402781-72157659013876281&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
 
     $.ajax({
         url: photos,
@@ -437,11 +440,12 @@ var getPhotos = function(city, collectionId) {
     });
 
     var handlePhotos = function(responseData) {
-    	//console.log(responseData);
-        model.collectionsFlickr[city].photo = [];
-        for(var j = 0; j < responseData.collection.iconphotos.photo.length; j++) {
-        	var ph = responseData.collection.iconphotos.photo[j];
-        	model.collectionsFlickr[city].photo.push(
+        //model.collectionsFlickr[city].photo = [];
+        console.log(location);
+        for(var i = 0; i < responseData.collection.iconphotos.photo.length; i++) {
+        	var ph = responseData.collection.iconphotos.photo[i];
+        	location.photo.push(
+        	//model.collectionsFlickr[city].photo.push(
         		{
 				imgAlt: ko.observable(ph.title),
 				imgSrc: ko.observable('https://farm' +
@@ -456,9 +460,9 @@ var getPhotos = function(city, collectionId) {
         	});
         }
 
-        console.log(model.collectionsFlickr);
+        console.log(location.photo);
     };
-};
+};*/
 
 var viewModel = function() {
     var self = this;
@@ -526,10 +530,13 @@ var viewModel = function() {
 	});
 
 
+	this.currentLocation = ko.observable();
+
 	// show photos in left sidebar according to selected location
     // parameter:
-    // 		place - selected from right sidebar location
-    this.showPhotos = function(place) {
+    // 		location - selected from right sidebar location
+    this.showPhotos = function(location) {
+    	self.currentLocation = location;
 		var flickrCollectionRequestTimeout = setTimeout(function() {
 			console.log('fail in flickrCollectionRequestTimeout');
 		    alert('Failed to get Flickr resources');
@@ -548,20 +555,64 @@ var viewModel = function() {
 		});
 
 		var handleCollections = function(responseData) {
-			//console.log(responseData);
 		    var collectionsList = responseData.collections.collection;
-
 		    for (var i = 0; i < collectionsList.length; i++) {
-		    	if (collectionsList[i].title == place.city ) {
+		    	console.log(i);
+		    	if (collectionsList[i].title == self.currentLocation.city()) {
+		    		console.log('in');
 					var city = collectionsList[i].title;
 			    	var collectionId = collectionsList[i].id;
-			    	model.collectionsFlickr[city] = {};
-			        model.collectionsFlickr[city].collectionId = collectionId;
-			        model.collectionsFlickr[city].photo = {};
+			    	//model.collectionsFlickr[city] = {};
+			        //model.collectionsFlickr[city].collectionId = collectionId;
+			        //model.collectionsFlickr[city].photo = {};
 			        getPhotos(city, collectionId);
 		    	}
 			}
 		};
+
+		var getPhotos = function(city, collectionId) {
+			var flickrPhotosRequestTimeout = setTimeout(function() {
+		    	console.log('fail in flickrPhotosRequestTimeout');
+		        alert('Failed to get Flickr resources');
+		    }, 8000);
+
+			//photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=' + /*model.collectionsFlickr[city].*/collectionId + '&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
+		    photos = 'https://api.flickr.com/services/rest/?method=flickr.collections.getInfo&api_key=6123d03adcf80439f7f840ff40e2cf5f&collection_id=136402781-72157659013876281&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=9b9de007e89e197446de52c2dd1d3b9a';
+
+		    $.ajax({
+		        url: photos,
+		        dataType: 'json',
+		        success: function(response) {
+		            handlePhotos(response);
+		            clearTimeout(flickrPhotosRequestTimeout);
+		        }
+		    });
+		};
+
+		var handlePhotos = function(responseData) {
+	        //model.collectionsFlickr[city].photo = [];
+	        //console.log(self.currentLocation);
+	        for(var i = 0; i < responseData.collection.iconphotos.photo.length; i++) {
+	        	var ph = responseData.collection.iconphotos.photo[i];
+	        	self.currentLocation.photos.push(
+	        	//model.collectionsFlickr[city].photo.push(
+	        		{
+					imgAlt: ph.title,
+					imgSrc: 'https://farm' +
+	    					 ph.farm +
+	    					 '.staticflickr.com/' +
+	    					 ph.server +
+	    					 '/' +
+	    					 ph.id +
+	    					 '_' +
+	    					 ph.secret +
+	    					 '_m.jpg'
+	    			}
+	        	);
+	        }
+	        console.log(self.currentLocation.photos());
+	    };
+
 		// show left sidebar if it is hidden
 		if (self.isHiddenLeft())
             self.toggleHiddenLeft();

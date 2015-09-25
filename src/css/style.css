@@ -79,11 +79,11 @@ body {
   	filter: alpha(opacity=100);
 }
 
-.place {
+.location {
 	margin-left: 50px;
 }
 
-.place:hover {
+.location:hover {
 	background-color: #E4E4E4;
 }
 
