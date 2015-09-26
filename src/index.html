@@ -38,12 +38,6 @@
 				</div>
 				<div id="info-list" data-bind="template: { name: 'location-template', foreach: filteredItems}"></div>
 			</div>
-			<!--<div
-				id="photos"
-				class="col-md-4 controls"
-				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
-						   style: { height: infoHeight()+'px'}"
-			>-->
 			<div
 				id="photos"
 				class="col-md-4 controls"
@@ -80,6 +74,7 @@
 	<script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./components/knockout/dist/knockout.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initMap" async defer></script>
+    <script src="./js/md5.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>
