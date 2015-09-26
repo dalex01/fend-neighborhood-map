@@ -38,18 +38,28 @@
 				</div>
 				<div id="info-list" data-bind="template: { name: 'location-template', foreach: filteredItems}"></div>
 			</div>
+		</div>
+		<div class="row">
 			<div
 				id="photos"
-				class="col-md-4 controls"
+				class="controls"
 				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
-						   style: { height: infoHeight()+'px'},
-						   template: {
-						   		name: 'photo-template',
-						   		foreach: currentPhotos
-						   	}"
+						   style: { height: photosHeight()+'px',
+						   			width: photosWidth()+'px'}"
 			>
+				<div class="photoList">
+    				<ul class="list-inline"
+    					data-bind="template: {
+						   				name: 'photo-template',
+						   				foreach: currentPhotos
+						   		   }">
+    				</ul>
+    			</div>
+    			<div class="mainPhoto" data-bind="with: currentBigPhoto">
+					<img src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
+				</div>
 			</div>
-		</div>
+    	</div>
 	</div>
 	<div id="map"></div>
 
@@ -66,15 +76,19 @@
     </script>
 
     <script type="text/html" id="photo-template">
-        <div class="photo">
-        	<img src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
+		<li class="photo">
+    		<img src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
+		</li>
+        <!--<div class="photoList">
+        	<img class="smallImg" src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
         </div>
+        <div>
+        </div>-->
     </script>
 	<script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./components/knockout/dist/knockout.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initMap" async defer></script>
-    <script src="./js/md5.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>

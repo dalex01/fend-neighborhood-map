@@ -427,11 +427,34 @@ var viewModel = function() {
             this.toggleHiddenLeft();
     };
 
+	// set height property to left and right sidebars
+    self.photosHeight = ko.observable($(window).height() - 70);
+    self.photosWidth = ko.computed(function() {
+    	if ($(window).width() > 600)
+    		return ($(window).width() - 370);
+    	else
+    		return 300;
+    });
+
 	// set hiding logic for left sidebar
     self.isHiddenLeft = ko.observable(true);
     self.toggleHiddenLeft = function() {
         self.isHiddenLeft(!self.isHiddenLeft());
     };
+
+	// set height property to bottom and right sidebars
+    /*self.bigPhotoHeight = ko.observable($(window).height() - 70);
+    self.bigPhotoWidth = ko.observable($(window).width() - 70);
+
+    // set hiding logic for bottom sidebar
+    self.isHiddenBottom = ko.observable(false);
+    self.toggleHiddenBottom = function() {
+    	// if it is hidden show it and vice versa
+        self.toggleHiddenBottom(!self.toggleHiddenBottom());
+        // if left menu is shown hide it
+        //if (!self.isHiddenLeft())
+            //this.toggleHiddenLeft();
+    };*/
 
     // selected location from right sidebar
     // !!! may be removed later
@@ -472,6 +495,7 @@ var viewModel = function() {
 
 	this.currentLocation = ko.observable();
 	this.currentPhotos = ko.observableArray([]);
+	this.currentBigPhoto = ko.observable();
 
 	// show photos in left sidebar according to selected location
     // parameter:
@@ -530,6 +554,40 @@ var viewModel = function() {
 		};
 
 		var handlePhotos = function(responseData) {
+			var firstPhoto = responseData.photoset.photo[0];
+			var side = Math.min(Math.max(320, $(window).width() - 370), $(window).height() - 150);
+			console.log('320');
+			console.log($(window).width() - 370);
+			console.log($(window).height() - 150);
+			console.log(side);
+			var photoSize = '_m.jpg';
+			if (side > 320 && side <= 500)
+				photoSize = '_n.jpg';
+			else if (side > 500 && side <= 640)
+				photoSize = '.jpg';
+			else if (side > 640 && side <= 800)
+				photoSize = '_z.jpg';
+			else if (side > 800 && side <= 1024)
+				photoSize = '_c.jpg';
+			else if (side > 1024 && side <= 1600)
+				photoSize = '_b.jpg';
+			else if (side > 1600 && side <= 2048)
+				photoSize = '_h.jpg';
+			else if (side > 2048)
+				photoSize = '_k.jpg';
+			self.currentBigPhoto({
+					imgAlt: firstPhoto.title,
+					imgSrc: 'https://farm' +
+	    					 firstPhoto.farm +
+	    					 '.staticflickr.com/' +
+	    					 firstPhoto.server +
+	    					 '/' +
+	    					 firstPhoto.id +
+	    					 '_' +
+	    					 firstPhoto.secret +
+	    					 photoSize
+	        	});
+			//console.log(self.currentBigPhoto());
 	        for(var i = 0; i < responseData.photoset.photo.length; i++) {
 	        	var ph = responseData.photoset.photo[i];
 	        	// TODO: photos may be should be removed from locations
@@ -558,7 +616,7 @@ var viewModel = function() {
 	    					 ph.id +
 	    					 '_' +
 	    					 ph.secret +
-	    					 '_m.jpg'
+	    					 '_s.jpg'
 	    			}
 	        	);
 	        }
@@ -568,8 +626,6 @@ var viewModel = function() {
 		if (self.isHiddenLeft())
             self.toggleHiddenLeft();
 	};
-
 };
-
 
 ko.applyBindings(new viewModel());
