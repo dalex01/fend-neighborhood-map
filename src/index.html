@@ -80,9 +80,11 @@
     		<span class="showDetails" data-bind="click: showDetails">Show details</span>&nbsp;&nbsp;
     		<span class="showDetails" data-bind="click: $parent.showPhotos">Show photos</span>
     		<br>
-    		<span class="hotel" data-bind="css: {'hidden' : isHiddenDetails}">Hotel: <span data-bind="text: hotel"></span></span>
+    		<span class="hotel" data-bind="css: {'hidden' : isHiddenDetails}"><strong>Hotel:</strong> <span data-bind="text: hotel"></span></span>
     		<br>
-    		<span class="address" data-bind="css: {'hidden' : isHiddenDetails}">Hotel address:  <span data-bind="text: address"></span></span>
+    		<span class="address" data-bind="css: {'hidden' : isHiddenDetails}"><strong>Hotel address:</strong>  <span data-bind="text: address"></span></span>
+    		<br>
+    		<span class="address" data-bind="css: {'hidden' : isHiddenDetails}"><strong>Company:</strong>  <span class="glyphicon glyphicon-user"></span>*<span data-bind="text: company"></span></span>
         	<hr class="line">
         </div>
     </script>

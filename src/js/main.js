@@ -32,6 +32,7 @@ var model = {
 			hotel: 'Hôtel Prince',
 			address: '66 Avenue Bosquet, 07. Tour Eiffel - Invalides, Paris, 75007, France',
 			marker: null,
+			company: 2,
 			photos: []
 		},
         		/*{
@@ -46,6 +47,7 @@ var model = {
         			hotel: 'Don\'t remember,
         			address: 'Don\'t remember',
         			marker: null,
+        			company: 2,
         			photos: []
         		},*/
 		{
@@ -60,6 +62,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 2,
 			photos: []
 		},
         		/*{
@@ -74,6 +77,7 @@ var model = {
         			hotel: 'Not applicable',
         			address: 'Not applicable',
         			marker: null,
+        			company: 2,
         			photos: []
         		},*/
         {
@@ -88,6 +92,7 @@ var model = {
             hotel: 'Not applicable',
             address: 'Not applicable',
             marker: null,
+            company: 10,
         	photos: []
         },
         {
@@ -102,6 +107,7 @@ var model = {
             hotel: 'Don\'t remember',
             address: 'Don\'t remember',
             marker: null,
+            company: 10,
         	photos: []
         },
         /*		{
@@ -130,6 +136,7 @@ var model = {
 			hotel: 'Siamese Views Lodge',
 			address: '211/21-23 Soi Damneon Klang Nuea, Ratchadamneon Klang Road, Bwonniwet, Pranakorn, Khaosan, Bangkok, 10200, Thailand',
 			marker: null,
+			company: 2,
 			photos: []
 		},
 		{
@@ -144,6 +151,7 @@ var model = {
 			hotel: 'Inn House',
 			address: '322/1 Pattaya Beach Road Soi 13, Pattaya City, Banglamung, Pattaya, 20260, Thailand',
 			marker: null,
+			company: 2,
 			photos: []
 		},
         {
@@ -158,6 +166,7 @@ var model = {
             hotel: 'Don\'t remember',
             address: 'Don\'t remember',
             marker: null,
+            company: 2,
         	photos: []
         },
         {
@@ -172,6 +181,7 @@ var model = {
             hotel: 'Don\'t remember',
             address: 'Don\'t remember',
             marker: null,
+            company: 2,
         	photos: []
         },
         /*		{
@@ -186,6 +196,7 @@ var model = {
         			hotel: 'Don\'t remember',
         			address: 'Don\'t remember',
         			marker: null,
+        			company: 2,
         			photos: []
         		},*/
         {
@@ -200,6 +211,7 @@ var model = {
             hotel: 'Don\'t remember',
             address: 'Don\'t remember',
             marker: null,
+            company: 2,
         	photos: []
         },
 		{
@@ -214,6 +226,7 @@ var model = {
 			hotel: 'Holiday Inn Express Berlin City Centre West',
 			address: 'Kurfürstenstraße 78, Tiergarten, Berlin, 10787, Germany',
 			marker: null,
+			company: 6,
 			photos: []
 		},
 		{
@@ -228,6 +241,7 @@ var model = {
 			hotel: 'Don\'t remember',
 			address: 'Don\'t remember',
 			marker: null,
+			company: 2,
 			photos: []
 		},
 		{
@@ -242,6 +256,7 @@ var model = {
 			hotel: 'Don\'t remember',
 			address: 'Don\'t remember',
 			marker: null,
+			company: 2,
 			photos: []
 		},
 		{
@@ -256,6 +271,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 2,
 			photos: []
 		},
         		/*{
@@ -270,6 +286,7 @@ var model = {
         			hotel: 'Not applicable',
         			address: 'Not applicable',
         			marker: null,
+        			company: 4,
         			photos: []
         		},*/
         {
@@ -284,6 +301,7 @@ var model = {
             hotel: 'Alexa',
             address: 'Pylimo str. 53 / Sodu str. 2, Vilnius , 01136, Lithuania',
             marker: null,
+            company: 4,
         	photos: []
         },
 		{
@@ -298,6 +316,7 @@ var model = {
 			hotel: 'Dubravushka',
 			address: 'Stanki, 16, Puhovichskiy district, Minsk region, Belarus',
 			marker: null,
+			company: 12,
 			photos: []
 		},
         		/*{
@@ -312,6 +331,7 @@ var model = {
         			hotel: 'Don\'t remember',
         			address: 'Don\'t remember',
         			marker: null,
+        			company: 2,
         			photos: []
         		},*/
 		{
@@ -326,6 +346,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 2,
 			photos: []
 		},
         {
@@ -340,6 +361,7 @@ var model = {
             hotel: 'Nevsky Mayak Hotel',
             address: 'Nevsky Prospekt 94, St Petersburg, 191025, Russia',
             marker: null,
+            company: 2,
         	photos: []
         },
         {
@@ -354,6 +376,7 @@ var model = {
             hotel: 'Home, sweet home :)',
             address: 'Home, sweet home!',
             marker: null,
+            company: 2,
         	photos: []
         },
         {
@@ -368,6 +391,7 @@ var model = {
             hotel: 'Not applicable',
             address: 'Not applicable',
             marker: null,
+            company: 2,
         	photos: []
         },
 		{
@@ -382,6 +406,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 2,
 			photos: []
 		},
         {
@@ -396,6 +421,7 @@ var model = {
             hotel: 'home',
             address: 'home',
             marker: null,
+            company: 2,
         	photos: []
         },
         {
@@ -410,6 +436,7 @@ var model = {
             hotel: 'Modern Sultan Hotel',
             address: 'Zeynep Sultan Cad. No 19 Sultanahmet, Istanbul , 34110, Turkey',
             marker: null,
+            company: 4,
         	photos: []
         },
 		{
@@ -424,6 +451,7 @@ var model = {
 			hotel: 'Don\'t remember',
 			address: 'Don\'t remember',
 			marker: null,
+			company: 2,
 			photos: []
 		},
 		{
@@ -438,6 +466,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 2,
 			photos: []
 		},
 		{
@@ -452,6 +481,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 6,
 			photos: []
 		},
 		{
@@ -466,6 +496,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 3,
 			photos: []
 		},
 		{
@@ -480,6 +511,7 @@ var model = {
 			hotel: 'Don\'t remember',
 			address: 'Don\'t remember',
 			marker: null,
+			company: 4,
 			photos: []
 		},
 		{
@@ -494,6 +526,7 @@ var model = {
 			hotel: 'Not applicable',
 			address: 'Not applicable',
 			marker: null,
+			company: 2,
 			photos: []
 		}
     ],
@@ -588,6 +621,7 @@ var Location = function (data) {
 	this.photos = ko.observableArray([]);
 	this.show = ko.observable(data.show);
 	this.marker = ko.observable(data.marker);
+	this.company = ko.observable(data.company);
 	this.isHiddenDetails = ko.observable(true);
 	this.showDetails = function() {
 		this.isHiddenDetails(!self.isHiddenDetails());
