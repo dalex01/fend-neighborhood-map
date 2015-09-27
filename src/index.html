@@ -29,9 +29,11 @@
 						   style: { height: infoHeight()+'px'}"
 			>
 				<a href="#">
-					<!--<i class="icon-list" data-bind="click: toggleHiddenRight"></i>-->
 					<span class="icon-list glyphicon glyphicon-align-justify" data-bind="click: toggleHiddenRight"></span>
 				</a>
+				<!--<a href="#">
+					<span class="icon-list fullmap glyphicon glyphicon glyphicon-fullscreen" data-bind="click: fullMap"></span>
+				</a>-->
 				<div class="rotate">
 					<div class="rotated-text">
 						<h1 class="headerLocations rotated-text__inner">Visited Locations</h1>
@@ -100,7 +102,10 @@
     		<span class="showDetails" data-bind="click: $parent.showPhotos">
     			Show photos
     		</span>
-    		
+    		&nbsp;&nbsp;
+    		<span class="showDetails" data-bind="click: $parent.showMarker">
+    			Show map
+    		</span>
     		<div data-bind="css: {'hidden' : isHiddenDetails}">
     			<span class="hotel">
     				<span class="glyphicon glyphicon-home"></span>

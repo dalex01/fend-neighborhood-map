@@ -13,9 +13,9 @@
 // 9. !!! Show information on marker when clicked or location choused in the list
 // 10. Create feature to choose on which field we want to search.
 // 11. Optimize big photo width and height
-// 12. Position and zoom on location when it is clicked
+// 12. ---DONE!!! Position and zoom on location when it is clicked
 // 13. Optimize width of left sidebar on small screens
-// 14. Add close button on left sidebar
+// 14. ---DONE!!! Add close button on left sidebar
 
 var model = {
     // array with all visited locations
@@ -670,13 +670,23 @@ var viewModel = function() {
 	        var marker = new google.maps.Marker({
 	            position: model.locations[loc],
 	            map: map,
-	            title: model.locations[loc].city
+	            title: model.locations[loc].city,
+	            animation: google.maps.Animation.DROP
 	        });
 	        // push marker into array of markers in model
 	        model.markers.push(marker);
 	        model.locations[loc].marker = marker;
+	        //marker.addListener('click', self.toggleBounce(marker));
 	    }
 	};
+
+	/*self.toggleBounce = function (marker) {
+	  if (marker.getAnimation() !== null) {
+	    marker.setAnimation(null);
+	  } else {
+	    marker.setAnimation(google.maps.Animation.BOUNCE);
+	  }
+	}*/
 
     self.initMap();
 
@@ -784,6 +794,24 @@ var viewModel = function() {
 	self.currentLocation = ko.observable();
 	self.currentPhotos = ko.observableArray([]);
 	self.currentBigPhoto = ko.observable();
+
+	self.showMarker = function(location) {
+		var myLatLng = new google.maps.LatLng(location.lat(),location.lng());
+		var marker = location.marker();
+		model.map.setCenter(myLatLng);
+		model.map.setZoom(12);
+		if (marker.getAnimation() !== null) {
+   			marker.setAnimation(null);
+  		} else {
+    		marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+	};
+
+	self.fullMap = function() {
+		myLatLng = new google.maps.LatLng(39.104892, 9.456656);
+		model.map.setCenter(myLatLng);
+		model.map.setZoom(3);
+	};
 
 	// show photos in left sidebar according to selected location
     // parameter:
