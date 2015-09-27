@@ -29,11 +29,12 @@
 						   style: { height: infoHeight()+'px'}"
 			>
 				<a href="#">
-					<i class="icon-list" data-bind="click: toggleHiddenRight"></i>
+					<!--<i class="icon-list" data-bind="click: toggleHiddenRight"></i>-->
+					<span class="icon-list glyphicon glyphicon-align-justify" data-bind="click: toggleHiddenRight"></span>
 				</a>
 				<div class="rotate">
 					<div class="rotated-text">
-						<h1 class="header rotated-text__inner">Visited Locations</h1>
+						<h1 class="headerLocations rotated-text__inner">Visited Locations</h1>
 					</div>
 				</div>
 				<div id="info-list" data-bind="template: { name: 'location-template', foreach: filteredItems}"></div>
@@ -47,6 +48,21 @@
 						   style: { height: photosHeight()+'px',
 						   			width: photosWidth()+'px'}"
 			>
+				<div class="wrapper">
+					<div class="photoHeaderWrapper">
+					<!--<div data-bind="if: currentLocation">-->
+						<h1 class="headerPhoto">
+							Photos <!--for <span data-bind="text: currentLocation().city"></span>-->
+						</h1>
+					<!--</div>-->
+
+					</div>
+					<div class="photoCloseWrapper">
+						<a href="#">
+							<span class="icon-list glyphicon glyphicon glyphicon-remove-circle" data-bind="click: toggleHiddenRight"></span>
+						</a>
+					</div>
+				</div>
 				<div class="photoList">
     				<ul class="list-inline"
     					data-bind="template: {
@@ -76,15 +92,38 @@
     			<span data-bind="text: month"></span>,
     			<span data-bind="text: year"></span>
     		</span>
-    		<br>
-    		<span class="showDetails" data-bind="click: showDetails">Show details</span>&nbsp;&nbsp;
-    		<span class="showDetails" data-bind="click: $parent.showPhotos">Show photos</span>
-    		<br>
-    		<span class="hotel" data-bind="css: {'hidden' : isHiddenDetails}"><strong>Hotel:</strong> <span data-bind="text: hotel"></span></span>
-    		<br>
-    		<span class="address" data-bind="css: {'hidden' : isHiddenDetails}"><strong>Hotel address:</strong>  <span data-bind="text: address"></span></span>
-    		<br>
-    		<span class="address" data-bind="css: {'hidden' : isHiddenDetails}"><strong>Company:</strong>  <span class="glyphicon glyphicon-user"></span>*<span data-bind="text: company"></span></span>
+    		<br class="clearBr">
+    		<span class="showDetails" data-bind="click: showDetails">
+    			Show details
+    		</span>
+    		&nbsp;&nbsp;
+    		<span class="showDetails" data-bind="click: $parent.showPhotos">
+    			Show photos
+    		</span>
+    		
+    		<div data-bind="css: {'hidden' : isHiddenDetails}">
+    			<span class="hotel">
+    				<span class="glyphicon glyphicon-home"></span>
+    				<strong>
+    					Hotel:
+    				</strong>
+    				<span data-bind="text: hotel"></span></span>
+    			<br>
+    			<span class="address">
+					<span class="glyphicon glyphicon-book"></span>
+    				<strong>
+    					Hotel address:
+    				</strong>
+    				<span data-bind="text: address"></span>
+    			</span>
+    			<br>
+    			<span class="company">
+    				<span class="glyphicon glyphicon-user"></span>
+    				<strong>
+    					Company:
+    				</strong>
+    				<span data-bind="text: company"></span></span>
+    		</div>
         	<hr class="line">
         </div>
     </script>

@@ -102,10 +102,16 @@ body {
 	font-size: 0.9em;
 }
 
-.header {
+.headerLocations {
 	color: #8F8F8F;
 	font-weight: normal;
 	text-align: right;
+}
+
+.headerPhoto {
+	color: #8F8F8F;
+	font-weight: normal;
+	text-align: center;
 }
 
 .line {
@@ -116,7 +122,7 @@ body {
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
-@font-face {
+/*@font-face {
 	font-family: 'icomoon';
 	src:url('../fonts/icomoon.eot?efsk18');
 	src:url('../fonts/icomoon.eot?#iefixefsk18') format('embedded-opentype'),
@@ -136,19 +142,24 @@ body {
 	text-transform: none;
 	line-height: 1;
 
-	/* Better Font Rendering =========== */
+
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
+}*/
 
 .icon-list {
+	color: #000;
 	position: absolute;
-	padding-top: 10px;
+	padding: 10px 0 0 5px;
 }
 
 .icon-list:before {
-	content: "\e600";
-	font-size: 2.8em;
+	font-size: 1.8em;
+}
+
+icon-list:hover {
+	cursor: pointer;
+	cursor: hand;
 }
 
 .menu-hidden-right {
@@ -243,6 +254,22 @@ body {
 }
 
 .hotel,
-.address {
+.address,
+.company {
 	font-size: 0.8em;
+}
+
+.photoHeaderWrapper {
+	display: inline-block;
+}
+
+.photoCloseWrapper {
+	display: inline-block;
+	float: right;
+	padding-right: 40px;
+}
+
+.clearBr {
+	display: inline;
+   	margin: 0;
 }
