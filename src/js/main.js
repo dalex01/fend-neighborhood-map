@@ -435,53 +435,6 @@ var model = {
     map: null
 };
 
-// initialize Google Map via API
-var initMap = function() {
-	// display map in element with id 'map'
-	model.map = new google.maps.Map(document.getElementById('map'), {
-        // center map somewhere near Italy :)
-        center: {
-            lat: 39.104892,
-            lng: 9.456656
-        },
-        zoom: 3,
-        mapTypeControl: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControlOptions: {
-            position: google.maps.ControlPosition.BOTTOM_CENTER
-        },
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_CENTER
-        },
-        streetViewControl: true,
-        streetViewControlOptions: {
-            position: google.maps.ControlPosition.LEFT_CENTER
-        }
-    });
-
-    // add markers on map according to locations in model
-    addMarkers(model.map);
-};
-
-// function to add markers on map
-// parameter:
-// 		map - map where markers will be displayed
-var addMarkers = function(map) {
-    // iterate through all locations in model
-    for ( var loc in model.locations) {
-        // create new marker at specified position
-        var marker = new google.maps.Marker({
-            position: model.locations[loc],
-            map: map,
-            title: model.locations[loc].city
-        });
-        // push marker into array of markers in model
-        model.markers.push(marker);
-        //model.locations[loc].marker = marker;
-    }
-};
-
 /*ko.bindingHandlers.map = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
         var mapObj = ko.utils.unwrapObservable(valueAccessor());
@@ -562,12 +515,61 @@ var Location = function (data) {
 	this.hotel = ko.observable(data.hotel);
 	this.photos = ko.observableArray([]);
 	this.show = ko.observable(data.show);
-	//this.marker = ko.observable(data.marker);
+	this.marker = ko.observable(data.marker);
 	//console.log(this.marker());
 };
 
 var viewModel = function() {
     var self = this;
+
+	// initialize Google Map via API
+	self.initMap = function() {
+		// display map in element with id 'map'
+		model.map = new google.maps.Map(document.getElementById('map'), {
+	        // center map somewhere near Italy :)
+	        center: {
+	            lat: 39.104892,
+	            lng: 9.456656
+	        },
+	        zoom: 3,
+	        mapTypeControl: true,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+	        mapTypeControlOptions: {
+	            position: google.maps.ControlPosition.BOTTOM_CENTER
+	        },
+	        zoomControl: true,
+	        zoomControlOptions: {
+	            position: google.maps.ControlPosition.LEFT_CENTER
+	        },
+	        streetViewControl: true,
+	        streetViewControlOptions: {
+	            position: google.maps.ControlPosition.LEFT_CENTER
+	        }
+	    });
+
+	    // add markers on map according to locations in model
+	    self.addMarkers(model.map);
+	};
+
+	// function to add markers on map
+	// parameter:
+	// 		map - map where markers will be displayed
+	self.addMarkers = function(map) {
+	    // iterate through all locations in model
+	    for ( var loc in model.locations) {
+	        // create new marker at specified position
+	        var marker = new google.maps.Marker({
+	            position: model.locations[loc],
+	            map: map,
+	            title: model.locations[loc].city
+	        });
+	        // push marker into array of markers in model
+	        model.markers.push(marker);
+	        model.locations[loc].marker = marker;
+	    }
+	};
+
+    self.initMap();
 
     /*self.myMap = ko.observable({
         lat: ko.observable(39.104892),
@@ -644,10 +646,15 @@ var viewModel = function() {
 		if (self.searchQuery())
 	    	filter = filter.toLowerCase();
 	    if (!filter) {
+	    	ko.utils.arrayForEach(self.locationsList(), function (loc) {
+	    		loc.marker().setVisible(true);
+	    	});
 	        return self.locationsList();
 	    } else {
-	        return ko.utils.arrayFilter(self.locationsList(), function(item) {
-	        	// !!! experementing
+	    	ko.utils.arrayForEach(self.locationsList(), function (loc) {
+	    		loc.marker().setVisible(false);
+	    	});
+	        var match = ko.utils.arrayFilter(self.locationsList(), function(item) {
 	        	var matching = -1;
 	        	ko.utils.arrayForEach(self.columnsToSearch(), function (c) {
                     var val = item[c]();
@@ -659,6 +666,9 @@ var viewModel = function() {
                 return matching>=0;
 	            //return stringStartsWith(item.city().toLowerCase(), filter);
 	        });
+	        for (var loc in match)
+	        	match[loc].marker().setVisible(true);
+	        return match;
 	    }
 	});
 
