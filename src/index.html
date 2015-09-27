@@ -67,13 +67,22 @@
 	<div id="map"></div>
 
 	<script type="text/html" id="location-template">
-        <div class="location" data-bind="click: $parent.showPhotos">
-        	<p>
-        		<span class="country" data-bind="text: country"></span>,
-        		<span class="city" data-bind="text: city"></span>
-        		<br>
-        		<span class="date">This location was visited on <span data-bind="text: year"></span></span>
-        	</p>
+        <div class="location">
+    		<span class="country" data-bind="text: country"></span>,
+    		<span class="city" data-bind="text: city"></span>
+    		<br>
+    		<span class="date">
+    			<span data-bind="text: city"></span> was visited on
+    			<span data-bind="text: month"></span>,
+    			<span data-bind="text: year"></span>
+    		</span>
+    		<br>
+    		<span class="showDetails" data-bind="click: showDetails">Show details</span>&nbsp;&nbsp;
+    		<span class="showDetails" data-bind="click: $parent.showPhotos">Show photos</span>
+    		<br>
+    		<span class="hotel" data-bind="css: {'hidden' : isHiddenDetails}">Hotel: <span data-bind="text: hotel"></span></span>
+    		<br>
+    		<span class="address" data-bind="css: {'hidden' : isHiddenDetails}">Hotel address:  <span data-bind="text: address"></span></span>
         	<hr class="line">
         </div>
     </script>

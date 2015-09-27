@@ -573,18 +573,25 @@ var model = {
 // parameter:
 //		data - data to create location (continent, country, city and so on...)
 var Location = function (data) {
+	var self = this;
+
 	this.continent = ko.observable(data.continent);
 	this.country = ko.observable(data.country);
 	this.city = ko.observable(data.city);
 	this.type = ko.observable(data.type);
+	this.month = ko.observable(data.month);
 	this.year = ko.observable(data.year);
 	this.lat = ko.observable(data.lat);
 	this.lng = ko.observable(data.lng);
 	this.hotel = ko.observable(data.hotel);
+	this.address = ko.observable(data.address);
 	this.photos = ko.observableArray([]);
 	this.show = ko.observable(data.show);
 	this.marker = ko.observable(data.marker);
-	//console.log(this.marker());
+	this.isHiddenDetails = ko.observable(true);
+	this.showDetails = function() {
+		this.isHiddenDetails(!self.isHiddenDetails());
+	};
 };
 
 var viewModel = function() {

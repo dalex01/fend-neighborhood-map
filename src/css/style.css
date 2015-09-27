@@ -83,9 +83,9 @@ body {
 	margin-left: 50px;
 }
 
-.location:hover {
+/*.location:hover {
 	background-color: #E4E4E4;
-}
+}*/
 
 .country {
 	font-weight: bold;
@@ -225,4 +225,24 @@ body {
 	margin: 10px;
 	text-align: center;
 	vertical-align: center;
+}
+
+.hidden {
+	display: none;
+}
+
+.showDetails {
+	color: #0090FF;
+	border-bottom: 1px dotted;
+	font-size: 0.8em;
+}
+
+.showDetails:hover {
+	cursor: pointer;
+	cursor: hand;
+}
+
+.hotel,
+.address {
+	font-size: 0.8em;
 }
