@@ -56,11 +56,14 @@
     				</ul>
     			</div>
     			<div class="mainPhoto" data-bind="with: currentBigPhoto">
-					<img src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
+					<img src="" alt="" data-bind="
+						attr: {src: imgSrc+imgSize, alt: imgAlt}"
+					>
 				</div>
 			</div>
     	</div>
 	</div>
+	<!--<div id="map" data-bind="map: myMap"></div>-->
 	<div id="map"></div>
 
 	<script type="text/html" id="location-template">
@@ -69,26 +72,22 @@
         		<span class="country" data-bind="text: country"></span>,
         		<span class="city" data-bind="text: city"></span>
         		<br>
-        		<span class="date">This location was visited on <span data-bind="text: date"></span></span>
+        		<span class="date">This location was visited on <span data-bind="text: year"></span></span>
         	</p>
         	<hr class="line">
         </div>
     </script>
 
     <script type="text/html" id="photo-template">
-		<li class="photo">
-    		<img src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
+		<li class="photo" data-bind="click: $parent.changeBigPhoto">
+    		<img src="" alt="" data-bind="attr: {src: imgSrc+imgSize, alt: imgAlt}">
 		</li>
-        <!--<div class="photoList">
-        	<img class="smallImg" src="" alt="" data-bind="attr: {src: imgSrc, alt: imgAlt}">
-        </div>
-        <div>
-        </div>-->
     </script>
 	<script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./components/knockout/dist/knockout.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initMap" async defer></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ"></script>-->
     <script src="./js/main.js"></script>
   </body>
 </html>
