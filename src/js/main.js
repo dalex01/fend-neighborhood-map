@@ -631,116 +631,104 @@ var Location = function (data) {
 var viewModel = function() {
     var self = this;
 
-	// initialize Google Map via API
-	self.initMap = function() {
-		// display map in element with id 'map'
-		model.map = new google.maps.Map(document.getElementById('map'), {
-	        // center map somewhere near Italy :)
-	        center: {
-	            lat: 39.104892,
-	            lng: 9.456656
-	        },
-	        zoom: 3,
-	        mapTypeControl: true,
-	        mapTypeId: google.maps.MapTypeId.ROADMAP,
-	        mapTypeControlOptions: {
-	            position: google.maps.ControlPosition.BOTTOM_CENTER
-	        },
-	        zoomControl: true,
-	        zoomControlOptions: {
-	            position: google.maps.ControlPosition.LEFT_CENTER
-	        },
-	        streetViewControl: true,
-	        streetViewControlOptions: {
-	            position: google.maps.ControlPosition.LEFT_CENTER
-	        }
-	    });
+    self.initialize = function() {
+		// initialize Google Map via API
+		self.initMap = function() {
+			// display map in element with id 'map'
+			model.map = new google.maps.Map(document.getElementById('map'), {
+		        // center map somewhere near Italy :)
+		        center: {
+		            lat: 39.104892,
+		            lng: 9.456656
+		        },
+		        zoom: 3,
+		        mapTypeControl: true,
+		        mapTypeId: google.maps.MapTypeId.ROADMAP,
+		        mapTypeControlOptions: {
+		            position: google.maps.ControlPosition.BOTTOM_CENTER
+		        },
+		        zoomControl: true,
+		        zoomControlOptions: {
+		            position: google.maps.ControlPosition.LEFT_CENTER
+		        },
+		        streetViewControl: true,
+		        streetViewControlOptions: {
+		            position: google.maps.ControlPosition.LEFT_CENTER
+		        }
+		    });
 
-	    // add markers on map according to locations in model
-	    self.addMarkers(model.map);
-	    //self.clickMarker(model.map);
+		    // add markers on map according to locations in model
+		    self.addMarkers(model.map);
+		    //self.clickMarker(model.map);
+		};
+
+		// function to add markers on map
+		// parameter:
+		// 		map - map where markers will be displayed
+		self.addMarkers = function(map) {
+
+		    // iterate through all locations in model
+		    for ( var loc in model.locations) {
+		        // create new marker at specified position
+		        var marker = new google.maps.Marker({
+		            position: model.locations[loc],
+		            map: map,
+		            title: model.locations[loc].city,
+		            animation: google.maps.Animation.DROP
+		        });
+
+		        // push marker into array of markers in model
+		        model.markers.push(marker);
+		        model.locations[loc].marker = marker;
+		    }
+		};
+
+
+		self.clickMarker = function(map) {
+			ko.utils.arrayForEach(self.locationsList(), function (loc) {
+				var marker = loc.marker();
+				// Zoom to 12 when clicking on marker
+				google.maps.event.addListener(marker,'click',function() {
+					if (marker.getAnimation() !== null) {
+					    marker.setAnimation(null);
+					} else {
+					    marker.setAnimation(google.maps.Animation.BOUNCE);
+					}
+					map.setZoom(12);
+					map.setCenter(marker.getPosition());
+				});
+		    });
+		};
+
+	    self.initMap();
+		//initialize locations list according to locations in model
+		self.locationsList = ko.observableArray([]);
+		model.locations.forEach(function(locationItem) {
+			self.locationsList.push(new Location(locationItem));
+		});
+
+	    self.isHiddenLeft = ko.observable(true); // initially left sidebar is hidden
+	    self.isHiddenRight = ko.observable(true); // initially right sidebar is hidden
+    	self.searchQuery = ko.observable(); // inisialize observable for search input
+		self.columnsToSearch = ko.observableArray(model.columns); // inisialize observable for columns to search
+		self.currentLocation = ko.observable(); // inisialize observable for current location
+		self.currentPhotos = ko.observableArray([]); // inisialize observable for photos for current location
+		self.currentBigPhoto = ko.observable(); // inisialize observable for big photo
+	    self.infoHeight = ko.observable($(window).height() - 70); // set height property to right sidebar
+    	self.photosHeight = ko.observable($(window).height() - 70); // set height property to left sidebar
+
+		self.clickMarker(model.map);
 	};
 
-	// function to add markers on map
-	// parameter:
-	// 		map - map where markers will be displayed
-	self.addMarkers = function(map) {
+	self.initialize();
 
-	    // iterate through all locations in model
-	    for ( var loc in model.locations) {
-	        // create new marker at specified position
-	        var marker = new google.maps.Marker({
-	            position: model.locations[loc],
-	            map: map,
-	            title: model.locations[loc].city,
-	            animation: google.maps.Animation.DROP
-	        });
-
-	        // push marker into array of markers in model
-	        model.markers.push(marker);
-	        model.locations[loc].marker = marker;
-	    }
-	};
-
-
-	self.clickMarker = function(map) {
-		ko.utils.arrayForEach(self.locationsList(), function (loc) {
-			var marker = loc.marker();
-			// Zoom to 12 when clicking on marker
-			google.maps.event.addListener(marker,'click',function() {
-				if (marker.getAnimation() !== null) {
-				    marker.setAnimation(null);
-				} else {
-				    marker.setAnimation(google.maps.Animation.BOUNCE);
-				}
-				map.setZoom(12);
-				map.setCenter(marker.getPosition());
-			});
-	    });
-	};
-
-    self.initMap();
-
-	self.locationsList = ko.observableArray([]);
-
-	model.locations.forEach(function(locationItem) {
-		self.locationsList.push(new Location(locationItem));
-	});
-
-	self.clickMarker(model.map);
-
-    // set height property to left and right sidebars
-    self.infoHeight = ko.observable($(window).height() - 70);
-
-    // set hiding logic for right sidebar
-    self.isHiddenRight = ko.observable(true);
-    self.toggleHiddenRight = function() {
-    	// if it is hidden show it and vice versa
-        self.isHiddenRight(!self.isHiddenRight());
-        // if left menu is shown hide it
-        if (!self.isHiddenLeft())
-            self.toggleHiddenLeft();
-    };
-
-	// set height property to left and right sidebars
-    self.photosHeight = ko.observable($(window).height() - 70);
-    self.photosWidth = ko.computed(function() {
+	// set big photo width and height according to avalaible area to display
+	self.photosWidth = ko.computed(function() {
     	if ($(window).width() > 600)
-    		return ($(window).width() - 370);
-    	else
+			return ($(window).width() - 370);
+		else
     		return 300;
     });
-
-	// set hiding logic for left sidebar
-    self.isHiddenLeft = ko.observable(true);
-    self.toggleHiddenLeft = function() {
-        self.isHiddenLeft(!self.isHiddenLeft());
-    };
-
-    // observable for search input
-    self.searchQuery = ko.observable();
-
-	self.columnsToSearch = ko.observableArray(model.columns);
 
     // locations array to display in right sidebar accordint to search input value
     // if search is empty - display all locations
@@ -778,9 +766,17 @@ var viewModel = function() {
 	    }
 	});
 
-	self.currentLocation = ko.observable();
-	self.currentPhotos = ko.observableArray([]);
-	self.currentBigPhoto = ko.observable();
+    self.toggleHiddenRight = function() {
+    	// if it is hidden show it and vice versa
+        self.isHiddenRight(!self.isHiddenRight());
+        // if left menu is shown hide it
+        if (!self.isHiddenLeft())
+            self.toggleHiddenLeft();
+    };
+
+    self.toggleHiddenLeft = function() {
+        self.isHiddenLeft(!self.isHiddenLeft());
+    };
 
 	self.showMarker = function(location) {
 		var myLatLng = new google.maps.LatLng(location.lat(),location.lng());
@@ -791,7 +787,7 @@ var viewModel = function() {
    			marker.setAnimation(null);
   		} else {
     		marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
+  		}
 	};
 
 	self.fullMap = function() {
