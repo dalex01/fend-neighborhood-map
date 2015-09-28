@@ -819,6 +819,7 @@ var viewModel = function() {
     self.showPhotos = function(location) {
     	self.currentLocation = location;
     	self.currentPhotos([]);
+    	self.currentBigPhoto();
 		var flickrCollectionRequestTimeout = setTimeout(function() {
 			console.log('fail in flickrCollectionRequestTimeout');
 		    alert('Failed to get Flickr resources');
