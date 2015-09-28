@@ -946,7 +946,16 @@ var viewModel = function() {
 		    }, 8000);
 
 			var photos = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=c69f4fb5685159e37196cb8b2b5273cb&photoset_id=' + photosetId + '&user_id=136434920%40N04&format=json&nojsoncallback=1';
-			//if (self.currentLocation.photos.length === 0) {
+			if (self.currentLocation.photos().length) {
+					self.currentPhotos(self.currentLocation.photos());
+					self.currentBigPhoto({
+						imgAlt: self.currentLocation.photos()[0].imgAlt,
+						imgSrc: self.currentLocation.photos()[0].imgSrc,
+						imgSize: determineBigSize()
+					});
+					clearTimeout(flickrPhotosRequestTimeout);
+			} else {
+				console.log('in async');
 			    $.ajax({
 			        url: photos,
 			        dataType: 'json',
@@ -955,13 +964,10 @@ var viewModel = function() {
 			            clearTimeout(flickrPhotosRequestTimeout);
 			        }
 			    });
-			//}
-			//else
-			//	self.currentPhotos = self.currentLocation.photos;
+			}
 		};
 
-		var handlePhotos = function(responseData) {
-			var firstPhoto = responseData.photoset.photo[0];
+		var determineBigSize = function() {
 			var side = Math.min(Math.max(320, $(window).width() - 370), $(window).height() - 150);
 			var photoSize = '.jpg';
 			if (side > 320 && side <= 500)
@@ -976,6 +982,11 @@ var viewModel = function() {
 				photoSize = '_k.jpg';
 			else if (side > 1600)
 				photoSize = '_o.jpg';
+			return photoSize;
+		};
+
+		var handlePhotos = function(responseData) {
+			var firstPhoto = responseData.photoset.photo[0];
 			self.currentBigPhoto({
 					imgAlt: firstPhoto.title,
 					imgSrc: 'https://farm' +
@@ -986,25 +997,24 @@ var viewModel = function() {
 	    					 firstPhoto.id +
 	    					 '_' +
 	    					 firstPhoto.secret,
-	    			imgSize: photoSize
+	    			imgSize: determineBigSize()
 	        	});
 	        for(var i = 0; i < responseData.photoset.photo.length; i++) {
 	        	var ph = responseData.photoset.photo[i];
-	        	// TODO: photos may be should be removed from locations
-	        	//self.currentLocation.photos.push(
-	        	//	{
-				//	imgAlt: ph.title,
-				//	imgSrc: 'https://farm' +
-	    		//			 ph.farm +
-	    		//			 '.staticflickr.com/' +
-	    		//			 ph.server +
-	    		//			 '/' +
-	    		//			 ph.id +
-	    		//			 '_' +
-	    		//			 ph.secret +
-	    		//			 '_m.jpg'
-	    		//	}
-	        	//);
+	        	self.currentLocation.photos.push(
+	        		{
+					imgAlt: ph.title,
+					imgSrc: 'https://farm' +
+	    					 ph.farm +
+	    					 '.staticflickr.com/' +
+	    					 ph.server +
+	    					 '/' +
+	    					 ph.id +
+	    					 '_' +
+	    					 ph.secret,
+	    			imgSize: '_s.jpg'
+	    			}
+	        	);
 	        	self.currentPhotos.push(
 	        		{
 					imgAlt: ph.title,
@@ -1020,6 +1030,7 @@ var viewModel = function() {
 	    			}
 	        	);
 	        }
+	        console.log('after adding', self.currentLocation.photos());
 	    };
 
 		// show left sidebar if it is hidden
