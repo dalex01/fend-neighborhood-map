@@ -6,7 +6,7 @@
 // 2. Color visited countries
 // 3. ---DONE!!! Popup big photo after clicking on small icon
 // 4. Create feature to add new locations via UI
-// 5. Error handling during working with Flickr API
+// 5. !!! Error handling during working with Flickr API
 // 6. ---DONE!!! Filter markers on the map by search bar
 // 7. !!! Click on location activate its marker
 // 8. !!! Animate marker when clicked
@@ -658,12 +658,14 @@ var viewModel = function() {
 
 	    // add markers on map according to locations in model
 	    self.addMarkers(model.map);
+	    //self.clickMarker(model.map);
 	};
 
 	// function to add markers on map
 	// parameter:
 	// 		map - map where markers will be displayed
 	self.addMarkers = function(map) {
+
 	    // iterate through all locations in model
 	    for ( var loc in model.locations) {
 	        // create new marker at specified position
@@ -673,36 +675,39 @@ var viewModel = function() {
 	            title: model.locations[loc].city,
 	            animation: google.maps.Animation.DROP
 	        });
+
 	        // push marker into array of markers in model
 	        model.markers.push(marker);
 	        model.locations[loc].marker = marker;
-	        //marker.addListener('click', self.toggleBounce(marker));
 	    }
 	};
 
-	/*self.toggleBounce = function (marker) {
-	  if (marker.getAnimation() !== null) {
-	    marker.setAnimation(null);
-	  } else {
-	    marker.setAnimation(google.maps.Animation.BOUNCE);
-	  }
-	}*/
+
+	self.clickMarker = function(map) {
+		ko.utils.arrayForEach(self.locationsList(), function (loc) {
+			var marker = loc.marker();
+			// Zoom to 12 when clicking on marker
+			google.maps.event.addListener(marker,'click',function() {
+				if (marker.getAnimation() !== null) {
+				    marker.setAnimation(null);
+				} else {
+				    marker.setAnimation(google.maps.Animation.BOUNCE);
+				}
+				map.setZoom(12);
+				map.setCenter(marker.getPosition());
+			});
+	    });
+	};
 
     self.initMap();
 
-    /*self.myMap = ko.observable({
-        lat: ko.observable(39.104892),
-        lng:ko.observable(9.456656)
-    });*/
-
-	//self.addMarkers(self.myMap().googleMap);
-
 	self.locationsList = ko.observableArray([]);
-	self.markersList = ko.observableArray([]);
 
 	model.locations.forEach(function(locationItem) {
 		self.locationsList.push(new Location(locationItem));
 	});
+
+	self.clickMarker(model.map);
 
     // set height property to left and right sidebars
     self.infoHeight = ko.observable($(window).height() - 70);
@@ -731,24 +736,6 @@ var viewModel = function() {
     self.toggleHiddenLeft = function() {
         self.isHiddenLeft(!self.isHiddenLeft());
     };
-
-	// set height property to bottom and right sidebars
-    /*self.bigPhotoHeight = ko.observable($(window).height() - 70);
-    self.bigPhotoWidth = ko.observable($(window).width() - 70);
-
-    // set hiding logic for bottom sidebar
-    self.isHiddenBottom = ko.observable(false);
-    self.toggleHiddenBottom = function() {
-    	// if it is hidden show it and vice versa
-        self.toggleHiddenBottom(!self.toggleHiddenBottom());
-        // if left menu is shown hide it
-        //if (!self.isHiddenLeft())
-            //this.toggleHiddenLeft();
-    };*/
-
-    // selected location from right sidebar
-    // !!! may be removed later
-    self.city = ko.observable();
 
     // observable for search input
     self.searchQuery = ko.observable();
