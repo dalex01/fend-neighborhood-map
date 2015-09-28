@@ -1,22 +1,16 @@
 //'use strict';
 
 // TODO:
-// 0. ---DONE!!! Display photos of each place
 // 1. Menu button in right menu should be fixed during scrolling
 // 2. Color visited countries
-// 3. ---DONE!!! Popup big photo after clicking on small icon
-// 4. Create feature to add new locations via UI
-// 5. !!! Error handling during working with Flickr API
-// 6. ---DONE!!! Filter markers on the map by search bar
-// 7. ---DONE!!! Click on location activate its marker
-// 8. ---DONE!!! Animate marker when clicked
-// 9. ---DONE!!! Show information on marker when clicked or location choused in the list
-// 10. Create feature to choose on which field we want to search.
-// 11. Optimize big photo width and height
-// 12. ---DONE!!! Position and zoom on location when it is clicked
-// 13. Optimize width of left sidebar on small screens
-// 14. ---DONE!!! Add close button on left sidebar
-// 15. Convert all css to BEM
+// 3. Create feature to add new locations via UI
+// 4. !!! Error handling during working with Flickr API
+// 5. Create feature to choose on which field we want to search.
+// 6. Optimize big photo width and height
+// 7. Optimize width of left sidebar on small screens
+// 8. Convert all css to BEM
+// 9. !!! Add wiki links into infowindow
+// 10. Make gray background during big photo displaying
 
 var model = {
     // array with all visited locations
@@ -157,7 +151,7 @@ var model = {
 		},
         {
             continent: 'North America',
-            country: 'USA',
+            country: 'United States of America',
             city: 'New York',
             type: 'so-so',
             month: 'September',
@@ -172,7 +166,7 @@ var model = {
         },
         {
             continent: 'North America',
-            country: 'USA',
+            country: 'United States of America',
             city: 'Chicago',
             type: 'so-so',
             month: 'September',
@@ -187,7 +181,7 @@ var model = {
         },
         /*		{
         			continent: 'North America',
-        			country: 'USA',
+        			country: 'United States of America',
         			city: 'Boston',
         			type: 'so-so',
         			month: 'September',
@@ -202,7 +196,7 @@ var model = {
         		},*/
         {
             continent: 'North America',
-            country: 'USA',
+            country: 'United States of America',
             city: 'Niagara Falls',
             type: 'so-so',
             month: 'September',
@@ -397,7 +391,7 @@ var model = {
         },
 		{
 			continent: 'Asia',
-			country: 'UAE',
+			country: 'United Arab Emirates',
 			city: 'Dubai',
 			type: 'so-so',
 			month: 'September',
@@ -823,8 +817,41 @@ var viewModel = function() {
 			self.locationsList.push(new Location(locationItem));
 		});
 
+		var fillCountries = function(map, country) {
+    		var countriesArray = [];
+    		var countries = '(';
+    		for (var loc in self.locationsList()) {
+    			var cntr = self.locationsList()[loc].country();
+    			if (countriesArray.indexOf(cntr) <= -1) {
+    				countriesArray.push(cntr);
+    				countries += "'" + cntr + "', ";
+    			}
+    		}
+    		countries = countries.substring(0, countries.length - 2) + ")";
+
+    		// Fusion Table data ID
+			var FT_TableID = 420419;
+			layer = new google.maps.FusionTablesLayer({
+  				query: {
+  					select: "kml_4326",
+          			from: FT_TableID,
+          			where: "'name_0' IN " + countries
+          		},
+  				styles: [{
+  					polygonOptions: {
+					    fillOpacity: "0.4",
+    					fillColor: "#06FF1D"
+  					}
+				}]
+			});
+
+			layer.setMap(map);
+
+		};
+
 		self.clickMarker(model.map);
 		self.addInfoWindow(model.map);
+		fillCountries(model.map, 'Russia');
 	};
 
 	self.initialize();
@@ -955,7 +982,6 @@ var viewModel = function() {
 					});
 					clearTimeout(flickrPhotosRequestTimeout);
 			} else {
-				console.log('in async');
 			    $.ajax({
 			        url: photos,
 			        dataType: 'json',
@@ -1030,7 +1056,6 @@ var viewModel = function() {
 	    			}
 	        	);
 	        }
-	        console.log('after adding', self.currentLocation.photos());
 	    };
 
 		// show left sidebar if it is hidden
