@@ -8,14 +8,15 @@
 // 4. Create feature to add new locations via UI
 // 5. !!! Error handling during working with Flickr API
 // 6. ---DONE!!! Filter markers on the map by search bar
-// 7. !!! Click on location activate its marker
-// 8. !!! Animate marker when clicked
-// 9. !!! Show information on marker when clicked or location choused in the list
+// 7. ---DONE!!! Click on location activate its marker
+// 8. ---DONE!!! Animate marker when clicked
+// 9. ---DONE!!! Show information on marker when clicked or location choused in the list
 // 10. Create feature to choose on which field we want to search.
 // 11. Optimize big photo width and height
 // 12. ---DONE!!! Position and zoom on location when it is clicked
 // 13. Optimize width of left sidebar on small screens
 // 14. ---DONE!!! Add close button on left sidebar
+// 15. Convert all css to BEM
 
 var model = {
     // array with all visited locations
@@ -632,6 +633,16 @@ var viewModel = function() {
     var self = this;
 
     self.initialize = function() {
+	    self.isHiddenLeft = ko.observable(true); // initially left sidebar is hidden
+	    self.isHiddenRight = ko.observable(true); // initially right sidebar is hidden
+    	self.searchQuery = ko.observable(); // inisialize observable for search input
+		self.columnsToSearch = ko.observableArray(model.columns); // inisialize observable for columns to search
+		self.currentLocation = ko.observable(); // inisialize observable for current location
+		self.currentPhotos = ko.observableArray([]); // inisialize observable for photos for current location
+		self.currentBigPhoto = ko.observable(); // inisialize observable for big photo
+	    self.infoHeight = ko.observable($(window).height() - 70); // set height property to right sidebar
+    	self.photosHeight = ko.observable($(window).height() - 70); // set height property to left sidebar
+
 		// initialize Google Map via API
 		self.initMap = function() {
 			// display map in element with id 'map'
@@ -676,6 +687,12 @@ var viewModel = function() {
 		            animation: google.maps.Animation.DROP
 		        });
 
+		        //if (model.locations[loc].company === 2) {
+				//	marker.setIcon('img/heart_2.png');
+		        //} else {
+		        //	marker.setIcon('img/blue.png');
+		        //}
+
 		        // push marker into array of markers in model
 		        //model.markers.push(marker);
 		        model.locations[loc].marker = marker;
@@ -703,7 +720,7 @@ var viewModel = function() {
 			ko.utils.arrayForEach(self.locationsList(), function (loc) {
 				var marker = loc.marker();
 				var content = '<div id="iw-container">' +
-	            	          	'<div class="iw-title">' + loc.city() + '</div>' +
+	            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
 	                  		  	'<div class="iw-content">' +
 	                      	  		'<div class="iw-subTitle">Visit info</div>' +
 	                      	  		//'<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
@@ -724,7 +741,6 @@ var viewModel = function() {
 					    				'<strong> Company: </strong>' +
 					    				'<span>' + loc.company() + '</span>' +
 					    			'</span>' +
-	                    	  	'</div>' +
 	                    	  	'<div class="iw-bottom-gradient"></div>' +
 	                  		  '</div>';
                   		  // A new Info Window is created and set content
@@ -732,7 +748,7 @@ var viewModel = function() {
 				   	content: content,
 				    // Assign a maximum value for the width of the infowindow allows
 				    // greater control over the various content elements
-				    maxWidth: 300
+				    maxWidth: 350
 				});
 
 				// This event expects a click on a marker
@@ -752,51 +768,51 @@ var viewModel = function() {
 				// the creation of the infowindow HTML structure 'domready'
 				// and before the opening of the infowindow, defined styles are applied.
 				// *
-				//google.maps.event.addListener(infowindow, 'domready', function() {
+				google.maps.event.addListener(infowindow, 'domready', function() {
 
 				    // Reference to the DIV that wraps the bottom of infowindow
-				//    var iwOuter = $('.gm-style-iw');
+				    var iwOuter = $('.gm-style-iw');
 
 				    /* Since this div is in a position prior to .gm-div style-iw.
 				     * We use jQuery and create a iwBackground variable,
 				     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 				    */
-				//    var iwBackground = iwOuter.prev();
+				    var iwBackground = iwOuter.prev();
 
 				    // Removes background shadow DIV
-				//    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+				    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 
 				    // Removes white background DIV
-				//    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+				    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
 
 				    // Moves the infowindow 115px to the right.
-				//    iwOuter.parent().parent().css({left: '115px'});
+				    //iwOuter.parent().parent().css({left: '115px'});
 
 				    // Moves the shadow of the arrow 76px to the left margin.
-				//    iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+				    //iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
 
 				    // Moves the arrow 76px to the left margin.
-				//    iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+				    //iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
 
 				    // Changes the desired tail shadow color.
-				//    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+				    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
 
 				    // Reference to the div that groups the close button elements.
-				//    var iwCloseBtn = iwOuter.next();
+				    var iwCloseBtn = iwOuter.next();
 
 				    // Apply the desired effect to the close button
-				//    iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+				    iwCloseBtn.css({opacity: '1', right: '55px', top: '20px', border: '7px #48b5e9', 'border-radius': '13px'});
 
 				    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-				//    if($('.iw-content').height() < 140){
-				//      $('.iw-bottom-gradient').css({display: 'none'});
-				//    }
+				    //if($('.iw-content').height() < 140){
+				    //  $('.iw-bottom-gradient').css({display: 'none'});
+				    //}
 
 				    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-				//    iwCloseBtn.mouseout(function(){
-				//      $(this).css({opacity: '1'});
-				//    });
-				//});
+				    iwCloseBtn.mouseout(function(){
+				      $(this).css({opacity: '1'});
+				    });
+				});
 			});
 		};
 
@@ -806,16 +822,6 @@ var viewModel = function() {
 		model.locations.forEach(function(locationItem) {
 			self.locationsList.push(new Location(locationItem));
 		});
-
-	    self.isHiddenLeft = ko.observable(true); // initially left sidebar is hidden
-	    self.isHiddenRight = ko.observable(true); // initially right sidebar is hidden
-    	self.searchQuery = ko.observable(); // inisialize observable for search input
-		self.columnsToSearch = ko.observableArray(model.columns); // inisialize observable for columns to search
-		self.currentLocation = ko.observable(); // inisialize observable for current location
-		self.currentPhotos = ko.observableArray([]); // inisialize observable for photos for current location
-		self.currentBigPhoto = ko.observable(); // inisialize observable for big photo
-	    self.infoHeight = ko.observable($(window).height() - 70); // set height property to right sidebar
-    	self.photosHeight = ko.observable($(window).height() - 70); // set height property to left sidebar
 
 		self.clickMarker(model.map);
 		self.addInfoWindow(model.map);
