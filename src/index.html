@@ -79,7 +79,9 @@
     			</div>
     			<div class="mainPhoto" data-bind="with: currentBigPhoto">
 					<img src="" alt="" data-bind="
-						attr: {src: imgSrc+imgSize, alt: imgAlt}"
+						attr: {src: imgSrc+imgSize, alt: imgAlt},
+						style: { width: $parent.bigPhotoWidth() + 'px',
+								 height: $parent.bigPhotoHeight() + 'px' }"
 					>
 				</div>
 			</div>

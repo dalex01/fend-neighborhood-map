@@ -3,12 +3,9 @@
 // TODO:
 // 1. Menu button in right menu should be fixed during scrolling
 // 2. Create feature to add new locations via UI
-// 3. !!! Error handling during working with Flickr API
-// 4. Create feature to choose on which field we want to search.
-// 5. Optimize big photo width and height
-// 6. Optimize width of left sidebar on small screens
-// 7. Convert all css to BEM
-// 8. Make gray background during big photo displaying
+// 3. Create feature to choose on which field we want to search.
+// 4. Convert all css to BEM
+// 5. Make gray background during big photo displaying
 
 var model = {
     // array with all visited locations
@@ -569,6 +566,8 @@ var viewModel = function() {
 		self.currentBigPhoto = ko.observable(); // inisialize observable for big photo
 	    self.infoHeight = ko.observable($(window).height() - 70); // set height property to right sidebar
     	self.photosHeight = ko.observable($(window).height() - 70); // set height property to left sidebar
+    	self.bigPhotoWidth = ko.observable();
+    	self.bigPhotoHeight = ko.observable();
 
 		// initialize Google Map via API
 		self.initMap = function() {
@@ -742,7 +741,6 @@ var viewModel = function() {
 			            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
 			                  		  	'<div class="iw-content">' +
 			                      	  		'<div class="iw-subTitle">Visit info</div>' +
-			                      	  		//'<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
 			                      	  		'<span class="hotel">' +
 							    				'<span class="glyphicon glyphicon-home"></span>' +
 							    				'<strong> Hotel: </strong>' +
@@ -766,7 +764,7 @@ var viewModel = function() {
 							    			'<ul>' + wikiArticleList + '</ul>' +
 			                    	  	'<div class="iw-bottom-gradient"></div>' +
 			                  		  '</div>';
-		                  		  // A new Info Window is created and set content
+		                // A new Info Window is created and set content
 						var infowindow = new google.maps.InfoWindow({
 						   	content: content,
 						    // Assign a maximum value for the width of the infowindow allows
@@ -856,10 +854,10 @@ var viewModel = function() {
 
 	// set big photo width and height according to avalaible area to display
 	self.photosWidth = ko.computed(function() {
-    	if ($(window).width() > 600)
+    	if ($(window).width() > 700)
 			return ($(window).width() - 370);
 		else
-    		return 300;
+    		return ($(window).width() - 60);
     });
 
     // locations array to display in right sidebar accordint to search input value
@@ -917,8 +915,10 @@ var viewModel = function() {
 		model.map.setZoom(12);
 		if (marker.getAnimation() !== null) {
    			marker.setAnimation(null);
+   			model.layer.setMap(model.map);
   		} else {
     		marker.setAnimation(google.maps.Animation.BOUNCE);
+    		model.layer.setMap(null);
   		}
 	};
 
@@ -982,6 +982,7 @@ var viewModel = function() {
 						imgSrc: self.currentLocation.photos()[0].imgSrc,
 						imgSize: determineBigSize()
 					});
+					self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
 					//clearTimeout(flickrPhotosRequestTimeout);
 			} else {
 			    $.ajax({
@@ -1030,6 +1031,7 @@ var viewModel = function() {
 	    					 firstPhoto.secret,
 	    			imgSize: determineBigSize()
 	        	});
+			self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
 	        for(var i = 0; i < responseData.photoset.photo.length; i++) {
 	        	var ph = responseData.photoset.photo[i];
 	        	self.currentLocation.photos.push(
@@ -1068,6 +1070,7 @@ var viewModel = function() {
             self.toggleHiddenLeft();
 	};
 
+
 	self.changeBigPhoto = function(photo) {
 		var size = self.currentBigPhoto().imgSize;
 		self.currentBigPhoto({
@@ -1075,9 +1078,36 @@ var viewModel = function() {
 					imgSrc: photo.imgSrc,
 	    			imgSize: size
 		});
+		self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
 	};
 
+	self.setBigPhotoSize = function(url) {
+		var img = new Image();
+		img.onload = function() {
+			var image = {
+				h: img.height,
+		    	w: img.width
+		    };
+
+			var height = $(window).height() - 270;
+			var width = Math.max($(window).width() - 90, $(window).width() - 400);
+			console.log(width, image.w, height, image.h);
+			if (width < image.w && height > image.h)
+				self.bigPhotoWidth(width);
+				//self.bigPhotoHeight(height);
+			else if (width > image.w && height < image.h)
+				//self.bigPhotoWidth(width);
+				self.bigPhotoHeight(height);
+			else if (image.w/width < image.h/height)
+				self.bigPhotoHeight(height);
+			else
+				self.bigPhotoWidth(width);
+		};
+
+		img.src = url;
+	};
 };
+
 
 $(document).ready(function() {
 	var vm = new viewModel();
