@@ -2,15 +2,14 @@
 
 // TODO:
 // 1. Menu button in right menu should be fixed during scrolling
-// 2. Color visited countries
-// 3. Create feature to add new locations via UI
-// 4. !!! Error handling during working with Flickr API
-// 5. Create feature to choose on which field we want to search.
-// 6. Optimize big photo width and height
-// 7. Optimize width of left sidebar on small screens
-// 8. Convert all css to BEM
-// 9. !!! Add wiki links into infowindow
-// 10. Make gray background during big photo displaying
+// 2. Create feature to add new locations via UI
+// 3. !!! Error handling during working with Flickr API
+// 4. Create feature to choose on which field we want to search.
+// 5. Optimize big photo width and height
+// 6. Optimize width of left sidebar on small screens
+// 7. Convert all css to BEM
+// 8. !!! Add wiki links into infowindow
+// 9. Make gray background during big photo displaying
 
 var model = {
     // array with all visited locations
@@ -681,11 +680,11 @@ var viewModel = function() {
 		            animation: google.maps.Animation.DROP
 		        });
 
-		        //if (model.locations[loc].company === 2) {
-				//	marker.setIcon('img/heart_2.png');
-		        //} else {
-		        //	marker.setIcon('img/blue.png');
-		        //}
+		        if (model.locations[loc].company === 2) {
+					marker.setIcon('img/heart.png');
+		        } else {
+		        	marker.setIcon('img/friends.png');
+		        }
 
 		        // push marker into array of markers in model
 		        //model.markers.push(marker);
@@ -713,100 +712,133 @@ var viewModel = function() {
 		self.addInfoWindow = function(map) {
 			ko.utils.arrayForEach(self.locationsList(), function (loc) {
 				var marker = loc.marker();
-				var content = '<div id="iw-container">' +
-	            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
-	                  		  	'<div class="iw-content">' +
-	                      	  		'<div class="iw-subTitle">Visit info</div>' +
-	                      	  		//'<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
-	                      	  		'<span class="hotel">' +
-					    				'<span class="glyphicon glyphicon-home"></span>' +
-					    				'<strong> Hotel: </strong>' +
-					    				'<span>' + loc.hotel() + '</span>' +
-					    			'</span>' +
-					    			'<br>' +
-					    			'<span class="address">' +
-										'<span class="glyphicon glyphicon-book"></span>' +
-					    				'<strong> Hotel address: </strong>' +
-					    				'<span>' + loc.address() + '</span>' +
-					    			'</span>' +
-					    			'<br>' +
-					    			'<span class="company">' +
-					    				'<span class="glyphicon glyphicon-user"></span>' +
-					    				'<strong> Company: </strong>' +
-					    				'<span>' + loc.company() + '</span>' +
-					    			'</span>' +
-	                    	  	'<div class="iw-bottom-gradient"></div>' +
-	                  		  '</div>';
-                  		  // A new Info Window is created and set content
-				var infowindow = new google.maps.InfoWindow({
-				   	content: content,
-				    // Assign a maximum value for the width of the infowindow allows
-				    // greater control over the various content elements
-				    maxWidth: 350
-				});
+				var city = loc.city();
 
-				// This event expects a click on a marker
-				// When this event is fired the Info Window is opened.
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.open(map, marker);
-				});
+				var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 
-				// Event that closes the Info Window with a click on the map
-				google.maps.event.addListener(map, 'click', function() {
-					infowindow.close();
-				});
+			    var wikiRequestTimeout = setTimeout( function (){
+			        //$wikiElem.text('Failed to get Wikipedia resources');
+			    }, 8000);
 
-				// *
-				// START INFOWINDOW CUSTOMIZE.
-				// The google.maps.event.addListener() event expects
-				// the creation of the infowindow HTML structure 'domready'
-				// and before the opening of the infowindow, defined styles are applied.
-				// *
-				google.maps.event.addListener(infowindow, 'domready', function() {
+			    $.ajax({
+			        url: wikiUrl,
+			        dataType: 'jsonp',
+			        success: function(response) {
+			        	handleWiki(response);
+			            clearTimeout(wikiRequestTimeout);
+			        }
+			    });
 
-				    // Reference to the DIV that wraps the bottom of infowindow
-				    var iwOuter = $('.gm-style-iw');
+			    var handleWiki = function(data) {
+		    		var articleList = data[1];
+		    		console.log(data[1])
+		    		wikiContent = '';
 
-				    /* Since this div is in a position prior to .gm-div style-iw.
-				     * We use jQuery and create a iwBackground variable,
-				     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-				    */
-				    var iwBackground = iwOuter.prev();
+		            for(var i = 0; i < articleList.length; i++) {
+		            	//console.log(articleList[i]);
+		                articleStr = articleList[i];
+		                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+		                wikiContent += '<li><a href="' + url + '">' + articleStr + '</a></li>';
+		            }
+		            console.log(wikiContent);
 
-				    // Removes background shadow DIV
-				    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+					var content = '<div id="iw-container">' +
+		            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
+		                  		  	'<div class="iw-content">' +
+		                      	  		'<div class="iw-subTitle">Visit info</div>' +
+		                      	  		//'<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
+		                      	  		'<span class="hotel">' +
+						    				'<span class="glyphicon glyphicon-home"></span>' +
+						    				'<strong> Hotel: </strong>' +
+						    				'<span>' + loc.hotel() + '</span>' +
+						    			'</span>' +
+						    			'<br>' +
+						    			'<span class="address">' +
+											'<span class="glyphicon glyphicon-book"></span>' +
+						    				'<strong> Hotel address: </strong>' +
+						    				'<span>' + loc.address() + '</span>' +
+						    			'</span>' +
+						    			'<br>' +
+						    			'<span class="company">' +
+						    				'<span class="glyphicon glyphicon-user"></span>' +
+						    				'<strong> Company: </strong>' +
+						    				'<span>' + loc.company() + '</span>' +
+						    			'</span>' +
+						    			'<div class="iw-subTitle">Wikipedia articles</div>' +
+		                    	  	'<div class="iw-bottom-gradient"></div>' +
+		                    	  	'<ul>' + wikiContent + '</ul>' +
+		                  		  '</div>';
+	                  		  // A new Info Window is created and set content
+					var infowindow = new google.maps.InfoWindow({
+					   	content: content,
+					    // Assign a maximum value for the width of the infowindow allows
+					    // greater control over the various content elements
+					    maxWidth: 350
+					});
 
-				    // Removes white background DIV
-				    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+					// This event expects a click on a marker
+					// When this event is fired the Info Window is opened.
+					google.maps.event.addListener(marker, 'click', function() {
+						infowindow.open(map, marker);
+					});
 
-				    // Moves the infowindow 115px to the right.
-				    //iwOuter.parent().parent().css({left: '115px'});
+					// Event that closes the Info Window with a click on the map
+					google.maps.event.addListener(map, 'click', function() {
+						infowindow.close();
+					});
 
-				    // Moves the shadow of the arrow 76px to the left margin.
-				    //iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+					// *
+					// START INFOWINDOW CUSTOMIZE.
+					// The google.maps.event.addListener() event expects
+					// the creation of the infowindow HTML structure 'domready'
+					// and before the opening of the infowindow, defined styles are applied.
+					// *
+					google.maps.event.addListener(infowindow, 'domready', function() {
 
-				    // Moves the arrow 76px to the left margin.
-				    //iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+					    // Reference to the DIV that wraps the bottom of infowindow
+					    var iwOuter = $('.gm-style-iw');
 
-				    // Changes the desired tail shadow color.
-				    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+					    /* Since this div is in a position prior to .gm-div style-iw.
+					     * We use jQuery and create a iwBackground variable,
+					     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+					    */
+					    var iwBackground = iwOuter.prev();
 
-				    // Reference to the div that groups the close button elements.
-				    var iwCloseBtn = iwOuter.next();
+					    // Removes background shadow DIV
+					    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 
-				    // Apply the desired effect to the close button
-				    iwCloseBtn.css({opacity: '1', right: '55px', top: '20px', border: '7px #48b5e9', 'border-radius': '13px'});
+					    // Removes white background DIV
+					    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
 
-				    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-				    //if($('.iw-content').height() < 140){
-				    //  $('.iw-bottom-gradient').css({display: 'none'});
-				    //}
+					    // Moves the infowindow 115px to the right.
+					    //iwOuter.parent().parent().css({left: '115px'});
 
-				    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-				    iwCloseBtn.mouseout(function(){
-				      $(this).css({opacity: '1'});
-				    });
-				});
+					    // Moves the shadow of the arrow 76px to the left margin.
+					    //iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+
+					    // Moves the arrow 76px to the left margin.
+					    //iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+
+					    // Changes the desired tail shadow color.
+					    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+
+					    // Reference to the div that groups the close button elements.
+					    var iwCloseBtn = iwOuter.next();
+
+					    // Apply the desired effect to the close button
+					    iwCloseBtn.css({opacity: '1', right: '55px', top: '20px', border: '7px #48b5e9', 'border-radius': '13px'});
+
+					    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+					    //if($('.iw-content').height() < 140){
+					    //  $('.iw-bottom-gradient').css({display: 'none'});
+					    //}
+
+					    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+					    iwCloseBtn.mouseout(function(){
+					      $(this).css({opacity: '1'});
+					    });
+					});
+			    };
 			});
 		};
 
