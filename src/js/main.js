@@ -527,7 +527,8 @@ var model = {
     // arrau with markers to display
     markers: [],
     columns: ['continent', 'country', 'city'],
-    map: null
+    map: null,
+    layer: null
 };
 
 /*ko.bindingHandlers.map = {
@@ -661,8 +662,8 @@ var viewModel = function() {
 		        }
 		    });
 
-		    // add markers on map according to locations in model
-		    self.addMarkers(model.map);
+		    self.fillCountries(model.map);	// fill visited countries
+		    self.addMarkers(model.map);		// add markers on map according to locations in model
 		};
 
 		// function to add markers on map
@@ -693,15 +694,49 @@ var viewModel = function() {
 		};
 
 
-		self.clickMarker = function(map) {
+		self.fillCountries = function(map) {
+    		var countriesArray = [];
+    		var countries = '(';
+    		for (var loc in model.locations) {
+    			var cntr = model.locations[loc].country;
+    			if (countriesArray.indexOf(cntr) <= -1) {
+    				countriesArray.push(cntr);
+    				countries += "'" + cntr + "', ";
+    			}
+    		}
+    		countries = countries.substring(0, countries.length - 2) + ")";
+
+    		// Fusion Table data ID
+			var FT_TableID = 420419;
+			model.layer = new google.maps.FusionTablesLayer({
+  				query: {
+  					select: "kml_4326",
+          			from: FT_TableID,
+          			where: "'name_0' IN " + countries
+          		},
+  				styles: [{
+  					polygonOptions: {
+					    fillOpacity: "0.2",
+    					fillColor: "#06FF1D"
+  					}
+				}]
+			});
+
+			model.layer.setMap(map);
+
+		};
+
+		self.clickMarker = function(map, layer) {
 			ko.utils.arrayForEach(self.locationsList(), function (loc) {
 				var marker = loc.marker();
 				// Zoom to 12 when clicking on marker
 				google.maps.event.addListener(marker,'click',function() {
 					if (marker.getAnimation() !== null) {
 					    marker.setAnimation(null);
+					    layer.setMap(map);
 					} else {
 					    marker.setAnimation(google.maps.Animation.BOUNCE);
+					    layer.setMap(null);
 					}
 					map.setZoom(12);
 					map.setCenter(marker.getPosition());
@@ -731,16 +766,13 @@ var viewModel = function() {
 
 			    var handleWiki = function(data) {
 		    		var articleList = data[1];
-		    		console.log(data[1])
 		    		wikiContent = '';
 
 		            for(var i = 0; i < articleList.length; i++) {
-		            	//console.log(articleList[i]);
 		                articleStr = articleList[i];
 		                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
 		                wikiContent += '<li><a href="' + url + '">' + articleStr + '</a></li>';
 		            }
-		            console.log(wikiContent);
 
 					var content = '<div id="iw-container">' +
 		            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
@@ -849,41 +881,8 @@ var viewModel = function() {
 			self.locationsList.push(new Location(locationItem));
 		});
 
-		var fillCountries = function(map, country) {
-    		var countriesArray = [];
-    		var countries = '(';
-    		for (var loc in self.locationsList()) {
-    			var cntr = self.locationsList()[loc].country();
-    			if (countriesArray.indexOf(cntr) <= -1) {
-    				countriesArray.push(cntr);
-    				countries += "'" + cntr + "', ";
-    			}
-    		}
-    		countries = countries.substring(0, countries.length - 2) + ")";
-
-    		// Fusion Table data ID
-			var FT_TableID = 420419;
-			layer = new google.maps.FusionTablesLayer({
-  				query: {
-  					select: "kml_4326",
-          			from: FT_TableID,
-          			where: "'name_0' IN " + countries
-          		},
-  				styles: [{
-  					polygonOptions: {
-					    fillOpacity: "0.4",
-    					fillColor: "#06FF1D"
-  					}
-				}]
-			});
-
-			layer.setMap(map);
-
-		};
-
-		self.clickMarker(model.map);
+		self.clickMarker(model.map, model.layer);
 		self.addInfoWindow(model.map);
-		fillCountries(model.map, 'Russia');
 	};
 
 	self.initialize();
@@ -960,6 +959,7 @@ var viewModel = function() {
 		myLatLng = new google.maps.LatLng(39.104892, 9.456656);
 		model.map.setCenter(myLatLng);
 		model.map.setZoom(3);
+		model.layer.setMap(model.map);
 	};
 
 	// show photos in left sidebar according to selected location
