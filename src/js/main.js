@@ -6,6 +6,7 @@
 // 3. Create feature to choose on which field we want to search.
 // 4. Convert all css to BEM
 // 5. Make gray background during big photo displaying
+// 6. Use localStorage and Firebase to configure locations and restore previous state of application
 
 var model = {
     // array with all visited locations
@@ -520,11 +521,9 @@ var model = {
 			photos: []
 		}
     ],
-    // arrau with markers to display
-    markers: [],
-    columns: ['continent', 'country', 'city'],
+    columns: ['continent', 'country', 'city'], //columns to search locations
     map: null,
-    layer: null
+    layer: null //layer used to fill in visited countries.
 };
 
 // function to create new location object
@@ -556,6 +555,7 @@ var Location = function (data) {
 var viewModel = function() {
     var self = this;
 
+    // function to initialize map, markes, infowindow and all neccessary observables
     self.initialize = function() {
 	    self.isHiddenLeft = ko.observable(true); // initially left sidebar is hidden
 	    self.isHiddenRight = ko.observable(true); // initially right sidebar is hidden
@@ -564,10 +564,10 @@ var viewModel = function() {
 		self.currentLocation = ko.observable(); // inisialize observable for current location
 		self.currentPhotos = ko.observableArray([]); // inisialize observable for photos for current location
 		self.currentBigPhoto = ko.observable(); // inisialize observable for big photo
+		self.bigPhotoWidth = ko.observable(); // inisialize observable for width of big photo
+    	self.bigPhotoHeight = ko.observable(); // inisialize observable for height of big photo
 	    self.infoHeight = ko.observable($(window).height() - 70); // set height property to right sidebar
     	self.photosHeight = ko.observable($(window).height() - 70); // set height property to left sidebar
-    	self.bigPhotoWidth = ko.observable();
-    	self.bigPhotoHeight = ko.observable();
 
 		// initialize Google Map via API
 		self.initMap = function() {
@@ -594,7 +594,7 @@ var viewModel = function() {
 		        }
 		    });
 
-		    self.fillCountries(model.map);	// fill visited countries
+		    self.fillCountries(model.map);	// fill visited countries countries in model
 		    self.addMarkers(model.map);		// add markers on map according to locations in model
 		};
 
@@ -603,9 +603,9 @@ var viewModel = function() {
 		// 		map - map where markers will be displayed
 		self.addMarkers = function(map) {
 
-		    // iterate through all locations in model
+		    // iterate through all locations in model to create marker for each location
 		    for ( var loc in model.locations) {
-		        // create new marker at specified position
+		        // create new marker at locations position
 		        var marker = new google.maps.Marker({
 		            position: model.locations[loc],
 		            map: map,
@@ -613,33 +613,44 @@ var viewModel = function() {
 		            animation: google.maps.Animation.DROP
 		        });
 
+		        // choose icon for marker
+		        // if location was visited with family (wife and children) - choose heart icon
+		        // if location was visited with friends (as well as with family) - choose friends icon
 		        if (model.locations[loc].company === 2) {
 					marker.setIcon('img/heart.png');
 		        } else {
 		        	marker.setIcon('img/friends.png');
 		        }
 
-		        // push marker into array of markers in model
-		        //model.markers.push(marker);
+		        // associate marker with location in model
 		        model.locations[loc].marker = marker;
 		    }
 		};
 
-
+		// function to fill visited countries with layer
+		// Fusion Table is used to determine country's border
+		// parameter:
+		// 		map - map to fill
 		self.fillCountries = function(map) {
     		var countriesArray = [];
     		var countries = '(';
+    		// iterate through all locations in model to determine unique set of countries
+    		// result of this loop is 'countries' string that should be added into query to Fusion Table
     		for (var loc in model.locations) {
     			var cntr = model.locations[loc].country;
+    			// if country is not in countriesArray do nothing
+    			// add it to countriesArray array and to 'countries' string
     			if (countriesArray.indexOf(cntr) <= -1) {
     				countriesArray.push(cntr);
     				countries += "'" + cntr + "', ";
     			}
     		}
+    		// remove the last to character ', ' from the string of countries and  add close bracket.
     		countries = countries.substring(0, countries.length - 2) + ")";
 
-    		// Fusion Table data ID
+    		// Fusion Table data ID to dertemine coontry's border
 			var FT_TableID = 420419;
+			// create layer to fill visited countries
 			model.layer = new google.maps.FusionTablesLayer({
   				query: {
   					select: "kml_4326",
@@ -654,89 +665,130 @@ var viewModel = function() {
 				}]
 			});
 
+			// assign layer to map
 			model.layer.setMap(map);
 
 		};
 
+		// function to add listeners on 'click' event to all markers
+		// parameter:
+		// 		map - map where marker is displayed
+		//		layer - layer thta should be shown or hidden
 		self.clickMarker = function(map, layer) {
+			// iterate through all locations to add event listener
 			ko.utils.arrayForEach(self.locationsList(), function (loc) {
 				var marker = loc.marker();
 				// Zoom to 12 when clicking on marker
 				google.maps.event.addListener(marker,'click',function() {
+					// TODO: this if else contition possible should be refactor to work correctly with show/hide layer
+					// if marker is animated (bounce) don't animate and display layer
 					if (marker.getAnimation() !== null) {
 					    marker.setAnimation(null);
 					    layer.setMap(map);
+					// else animate and remove layer
 					} else {
 					    marker.setAnimation(google.maps.Animation.BOUNCE);
 					    layer.setMap(null);
 					}
+					// zoom and center to clicked marker
 					map.setZoom(12);
 					map.setCenter(marker.getPosition());
 				});
 		    });
 		};
 
+
+		// function to infowindows and fill them with appropriate content
+		// parameter:
+		// 		map - map where marker is displayed
 		self.addInfoWindow = function(map) {
+			// iterate through all locations to create infowindow for each marker
 			ko.utils.arrayForEach(self.locationsList(), function (loc) {
 				var marker = loc.marker();
 				var city = loc.city();
 
+				// url that will be used to request for links for particular city to display them in infowindow content
 				var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 
+				// previous error handler function
+				// don't remove it for further investigation
 			    //var wikiListRequestTimeout = setTimeout( function (){
 			    //    alert('Failed to get Wiki resources');
 			    //}, 8000);
 
+				// ajax request to receive wiki links on articles that should be displayed in infowindow content
 			    $.ajax({
 			        url: wikiUrl,
 			        dataType: 'jsonp',
 			        success: function(response) {
+			        	// handle response with handleWiki function
 			        	handleWiki(response);
 			            //clearTimeout(wikiListRequestTimeout);
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
+			        	// alert if ajax request was not executed correctly
 				        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiUrl);
 				    }
 			    });
 
+			    // function to handle ajax request
+			    // parameter:
+			    //		data - data received from wiki, contatins list of articles for particular city.
 			    var handleWiki = function(data) {
 		    		var articleList = data[1];
-
 		    		var wikiArticleList = '';
-		            for(var i = 0; i < articleList.length; i++) {
-		                articleStr = articleList[i];
-		                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-		                wikiArticleList += '<li><a href="' + url + '">' + articleStr + '</a></li>';
-		            }
 
+		    		// iterate through all articles and add them into a list thta will be displayed in infowindow
+		            for(var i = 0, l = articleList.length; i < l; i++)
+		                wikiArticleList += '<li><a href="http://en.wikipedia.org/wiki/' + articleList[i] + '">' + articleList[i] + '</a></li>';
+
+		            // variable will be used to search brief information about each city in wikipedia
 		            var article = articleList[0];
+		            // cities Pushkin and Versailles have not standard names in wiki
+		            // so implement logic to search further information using correct data
 		            if (city === 'Pushkin')
 		            	article = articleList[7];
 		            if (city === 'Versailles')
 		            	article = articleList[1];
+		            // url to search brief information about each city in wikipedia
 		    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
 
+					// previous error handler function
+					// don't remove it for further investigation
 					//var wikiArticleRequestTimeout = setTimeout( function (){
 					//	alert('Failed to get Wiki resources');
 				    //}, 8000);
 
 		    		var aboutCity = '';
+		    		// ajax request to receive brief information about each city in wikipedia that should be displayed in infowindow content
 					$.ajax({
 				        url: wikiAboutUrl,
 				        dataType: 'jsonp',
 				        success: function(response) {
+				        	// handle response with handleWikiAbout function
 				        	handleWikiAbout(response);
 				            //clearTimeout(wikiArticleRequestTimeout);
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
+				        	// alert if ajax request was not executed correctly
 					        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiAboutUrl);
 					    }
 				    });
 
+					// function to handle ajax request
+			    	// parameter:
+			    	//		data - data received from wiki, contatins list of articles for particular city.
 					var handleWikiAbout = function(data) {
+						// extract brief information from response
 						articleObjectKeys = Object.keys(data.query.pages);
 						key = articleObjectKeys[0];
 						wikiArticle = data.query.pages[key].extract;
+
+						// create content to be displayed in infowindow
+						// it include:
+						//	information about visit
+						//	brief information about city from wikipedia
+						//	list of links on articles about city and around it in wikipedia
 						var content = '<div id="iw-container">' +
 			            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
 			                  		  	'<div class="iw-content">' +
@@ -764,21 +816,20 @@ var viewModel = function() {
 							    			'<ul>' + wikiArticleList + '</ul>' +
 			                    	  	'<div class="iw-bottom-gradient"></div>' +
 			                  		  '</div>';
-		                // A new Info Window is created and set content
+
+		                // a new Info Window is created and set content
 						var infowindow = new google.maps.InfoWindow({
 						   	content: content,
-						    // Assign a maximum value for the width of the infowindow allows
-						    // greater control over the various content elements
 						    maxWidth: 350
 						});
 
-						// This event expects a click on a marker
-						// When this event is fired the Info Window is opened.
+						// this event expects a click on a marker
+						// when this event is fired the Info Window is opened.
 						google.maps.event.addListener(marker, 'click', function() {
 							infowindow.open(map, marker);
 						});
 
-						// Event that closes the Info Window with a click on the map
+						// event that closes the Info Window with a click on the map
 						google.maps.event.addListener(map, 'click', function() {
 							infowindow.close();
 						});
@@ -936,6 +987,9 @@ var viewModel = function() {
     	self.currentLocation = location;
     	self.currentPhotos([]);
     	self.currentBigPhoto();
+
+    	// previous error handler function
+		// don't remove it for further investigation
 		//var flickrCollectionRequestTimeout = setTimeout(function() {
 		//	console.log('fail in flickrCollectionRequestTimeout');
 		//    alert('Failed to get Flickr resources');
@@ -953,6 +1007,7 @@ var viewModel = function() {
 		        //clearTimeout(flickrCollectionRequestTimeout);
 		    },
 	        error: function (xhr, ajaxOptions, thrownError) {
+	        	// alert if ajax request was not executed correctly
 		        alert(xhr.status + ' failed to get Flickr resources for city ' + location.city() + '\nUrl requested: \n' + photosets);
 		    }
 		});
@@ -969,6 +1024,9 @@ var viewModel = function() {
 		};
 
 		var getPhotos = function(city, photosetId) {
+
+			// previous error handler function
+			// don't remove it for further investigation
 			//var flickrPhotosRequestTimeout = setTimeout(function() {
 		    //	console.log('fail in flickrPhotosRequestTimeout');
 		    //    alert('Failed to get Flickr resources');
@@ -993,6 +1051,7 @@ var viewModel = function() {
 			            //clearTimeout(flickrPhotosRequestTimeout);
 			        },
 			        error: function (xhr, ajaxOptions, thrownError) {
+			        	// alert if ajax request was not executed correctly
 				        alert(xhr.status + ' failed to get Flickr resources for city ' + city + '\nUrl requested: \n' + photos);
 				    }
 			    });
