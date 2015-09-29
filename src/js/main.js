@@ -8,8 +8,7 @@
 // 5. Optimize big photo width and height
 // 6. Optimize width of left sidebar on small screens
 // 7. Convert all css to BEM
-// 8. !!! Add wiki links into infowindow
-// 9. Make gray background during big photo displaying
+// 8. Make gray background during big photo displaying
 
 var model = {
     // array with all visited locations
@@ -531,72 +530,6 @@ var model = {
     layer: null
 };
 
-/*ko.bindingHandlers.map = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-        var mapObj = ko.utils.unwrapObservable(valueAccessor());
-        var latLng = new google.maps.LatLng(
-            ko.utils.unwrapObservable(mapObj.lat),
-            ko.utils.unwrapObservable(mapObj.lng));
-        var mapOptions = {
-				        	center: latLng,
-					        zoom: 3,
-					        mapTypeControl: true,
-					        mapTypeId: google.maps.MapTypeId.ROADMAP,
-					        mapTypeControlOptions: {
-					            position: google.maps.ControlPosition.BOTTOM_CENTER
-					        },
-					        zoomControl: true,
-					        zoomControlOptions: {
-					            position: google.maps.ControlPosition.LEFT_CENTER
-					        },
-					        streetViewControl: true,
-					        streetViewControlOptions: {
-					            position: google.maps.ControlPosition.LEFT_CENTER
-					        }
-            			};
-
-        mapObj.googleMap = new google.maps.Map(element, mapOptions);
-
-        //var markers = ko.utils.unwrapObservable(mapObj.markers);
-        //for (var marker in markers) {
-        //	mapObj.markers.push(new google.maps.Marker({
-		//            				position: markers[marker].location,
-		//            				map: mapObj.googleMap,
-		//            				title: markers[marker].title
-	    //    						})
-        //						);
-        //}
-
-        mapObj.marker = new google.maps.Marker({
-            map: mapObj.googleMap,
-            position: latLng,
-            title: "You Are Here",
-            draggable: true
-        });
-
-        mapObj.onChangedCoord = function(newValue) {
-            var latLng = new google.maps.LatLng(
-                ko.utils.unwrapObservable(mapObj.lat),
-                ko.utils.unwrapObservable(mapObj.lng));
-            mapObj.googleMap.setCenter(latLng);
-        };
-
-        mapObj.onMarkerMoved = function(dragEnd) {
-            var latLng = mapObj.marker.getPosition();
-            mapObj.lat(latLng.lat());
-            mapObj.lng(latLng.lng());
-        };
-
-        mapObj.lat.subscribe(mapObj.onChangedCoord);
-        mapObj.lng.subscribe(mapObj.onChangedCoord);
-
-        google.maps.event.addListener(mapObj.marker, 'dragend', mapObj.onMarkerMoved);
-
-        $("#" + element.getAttribute("id")).data("mapObj",mapObj);
-    }
-};*/
-
-
 // function to create new location object
 // parameter:
 //		data - data to create location (continent, country, city and so on...)
@@ -751,17 +684,20 @@ var viewModel = function() {
 
 				var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 
-			    var wikiListRequestTimeout = setTimeout( function (){
-			        //$wikiElem.text('Failed to get Wikipedia resources');
-			    }, 8000);
+			    //var wikiListRequestTimeout = setTimeout( function (){
+			    //    alert('Failed to get Wiki resources');
+			    //}, 8000);
 
 			    $.ajax({
 			        url: wikiUrl,
 			        dataType: 'jsonp',
 			        success: function(response) {
 			        	handleWiki(response);
-			            clearTimeout(wikiListRequestTimeout);
-			        }
+			            //clearTimeout(wikiListRequestTimeout);
+			        },
+			        error: function (xhr, ajaxOptions, thrownError) {
+				        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiUrl);
+				    }
 			    });
 
 			    var handleWiki = function(data) {
@@ -780,10 +716,10 @@ var viewModel = function() {
 		            if (city === 'Versailles')
 		            	article = articleList[1];
 		    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
-		    		//console.log(articleList[0])
-					var wikiArticleRequestTimeout = setTimeout( function (){
-				        //$wikiElem.text('Failed to get Wikipedia resources');
-				    }, 8000);
+
+					//var wikiArticleRequestTimeout = setTimeout( function (){
+					//	alert('Failed to get Wiki resources');
+				    //}, 8000);
 
 		    		var aboutCity = '';
 					$.ajax({
@@ -791,8 +727,11 @@ var viewModel = function() {
 				        dataType: 'jsonp',
 				        success: function(response) {
 				        	handleWikiAbout(response);
-				            clearTimeout(wikiArticleRequestTimeout);
-				        }
+				            //clearTimeout(wikiArticleRequestTimeout);
+				        },
+				        error: function (xhr, ajaxOptions, thrownError) {
+					        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiAboutUrl);
+					    }
 				    });
 
 					var handleWikiAbout = function(data) {
@@ -997,10 +936,10 @@ var viewModel = function() {
     	self.currentLocation = location;
     	self.currentPhotos([]);
     	self.currentBigPhoto();
-		var flickrCollectionRequestTimeout = setTimeout(function() {
-			console.log('fail in flickrCollectionRequestTimeout');
-		    alert('Failed to get Flickr resources');
-		}, 8000);
+		//var flickrCollectionRequestTimeout = setTimeout(function() {
+		//	console.log('fail in flickrCollectionRequestTimeout');
+		//    alert('Failed to get Flickr resources');
+		//}, 8000);
 
 
 		// url to use Flickr API to receive all my collections
@@ -1011,7 +950,10 @@ var viewModel = function() {
 		    dataType: 'json',
 		    success: function(response) {
 		        handlePhotosets(response);
-		        clearTimeout(flickrCollectionRequestTimeout);
+		        //clearTimeout(flickrCollectionRequestTimeout);
+		    },
+	        error: function (xhr, ajaxOptions, thrownError) {
+		        alert(xhr.status + ' failed to get Flickr resources for city ' + location.city() + '\nUrl requested: \n' + photosets);
 		    }
 		});
 
@@ -1027,10 +969,10 @@ var viewModel = function() {
 		};
 
 		var getPhotos = function(city, photosetId) {
-			var flickrPhotosRequestTimeout = setTimeout(function() {
-		    	console.log('fail in flickrPhotosRequestTimeout');
-		        alert('Failed to get Flickr resources');
-		    }, 8000);
+			//var flickrPhotosRequestTimeout = setTimeout(function() {
+		    //	console.log('fail in flickrPhotosRequestTimeout');
+		    //    alert('Failed to get Flickr resources');
+		    //}, 8000);
 
 			var photos = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=c69f4fb5685159e37196cb8b2b5273cb&photoset_id=' + photosetId + '&user_id=136434920%40N04&format=json&nojsoncallback=1';
 			if (self.currentLocation.photos().length) {
@@ -1040,15 +982,18 @@ var viewModel = function() {
 						imgSrc: self.currentLocation.photos()[0].imgSrc,
 						imgSize: determineBigSize()
 					});
-					clearTimeout(flickrPhotosRequestTimeout);
+					//clearTimeout(flickrPhotosRequestTimeout);
 			} else {
 			    $.ajax({
 			        url: photos,
 			        dataType: 'json',
 			        success: function(response) {
 			            handlePhotos(response);
-			            clearTimeout(flickrPhotosRequestTimeout);
-			        }
+			            //clearTimeout(flickrPhotosRequestTimeout);
+			        },
+			        error: function (xhr, ajaxOptions, thrownError) {
+				        alert(xhr.status + ' failed to get Flickr resources for city ' + city + '\nUrl requested: \n' + photos);
+				    }
 			    });
 			}
 		};
