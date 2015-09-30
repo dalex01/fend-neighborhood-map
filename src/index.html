@@ -10,17 +10,19 @@
   </head>
   <body>
     <div class="container-fluid">
+    	<!-- DIV to display search field -->
     	<div class="row">
     		<div id="search" class="col-md-12">
     			<input
     				id="pac-input"
     				class="controls"
     				type="text"
-    				placeholder="Search Box: enter Continent, Country or City to filter location"
+    				placeholder="Search Box: enter Continent, Country, City, Year or Month of visit to filter location"
     				data-bind="textInput: searchQuery"
     			>
     		</div>
 		</div>
+		<!-- DIV to display right sidebar -->
 		<div class="row">
 			<div
 				id="info"
@@ -46,6 +48,7 @@
 				<div id="info-list" data-bind="template: { name: 'location-template', foreach: filteredItems}"></div>
 			</div>
 		</div>
+		<!-- DIV to display left sidebar -->
 		<div class="row">
 			<div
 				id="photos"
@@ -56,12 +59,9 @@
 			>
 				<div class="wrapper">
 					<div class="photoHeaderWrapper">
-					<!--<div data-bind="if: currentLocation">-->
 						<h1 class="headerPhoto">
-							Photos <!--for <span data-bind="text: currentLocation().city"></span>-->
+							Photos
 						</h1>
-					<!--</div>-->
-
 					</div>
 					<div class="photoCloseWrapper">
 						<a href="#">
@@ -87,8 +87,10 @@
 			</div>
     	</div>
 	</div>
+	<!-- DIV to display map -->
 	<div id="map"></div>
 
+	<!-- template to display location in right sidebar -->
 	<script type="text/html" id="location-template">
         <div class="location" data-bind="click: $parent.showMarker">
     		<span class="country" data-bind="text: country"></span>,
@@ -139,6 +141,7 @@
         </div>
     </script>
 
+	<!-- template to display photos in left sidebar -->
     <script type="text/html" id="photo-template">
 		<li class="photo" data-bind="click: $parent.changeBigPhoto">
     		<img src="" alt="" data-bind="attr: {src: imgSrc+imgSize, alt: imgAlt}">

@@ -521,7 +521,7 @@ var model = {
 			photos: []
 		}
     ],
-    columns: ['continent', 'country', 'city'], //columns to search locations
+    columns: ['continent', 'country', 'city', 'year', 'month'], //columns to search locations
     map: null,
     layer: null //layer used to fill in visited countries.
 };
@@ -834,21 +834,18 @@ var viewModel = function() {
 							infowindow.close();
 						});
 
-						// *
 						// START INFOWINDOW CUSTOMIZE.
 						// The google.maps.event.addListener() event expects
 						// the creation of the infowindow HTML structure 'domready'
 						// and before the opening of the infowindow, defined styles are applied.
-						// *
 						google.maps.event.addListener(infowindow, 'domready', function() {
 
 						    // Reference to the DIV that wraps the bottom of infowindow
 						    var iwOuter = $('.gm-style-iw');
 
-						    /* Since this div is in a position prior to .gm-div style-iw.
-						     * We use jQuery and create a iwBackground variable,
-						     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-						    */
+						    // Since this div is in a position prior to .gm-div style-iw.
+						    // We use jQuery and create a iwBackground variable,
+						    // and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 						    var iwBackground = iwOuter.prev();
 
 						    // Removes background shadow DIV
@@ -901,6 +898,7 @@ var viewModel = function() {
 		self.addInfoWindow(model.map);
 	};
 
+	// initialize map, markes, infowindow and all neccessary observables
 	self.initialize();
 
 	// set big photo width and height according to avalaible area to display
@@ -911,42 +909,55 @@ var viewModel = function() {
     		return ($(window).width() - 60);
     });
 
-    // locations array to display in right sidebar accordint to search input value
+    // filter locations array to display in right sidebar accordiny to search input value
     // if search is empty - display all locations
-    // if search is not empty and there are continent, country or city in search that
-    // is presented in array of locations then display locations according to this search
+    // if search is not empty and there are continent, country, city, yaer or month in search
+    // that is presented in array of locations then display locations according to this search
     // otherwise don't display anything
 	self.filteredItems = ko.computed(function() {
+		// read search input box
 		var filter = self.searchQuery();
 		if (self.searchQuery())
 	    	filter = filter.toLowerCase();
+
+	    // if search is empty we should display all locations
 	    if (!filter) {
+	    	// set all markers to visible state
 	    	ko.utils.arrayForEach(self.locationsList(), function (loc) {
 	    		loc.marker().setVisible(true);
 	    	});
+	    	// set all locations visible
 	        return self.locationsList();
+	    // else if search is not empty
 	    } else {
+	    	// set all markers invisible (later we will display only required markers)
 	    	ko.utils.arrayForEach(self.locationsList(), function (loc) {
 	    		loc.marker().setVisible(false);
 	    	});
+	    	// filter only found locations in right sidebar
 	        var match = ko.utils.arrayFilter(self.locationsList(), function(item) {
 	        	var matching = -1;
+	        	// loop through all searchable fields
 	        	ko.utils.arrayForEach(self.columnsToSearch(), function (c) {
+	        		// convert searchable filed to string if it is a number
                     var val = item[c]();
                     if (typeof val === 'number') {
                         val = val.toString();
                     }
+                    // dertemine locations that match search query
                     matching+= val.toLowerCase().indexOf(filter.toLowerCase())+1;
                 });
                 return matching>=0;
 	            //return stringStartsWith(item.city().toLowerCase(), filter);
 	        });
+	        // show only those markers that match search query
 	        for (var loc in match)
 	        	match[loc].marker().setVisible(true);
 	        return match;
 	    }
 	});
 
+	// function to show/hide right sidebar
     self.toggleHiddenRight = function() {
     	// if it is hidden show it and vice versa
         self.isHiddenRight(!self.isHiddenRight());
@@ -955,15 +966,22 @@ var viewModel = function() {
             self.toggleHiddenLeft();
     };
 
+	// function to show/hide left sidebar
     self.toggleHiddenLeft = function() {
         self.isHiddenLeft(!self.isHiddenLeft());
     };
 
+	// function to center and zoom on marker when we click on location in right sidebar
+	// parameter:
+    // 		location - selected from right sidebar location
 	self.showMarker = function(location) {
+		// dertemine current marker and its location
 		var myLatLng = new google.maps.LatLng(location.lat(),location.lng());
 		var marker = location.marker();
+		// center map to current location and zoom it
 		model.map.setCenter(myLatLng);
 		model.map.setZoom(12);
+		// toggle anomation of marker and layer that fill in visited country
 		if (marker.getAnimation() !== null) {
    			marker.setAnimation(null);
    			model.layer.setMap(model.map);
@@ -973,6 +991,10 @@ var viewModel = function() {
   		}
 	};
 
+	// function to restore map to initial state:
+	//		zoom out it
+	//		center it to show all markers
+	//		restore layer
 	self.fullMap = function() {
 		myLatLng = new google.maps.LatLng(39.104892, 9.456656);
 		model.map.setCenter(myLatLng);
@@ -984,6 +1006,7 @@ var viewModel = function() {
     // parameter:
     // 		location - selected from right sidebar location
     self.showPhotos = function(location) {
+    	// initialize values should be displayed in left sidebar
     	self.currentLocation = location;
     	self.currentPhotos([]);
     	self.currentBigPhoto();
@@ -996,13 +1019,14 @@ var viewModel = function() {
 		//}, 8000);
 
 
-		// url to use Flickr API to receive all my collections
-		//var collections = 'https://api.flickr.com/services/rest/?method=flickr.collections.getTree&api_key=6123d03adcf80439f7f840ff40e2cf5f&format=json&nojsoncallback=1&auth_token=72157658661848010-e40ca7f10290a5d5&api_sig=b3cfdfe69623ac3a5eeb49d7fee15e05';
+		// url to use Flickr API to receive all my albums
 		var photosets = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=c69f4fb5685159e37196cb8b2b5273cb&user_id=136434920%40N04&format=json&nojsoncallback=1';
+		// ajax request to receive albums of photos
 		$.ajax({
 		    url: photosets,
 		    dataType: 'json',
 		    success: function(response) {
+		    	// response will be handled by this function
 		        handlePhotosets(response);
 		        //clearTimeout(flickrCollectionRequestTimeout);
 		    },
@@ -1012,17 +1036,31 @@ var viewModel = function() {
 		    }
 		});
 
+		// handle ajax request results
+		// this function extracts ids of Flickr albums, requests photos in required album
+		// and assign these values to appropriate variables to display them in left sidebar
+		// paramter:
+		//		responseData - data received from ajax request
 		var handlePhotosets = function(responseData) {
+			// dertemine albums from response
 		    var photosetsList = responseData.photosets.photoset;
+		    // loop through all albums, dertemine album id for required city (by name of album)
+		    // and download photos from this album
 		    for (var i = 0; i < photosetsList.length; i++) {
-		    	if (photosetsList[i].title._content == self.currentLocation.city()) {
-					var city = photosetsList[i].title._content;
+		    	var city = photosetsList[i].title._content;
+		    	// if name of album is equal to name of city from requested location handle photos from album
+		    	if (city == self.currentLocation.city()) {
 			    	var photosetId = photosetsList[i].id;
 			        getPhotos(city, photosetId);
+			        break;
 		    	}
 			}
 		};
 
+		// function to handle photos from album
+		// parameters:
+		//		city - city of choosen location
+		//		photosetId - id of photoset from which we will display photos
 		var getPhotos = function(city, photosetId) {
 
 			// previous error handler function
@@ -1032,21 +1070,29 @@ var viewModel = function() {
 		    //    alert('Failed to get Flickr resources');
 		    //}, 8000);
 
+			// url to use Flickr API to receive all photos
 			var photos = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=c69f4fb5685159e37196cb8b2b5273cb&photoset_id=' + photosetId + '&user_id=136434920%40N04&format=json&nojsoncallback=1';
+
+			// if photos was received from some previous request they already stored in model and we can use them
+			// without additional ajax request
 			if (self.currentLocation.photos().length) {
-					self.currentPhotos(self.currentLocation.photos());
-					self.currentBigPhoto({
-						imgAlt: self.currentLocation.photos()[0].imgAlt,
-						imgSrc: self.currentLocation.photos()[0].imgSrc,
-						imgSize: determineBigSize()
-					});
-					self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
-					//clearTimeout(flickrPhotosRequestTimeout);
+				// fill array with addresses of all photos from album and set big photo
+				self.currentPhotos(self.currentLocation.photos());
+				self.currentBigPhoto({
+					imgAlt: self.currentLocation.photos()[0].imgAlt,
+					imgSrc: self.currentLocation.photos()[0].imgSrc,
+					imgSize: determineBigSize()
+				});
+				// set size of big photo to be fit in displaying area and to avoid of appearing scrollbars
+				self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
+				//clearTimeout(flickrPhotosRequestTimeout);
+			// if photos was not requested previously request them via ajax request
 			} else {
 			    $.ajax({
 			        url: photos,
 			        dataType: 'json',
 			        success: function(response) {
+			        	// handle request by handlePhotos function
 			            handlePhotos(response);
 			            //clearTimeout(flickrPhotosRequestTimeout);
 			        },
@@ -1058,9 +1104,12 @@ var viewModel = function() {
 			}
 		};
 
+		// function to dertemine size of big photo, that should be downloaded accroding to available size to display
 		var determineBigSize = function() {
-			var side = Math.min(Math.max(320, $(window).width() - 370), $(window).height() - 150);
+			// dertemine available size to display
+			var side = Math.min(Math.max($(window).width() - 90, $(window).width() - 400), $(window).height() - 270);
 			var photoSize = '.jpg';
+			// dertemine size depending from available size to display to display big photo
 			if (side > 320 && side <= 500)
 				photoSize = '_z.jpg';
 			else if (side > 500 && side <= 640)
@@ -1076,10 +1125,16 @@ var viewModel = function() {
 			return photoSize;
 		};
 
+		// function to save url of photos related to selected location
+		// paramter:
+		//		responseData - data received from ajax request
 		var handlePhotos = function(responseData) {
+			// set big photo to first photo from downloaded from album
 			var firstPhoto = responseData.photoset.photo[0];
 			self.currentBigPhoto({
+					// alt attribute of image
 					imgAlt: firstPhoto.title,
+					// url of photo
 					imgSrc: 'https://farm' +
 	    					 firstPhoto.farm +
 	    					 '.staticflickr.com/' +
@@ -1088,9 +1143,13 @@ var viewModel = function() {
 	    					 firstPhoto.id +
 	    					 '_' +
 	    					 firstPhoto.secret,
+	    			// siz of photo
 	    			imgSize: determineBigSize()
 	        	});
+			// set size of big photo to be fit in displaying area and to avoid of appearing scrollbars
 			self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
+			// loop through all photos
+			// add photo url, size and alt text into model and currentPhotos
 	        for(var i = 0; i < responseData.photoset.photo.length; i++) {
 	        	var ph = responseData.photoset.photo[i];
 	        	self.currentLocation.photos.push(
@@ -1129,7 +1188,9 @@ var viewModel = function() {
             self.toggleHiddenLeft();
 	};
 
-
+	// function to change big photo when small photo in the list is clicked
+	// parameter
+	//		photo - clicked thumbnail of photo
 	self.changeBigPhoto = function(photo) {
 		var size = self.currentBigPhoto().imgSize;
 		self.currentBigPhoto({
@@ -1137,25 +1198,31 @@ var viewModel = function() {
 					imgSrc: photo.imgSrc,
 	    			imgSize: size
 		});
+		// set size of big photo to be fit in displaying area and to avoid of appearing scrollbars
 		self.setBigPhotoSize(self.currentBigPhoto().imgSrc+self.currentBigPhoto().imgSize);
 	};
 
+	// function ti determine big photo size
+	// if width, height or both of big photo is bigger than area to display
+	// then photo should be fit in this area
+	// parameter:
+	//		url - url to load big photo
 	self.setBigPhotoSize = function(url) {
+		// load image
 		var img = new Image();
 		img.onload = function() {
+			// dertemine image size (width and height)
 			var image = {
 				h: img.height,
 		    	w: img.width
 		    };
-
+		    // dertemine display area size (width and height)
 			var height = $(window).height() - 270;
 			var width = Math.max($(window).width() - 90, $(window).width() - 400);
-			console.log(width, image.w, height, image.h);
+			// set width or height of big photo to fit display area
 			if (width < image.w && height > image.h)
 				self.bigPhotoWidth(width);
-				//self.bigPhotoHeight(height);
 			else if (width > image.w && height < image.h)
-				//self.bigPhotoWidth(width);
 				self.bigPhotoHeight(height);
 			else if (image.w/width < image.h/height)
 				self.bigPhotoHeight(height);
