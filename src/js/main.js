@@ -826,6 +826,7 @@ var viewModel = function() {
 						// this event expects a click on a marker
 						// when this event is fired the Info Window is opened.
 						google.maps.event.addListener(marker, 'click', function() {
+							model.layer.setMap(null);
 							infowindow.open(map, marker);
 						});
 
@@ -978,17 +979,15 @@ var viewModel = function() {
 		// dertemine current marker and its location
 		var myLatLng = new google.maps.LatLng(location.lat(),location.lng());
 		var marker = location.marker();
-		// center map to current location and zoom it
+		// center map to current location, zoom it and remove layer
 		model.map.setCenter(myLatLng);
 		model.map.setZoom(12);
+		model.layer.setMap(null);
 		// toggle anomation of marker and layer that fill in visited country
-		if (marker.getAnimation() !== null) {
+		if (marker.getAnimation() !== null)
    			marker.setAnimation(null);
-   			model.layer.setMap(model.map);
-  		} else {
+  		else
     		marker.setAnimation(google.maps.Animation.BOUNCE);
-    		model.layer.setMap(null);
-  		}
 	};
 
 	// function to restore map to initial state:
