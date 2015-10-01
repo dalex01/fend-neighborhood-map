@@ -2,7 +2,7 @@
 This map represent different cities all over the world I have visited with my family and friends since 2009.
 
 ## How to use
-Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborhood-map
+Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborhood-map/build
 
 ## Features
 
