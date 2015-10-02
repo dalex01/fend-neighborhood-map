@@ -43,8 +43,16 @@ Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborho
 6. Make gray background during big photo displaying
 
 
-## APIs used
+# APIs used
 Google Maps Javascript API
 Google Fusion Tables
 Flickr API
 Wikipedia API
+
+# To make your own map
+1. Clone repository
+2. Install all required components via bower (bootstrap, jquery, knockout)
+3. Install all required gulp modules
+4. Change locations in main.js in model variable
+5. Place your photo on flickr and sort it by album (name of album should be the same as name of visited city)
+6. Change links in main.js in variables 'photosets' (line 1022 or about it) and 'photos' (line 1073 or about it)
