@@ -45,10 +45,10 @@ Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborho
 
 
 # APIs used
-Google Maps Javascript API
-Google Fusion Tables
-Flickr API
-Wikipedia API
+1. Google Maps Javascript API
+2. Google Fusion Tables
+3. Flickr API
+4. Wikipedia API
 
 # To make your own map
 1. Clone repository
