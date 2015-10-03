@@ -41,6 +41,7 @@ Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborho
 4. Use localStorage and Firebase to configure locations and restore previous state of application
 5. Convert all css to BEM
 6. Make gray background during big photo displaying
+7. Add Jasmine and write some tests
 
 
 # APIs used
