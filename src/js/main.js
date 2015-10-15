@@ -692,7 +692,10 @@ var viewModel = function() {
 					}
 					// zoom and center to clicked marker
 					map.setZoom(12);
-					map.setCenter(marker.getPosition());
+					//console.log(marker.getPosition().lat(),marker.getPosition().lng());
+					//console.log(loc.lat()-100.1,loc.lng()+100.1);
+					var myLatLng = new google.maps.LatLng(loc.lat()+0.04,loc.lng()+0.04);
+					map.setCenter(myLatLng);
 				});
 		    });
 		};
@@ -791,6 +794,7 @@ var viewModel = function() {
 						//	list of links on articles about city and around it in wikipedia
 						var content = '<div id="iw-container">' +
 			            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
+			            	          	'<hr class="line">' +
 			                  		  	'<div class="iw-content">' +
 			                      	  		'<div class="iw-subTitle">Visit info</div>' +
 			                      	  		'<span class="hotel">' +
@@ -810,10 +814,13 @@ var viewModel = function() {
 							    				'<strong> Company: </strong>' +
 							    				'<span>' + loc.company() + '</span>' +
 							    			'</span>' +
+							    			'<hr class="line">' +
 							    			'<div class="iw-subTitle">About ' + loc.city() + '</div>' +
 							    			wikiArticle +
+							    			'<hr class="line">' +
 							    			'<div class="iw-subTitle">Other wikipedia articles</div>' +
 							    			'<ul>' + wikiArticleList + '</ul>' +
+							    		'</div>' +
 			                    	  	'<div class="iw-bottom-gradient"></div>' +
 			                  		  '</div>';
 
@@ -850,13 +857,13 @@ var viewModel = function() {
 						    var iwBackground = iwOuter.prev();
 
 						    // Removes background shadow DIV
-						    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+						    //iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 
 						    // Removes white background DIV
-						    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+						    //iwBackground.children(':nth-child(4)').css({'display' : 'none'});
 
 						    // Moves the infowindow 115px to the right.
-						    //iwOuter.parent().parent().css({left: '115px'});
+						    //iwOuter.parent().parent().css({right: '115px'});
 
 						    // Moves the shadow of the arrow 76px to the left margin.
 						    //iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
@@ -865,13 +872,13 @@ var viewModel = function() {
 						    //iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
 
 						    // Changes the desired tail shadow color.
-						    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+						    //iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
 
 						    // Reference to the div that groups the close button elements.
 						    var iwCloseBtn = iwOuter.next();
 
 						    // Apply the desired effect to the close button
-						    iwCloseBtn.css({opacity: '1', right: '55px', top: '20px', border: '7px #48b5e9', 'border-radius': '13px'});
+						    //iwCloseBtn.css({opacity: '1', right: '40px', top: '10px'/*, border: '7px #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'*/});
 
 						    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 						    //if($('.iw-content').height() < 140){
@@ -879,9 +886,9 @@ var viewModel = function() {
 						    //}
 
 						    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-						    iwCloseBtn.mouseout(function(){
-						      $(this).css({opacity: '1'});
-						    });
+						    //iwCloseBtn.mouseout(function(){
+						    //  $(this).css({opacity: '1'});
+						    //});
 						});
 					};
 			    };
@@ -977,7 +984,7 @@ var viewModel = function() {
     // 		location - selected from right sidebar location
 	self.showMarker = function(location) {
 		// dertemine current marker and its location
-		var myLatLng = new google.maps.LatLng(location.lat(),location.lng());
+		var myLatLng = new google.maps.LatLng(location.lat()+0.06,location.lng()+0.04);
 		var marker = location.marker();
 		// center map to current location, zoom it and remove layer
 		model.map.setCenter(myLatLng);
