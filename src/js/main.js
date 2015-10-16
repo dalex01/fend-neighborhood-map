@@ -25,6 +25,7 @@ var initAll = function() {
 				hotel: 'Hôtel Prince',
 				address: '66 Avenue Bosquet, 07. Tour Eiffel - Invalides, Paris, 75007, France',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -41,6 +42,7 @@ var initAll = function() {
 	        			hotel: 'Don\'t remember,
 	        			address: 'Don\'t remember',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -57,6 +59,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -73,6 +76,7 @@ var initAll = function() {
 	        			hotel: 'Not applicable',
 	        			address: 'Not applicable',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -89,6 +93,7 @@ var initAll = function() {
 	            hotel: 'Not applicable',
 	            address: 'Not applicable',
 	            marker: null,
+	            iw_content: '',
 	            company: 10,
 	        	photos: []
 	        },
@@ -105,6 +110,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 10,
 	        	photos: []
 	        },
@@ -121,6 +127,7 @@ var initAll = function() {
 	        			hotel: 'Royal Grand Sharm',
 	        			address: 'Om El-Seid Hill Sharm El-Sheikh, Qesm Sharm Ash Sheikh, South Sinai Governorate, Egypt',
 	        			marker: null,
+	        			iw_content: '',
 	        			photos: []
 	        		},*/
 			{
@@ -136,6 +143,7 @@ var initAll = function() {
 				hotel: 'Siamese Views Lodge',
 				address: '211/21-23 Soi Damneon Klang Nuea, Ratchadamneon Klang Road, Bwonniwet, Pranakorn, Khaosan, Bangkok, 10200, Thailand',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -152,6 +160,7 @@ var initAll = function() {
 				hotel: 'Inn House',
 				address: '322/1 Pattaya Beach Road Soi 13, Pattaya City, Banglamung, Pattaya, 20260, Thailand',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -168,6 +177,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -184,6 +194,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -200,6 +211,7 @@ var initAll = function() {
 	        			hotel: 'Don\'t remember',
 	        			address: 'Don\'t remember',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -216,6 +228,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -232,6 +245,7 @@ var initAll = function() {
 				hotel: 'Holiday Inn Express Berlin City Centre West',
 				address: 'Kurfürstenstraße 78, Tiergarten, Berlin, 10787, Germany',
 				marker: null,
+				iw_content: '',
 				company: 6,
 				photos: []
 			},
@@ -248,6 +262,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -264,6 +279,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -280,6 +296,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -296,6 +313,7 @@ var initAll = function() {
 	        			hotel: 'Not applicable',
 	        			address: 'Not applicable',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 4,
 	        			photos: []
 	        		},*/
@@ -312,6 +330,7 @@ var initAll = function() {
 	            hotel: 'Alexa',
 	            address: 'Pylimo str. 53 / Sodu str. 2, Vilnius , 01136, Lithuania',
 	            marker: null,
+	            iw_content: '',
 	            company: 4,
 	        	photos: []
 	        },
@@ -328,6 +347,7 @@ var initAll = function() {
 				hotel: 'Dubravushka',
 				address: 'Stanki, 16, Puhovichskiy district, Minsk region, Belarus',
 				marker: null,
+				iw_content: '',
 				company: 12,
 				photos: []
 			},
@@ -344,6 +364,7 @@ var initAll = function() {
 	        			hotel: 'Don\'t remember',
 	        			address: 'Don\'t remember',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -360,6 +381,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -376,6 +398,7 @@ var initAll = function() {
 	            hotel: 'Nevsky Mayak Hotel',
 	            address: 'Nevsky Prospekt 94, St Petersburg, 191025, Russia',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -392,6 +415,7 @@ var initAll = function() {
 	            hotel: 'Home, sweet home :)',
 	            address: 'Home, sweet home!',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -408,6 +432,7 @@ var initAll = function() {
 	            hotel: 'Not applicable',
 	            address: 'Not applicable',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -424,6 +449,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -440,6 +466,7 @@ var initAll = function() {
 	            hotel: 'home',
 	            address: 'home',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -456,6 +483,7 @@ var initAll = function() {
 	            hotel: 'Modern Sultan Hotel',
 	            address: 'Zeynep Sultan Cad. No 19 Sultanahmet, Istanbul , 34110, Turkey',
 	            marker: null,
+	            iw_content: '',
 	            company: 4,
 	        	photos: []
 	        },
@@ -472,6 +500,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -488,6 +517,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -504,6 +534,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 6,
 				photos: []
 			},
@@ -520,6 +551,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 3,
 				photos: []
 			},
@@ -536,6 +568,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 4,
 				photos: []
 			},
@@ -552,6 +585,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			}
@@ -582,6 +616,7 @@ var initAll = function() {
 		this.marker = ko.observable(data.marker);
 		this.company = ko.observable(data.company);
 		this.isHiddenDetails = ko.observable(true);
+		this.iwContent = ko.observable(data.iw_content);
 		this.showDetails = function() {
 			this.isHiddenDetails(!self.isHiddenDetails());
 		};
@@ -589,6 +624,7 @@ var initAll = function() {
 
 	var viewModel = function() {
 	    var self = this;
+	    var infowindow;
 
 	    // function to initialize map, markes, infowindow and all neccessary observables
 	    self.initialize = function() {
@@ -645,6 +681,11 @@ var initAll = function() {
 				//	countries.push(model.locations[loc].country_code);
 				//autocomplete.setComponentRestrictions({'country': countries});
 
+				infowindow = new google.maps.InfoWindow({
+				   	content: '',
+				    maxWidth: 350
+				});
+
 			    self.fillCountries(model.map);	// fill visited countries countries in model
 			    self.addMarkers(model.map);		// add markers on map according to locations in model
 			};
@@ -672,6 +713,23 @@ var initAll = function() {
 			        } else {
 			        	marker.setIcon('img/friends.png');
 			        }
+
+//					self.addInfoWindowContent(model.locations[loc]);
+
+					// this event expects a click on a marker
+					// when this event is fired the Info Window is opened.
+					google.maps.event.addListener(marker, 'click', function() {
+						if (model.locations[loc].iw_content === '')
+							self.addInfoWindowContent(model.locations[loc])();
+						model.layer.setMap(null);
+						infowindow.setContent(model.locations[loc].iw_content);
+						infowindow.open(map, marker);
+					});
+
+					// event that closes the Info Window with a click on the map
+					google.maps.event.addListener(map, 'click', function() {
+						infowindow.close();
+					});
 
 			        // associate marker with location in model
 			        model.locations[loc].marker = marker;
@@ -751,15 +809,16 @@ var initAll = function() {
 			    });
 			};
 
-
 			// function to infowindows and fill them with appropriate content
 			// parameter:
 			// 		map - map where marker is displayed
-			self.addInfoWindow = function(map) {
+			self.addInfoWindowContent = function(loc) {
+				return (function() {
 				// iterate through all locations to create infowindow for each marker
-				ko.utils.arrayForEach(self.locationsList(), function (loc) {
-					var marker = loc.marker();
-					var city = loc.city();
+
+				//ko.utils.arrayForEach(self.locationsList(), function (loc) {
+					//var marker = loc.marker();
+					var city = loc.city;
 
 					// url that will be used to request for links for particular city to display them in infowindow content
 					var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
@@ -844,29 +903,29 @@ var initAll = function() {
 							//	brief information about city from wikipedia
 							//	list of links on articles about city and around it in wikipedia
 							var content = '<div id="iw-container">' +
-				            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
+				            	          	'<div class="iw-title">' + loc.continent + ', ' + loc.country + ', ' + loc.city + '</div>' +
 				            	          	'<hr class="line">' +
 				                  		  	'<div class="iw-content">' +
 				                      	  		'<div class="iw-subTitle">Visit info</div>' +
 				                      	  		'<span class="hotel">' +
 								    				'<span class="glyphicon glyphicon-home"></span>' +
 								    				'<strong> Hotel: </strong>' +
-								    				'<span>' + loc.hotel() + '</span>' +
+								    				'<span>' + loc.hotel + '</span>' +
 								    			'</span>' +
 								    			'<br>' +
 								    			'<span class="address">' +
 													'<span class="glyphicon glyphicon-book"></span>' +
 								    				'<strong> Hotel address: </strong>' +
-								    				'<span>' + loc.address() + '</span>' +
+								    				'<span>' + loc.address + '</span>' +
 								    			'</span>' +
 								    			'<br>' +
 								    			'<span class="company">' +
 								    				'<span class="glyphicon glyphicon-user"></span>' +
 								    				'<strong> Company: </strong>' +
-								    				'<span>' + loc.company() + '</span>' +
+								    				'<span>' + loc.company + '</span>' +
 								    			'</span>' +
 								    			'<hr class="line">' +
-								    			'<div class="iw-subTitle">About ' + loc.city() + '</div>' +
+								    			'<div class="iw-subTitle">About ' + loc.city + '</div>' +
 								    			wikiArticle +
 								    			'<hr class="line">' +
 								    			'<div class="iw-subTitle">Other wikipedia articles</div>' +
@@ -874,8 +933,9 @@ var initAll = function() {
 								    		'</div>' +
 				                    	  	'<div class="iw-bottom-gradient"></div>' +
 				                  		  '</div>';
-
-			                // a new Info Window is created and set content
+							infowindow.setContent(content);
+				            loc.iw_content = content;
+/*			                // a new Info Window is created and set content
 							var infowindow = new google.maps.InfoWindow({
 							   	content: content,
 							    maxWidth: 350
@@ -892,6 +952,7 @@ var initAll = function() {
 							google.maps.event.addListener(map, 'click', function() {
 								infowindow.close();
 							});
+*/
 						};
 				    };
 				});
@@ -905,7 +966,7 @@ var initAll = function() {
 			});
 
 			self.clickMarker(model.map, model.layer);
-			self.addInfoWindow(model.map);
+			//self.addInfoWindow(model.map);
 		};
 
 		// initialize map, markes, infowindow and all neccessary observables
@@ -940,6 +1001,8 @@ var initAll = function() {
 		        return self.locationsList();
 		    // else if search is not empty
 		    } else {
+		    	// close infowindow
+		    	infowindow.close();
 		    	// set all markers invisible (later we will display only required markers)
 		    	ko.utils.arrayForEach(self.locationsList(), function (loc) {
 		    		loc.marker().setVisible(false);
@@ -1009,6 +1072,7 @@ var initAll = function() {
 			model.map.setCenter(myLatLng);
 			model.map.setZoom(3);
 			model.layer.setMap(model.map);
+			infowindow.close();
 		};
 
 		// show photos in left sidebar according to selected location
