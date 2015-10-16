@@ -637,10 +637,13 @@ var initAll = function() {
 				        types: ['(cities)']
 				        //componentRestrictions: countryRestrict
 				      });
-				var countries = [];
-				for ( var loc in model.locations)
-					countries.push(model.locations[loc].country_code);
-//				autocomplete.setComponentRestrictions({'country': countries});
+				// Restriction for multiple countries is not working
+				// It is a known bug mentioned here:
+				// https://code.google.com/p/gmaps-api-issues/issues/detail?id=4233
+				//var countries = [];
+				//for ( var loc in model.locations)
+				//	countries.push(model.locations[loc].country_code);
+				//autocomplete.setComponentRestrictions({'country': countries});
 
 			    self.fillCountries(model.map);	// fill visited countries countries in model
 			    self.addMarkers(model.map);		// add markers on map according to locations in model
