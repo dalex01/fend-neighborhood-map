@@ -667,12 +667,12 @@ var initAll = function() {
 			        }
 			    });
 
-				var autocomplete = new google.maps.places.Autocomplete(
-				      /** @type {!HTMLInputElement} */ (
-				          document.getElementById('pac-input')), {
-				        types: ['(cities)']
-				        //componentRestrictions: countryRestrict
-				      });
+				//var autocomplete = new google.maps.places.Autocomplete(
+				//      /** @type {!HTMLInputElement} */ (
+				//          document.getElementById('pac-input')), {
+				//        types: ['(cities)']
+				//        //componentRestrictions: countryRestrict
+				//      });
 				// Restriction for multiple countries is not working
 				// It is a known bug mentioned here:
 				// https://code.google.com/p/gmaps-api-issues/issues/detail?id=4233
@@ -690,13 +690,29 @@ var initAll = function() {
 			    self.addMarkers(model.map);		// add markers on map according to locations in model
 			};
 
+			self.addAutocomplete = function() {
+				var input = document.getElementById("pac-input");
+				var autocompleteArray = [];
+				for (var loc in model.locations) {
+					autocompleteArray.push(model.locations[loc].continent);
+					autocompleteArray.push(model.locations[loc].country);
+					autocompleteArray.push(model.locations[loc].city);
+					autocompleteArray.push(model.locations[loc].month);
+					autocompleteArray.push(model.locations[loc].year);
+				}
+				autocompleteArray = autocompleteArray.filter(function(value, index, self) {
+ 					return self.indexOf(value) === index;
+				});
+				new Awesomplete(input, {list: autocompleteArray});
+			};
+
 			// function to add markers on map
 			// parameter:
 			// 		map - map where markers will be displayed
 			self.addMarkers = function(map) {
 
 			    // iterate through all locations in model to create marker for each location
-			    for ( var loc in model.locations) {
+			    for (var loc in model.locations) {
 			        // create new marker at locations position
 			        var marker = new google.maps.Marker({
 			            position: model.locations[loc],
@@ -944,8 +960,8 @@ var initAll = function() {
 			model.locations.forEach(function(locationItem) {
 				self.locationsList.push(new Location(locationItem));
 			});
-
 			self.clickMarker(model.map, model.layer);
+			self.addAutocomplete();
 		};
 
 		// initialize map, markes, infowindow and all neccessary observables
