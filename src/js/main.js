@@ -25,6 +25,7 @@ var initAll = function() {
 				hotel: 'Hôtel Prince',
 				address: '66 Avenue Bosquet, 07. Tour Eiffel - Invalides, Paris, 75007, France',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -41,6 +42,7 @@ var initAll = function() {
 	        			hotel: 'Don\'t remember,
 	        			address: 'Don\'t remember',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -57,6 +59,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -73,6 +76,7 @@ var initAll = function() {
 	        			hotel: 'Not applicable',
 	        			address: 'Not applicable',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -89,6 +93,7 @@ var initAll = function() {
 	            hotel: 'Not applicable',
 	            address: 'Not applicable',
 	            marker: null,
+	            iw_content: '',
 	            company: 10,
 	        	photos: []
 	        },
@@ -105,6 +110,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 10,
 	        	photos: []
 	        },
@@ -121,6 +127,7 @@ var initAll = function() {
 	        			hotel: 'Royal Grand Sharm',
 	        			address: 'Om El-Seid Hill Sharm El-Sheikh, Qesm Sharm Ash Sheikh, South Sinai Governorate, Egypt',
 	        			marker: null,
+	        			iw_content: '',
 	        			photos: []
 	        		},*/
 			{
@@ -136,6 +143,7 @@ var initAll = function() {
 				hotel: 'Siamese Views Lodge',
 				address: '211/21-23 Soi Damneon Klang Nuea, Ratchadamneon Klang Road, Bwonniwet, Pranakorn, Khaosan, Bangkok, 10200, Thailand',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -152,6 +160,7 @@ var initAll = function() {
 				hotel: 'Inn House',
 				address: '322/1 Pattaya Beach Road Soi 13, Pattaya City, Banglamung, Pattaya, 20260, Thailand',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -168,6 +177,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -184,6 +194,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -200,6 +211,7 @@ var initAll = function() {
 	        			hotel: 'Don\'t remember',
 	        			address: 'Don\'t remember',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -216,6 +228,7 @@ var initAll = function() {
 	            hotel: 'Don\'t remember',
 	            address: 'Don\'t remember',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -232,6 +245,7 @@ var initAll = function() {
 				hotel: 'Holiday Inn Express Berlin City Centre West',
 				address: 'Kurfürstenstraße 78, Tiergarten, Berlin, 10787, Germany',
 				marker: null,
+				iw_content: '',
 				company: 6,
 				photos: []
 			},
@@ -248,6 +262,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -264,6 +279,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -280,6 +296,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -296,6 +313,7 @@ var initAll = function() {
 	        			hotel: 'Not applicable',
 	        			address: 'Not applicable',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 4,
 	        			photos: []
 	        		},*/
@@ -312,6 +330,7 @@ var initAll = function() {
 	            hotel: 'Alexa',
 	            address: 'Pylimo str. 53 / Sodu str. 2, Vilnius , 01136, Lithuania',
 	            marker: null,
+	            iw_content: '',
 	            company: 4,
 	        	photos: []
 	        },
@@ -328,6 +347,7 @@ var initAll = function() {
 				hotel: 'Dubravushka',
 				address: 'Stanki, 16, Puhovichskiy district, Minsk region, Belarus',
 				marker: null,
+				iw_content: '',
 				company: 12,
 				photos: []
 			},
@@ -344,6 +364,7 @@ var initAll = function() {
 	        			hotel: 'Don\'t remember',
 	        			address: 'Don\'t remember',
 	        			marker: null,
+	        			iw_content: '',
 	        			company: 2,
 	        			photos: []
 	        		},*/
@@ -360,6 +381,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -376,6 +398,7 @@ var initAll = function() {
 	            hotel: 'Nevsky Mayak Hotel',
 	            address: 'Nevsky Prospekt 94, St Petersburg, 191025, Russia',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -392,6 +415,7 @@ var initAll = function() {
 	            hotel: 'Home, sweet home :)',
 	            address: 'Home, sweet home!',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -408,6 +432,7 @@ var initAll = function() {
 	            hotel: 'Not applicable',
 	            address: 'Not applicable',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -424,6 +449,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -440,6 +466,7 @@ var initAll = function() {
 	            hotel: 'home',
 	            address: 'home',
 	            marker: null,
+	            iw_content: '',
 	            company: 2,
 	        	photos: []
 	        },
@@ -456,6 +483,7 @@ var initAll = function() {
 	            hotel: 'Modern Sultan Hotel',
 	            address: 'Zeynep Sultan Cad. No 19 Sultanahmet, Istanbul , 34110, Turkey',
 	            marker: null,
+	            iw_content: '',
 	            company: 4,
 	        	photos: []
 	        },
@@ -472,6 +500,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -488,6 +517,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			},
@@ -504,6 +534,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 6,
 				photos: []
 			},
@@ -520,6 +551,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 3,
 				photos: []
 			},
@@ -536,6 +568,7 @@ var initAll = function() {
 				hotel: 'Don\'t remember',
 				address: 'Don\'t remember',
 				marker: null,
+				iw_content: '',
 				company: 4,
 				photos: []
 			},
@@ -552,6 +585,7 @@ var initAll = function() {
 				hotel: 'Not applicable',
 				address: 'Not applicable',
 				marker: null,
+				iw_content: '',
 				company: 2,
 				photos: []
 			}
@@ -582,6 +616,7 @@ var initAll = function() {
 		self.marker = ko.observable(data.marker);
 		self.company = ko.observable(data.company);
 		self.isHiddenDetails = ko.observable(true);
+		self.iwContent = ko.observable(data.iw_content);
 		this.showDetails = function() {
 			self.isHiddenDetails(!self.isHiddenDetails());
 		};
@@ -589,6 +624,7 @@ var initAll = function() {
 
 	var viewModel = function() {
 	    var self = this;
+	    var infowindow;
 
 	    // function to initialize map, markes, infowindow and all neccessary observables
 	    self.initialize = function() {
@@ -631,12 +667,12 @@ var initAll = function() {
 			        }
 			    });
 
-				var autocomplete = new google.maps.places.Autocomplete(
-				      /** @type {!HTMLInputElement} */ (
-				          document.getElementById('pac-input')), {
-				        types: ['(cities)']
-				        //componentRestrictions: countryRestrict
-				      });
+				//var autocomplete = new google.maps.places.Autocomplete(
+				//      /** @type {!HTMLInputElement} */ (
+				//          document.getElementById('pac-input')), {
+				//        types: ['(cities)']
+				//        //componentRestrictions: countryRestrict
+				//      });
 				// Restriction for multiple countries is not working
 				// It is a known bug mentioned here:
 				// https://code.google.com/p/gmaps-api-issues/issues/detail?id=4233
@@ -645,8 +681,40 @@ var initAll = function() {
 				//	countries.push(model.locations[loc].country_code);
 				//autocomplete.setComponentRestrictions({'country': countries});
 
+				infowindow = new google.maps.InfoWindow({
+				   	content: '',
+				    maxWidth: 350
+				});
+
 			    self.fillCountries(model.map);	// fill visited countries countries in model
 			    self.addMarkers(model.map);		// add markers on map according to locations in model
+			};
+
+			// function to add autocomplete functionality
+			self.addAutocomplete = function() {
+				var input = document.getElementById("pac-input");
+				var autocompleteArray = [];
+				// create list of values to show in autocomplete window
+				for (var loc in model.locations) {
+					autocompleteArray.push(model.locations[loc].continent);
+					autocompleteArray.push(model.locations[loc].country);
+					autocompleteArray.push(model.locations[loc].city);
+					autocompleteArray.push(model.locations[loc].month);
+					autocompleteArray.push(model.locations[loc].year);
+				}
+				// leave only unique values
+				autocompleteArray = autocompleteArray.filter(function(value, index, self) {
+ 					return self.indexOf(value) === index;
+				});
+				// create autocomplete object
+				new Awesomplete(input, {
+								 		list: autocompleteArray,
+								 		filter: Awesomplete.FILTER_STARTSWITH
+									   });
+				// add event to set search query if some suggestion is selected
+				window.addEventListener("awesomplete-select", function(e){
+					self.searchQuery(e.text);
+				});
 			};
 
 			// function to add markers on map
@@ -655,7 +723,7 @@ var initAll = function() {
 			self.addMarkers = function(map) {
 
 			    // iterate through all locations in model to create marker for each location
-			    for ( var loc in model.locations) {
+			    for (var loc in model.locations) {
 			        // create new marker at locations position
 			        var marker = new google.maps.Marker({
 			            position: model.locations[loc],
@@ -672,6 +740,14 @@ var initAll = function() {
 			        } else {
 			        	marker.setIcon('img/friends.png');
 			        }
+
+					// generate content of infowindow and create appropriate event if marker is clicked
+					self.addInfoWindowContent(model.locations[loc], marker);
+
+					// event that closes the Info Window with a click on the map
+					google.maps.event.addListener(map, 'click', function() {
+						infowindow.close();
+					});
 
 			        // associate marker with location in model
 			        model.locations[loc].marker = marker;
@@ -751,150 +827,125 @@ var initAll = function() {
 			    });
 			};
 
-
 			// function to infowindows and fill them with appropriate content
 			// parameter:
 			// 		map - map where marker is displayed
-			self.addInfoWindow = function(map) {
-				// iterate through all locations to create infowindow for each marker
-				ko.utils.arrayForEach(self.locationsList(), function (loc) {
-					var marker = loc.marker();
-					var city = loc.city();
+			self.addInfoWindowContent = function(loc, marker) {
+				var city = loc.city;
 
-					// url that will be used to request for links for particular city to display them in infowindow content
-					var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
+				// url that will be used to request for links for particular city to display them in infowindow content
+				var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 
-					// previous error handler function
-					// don't remove it for further investigation
-				    //var wikiListRequestTimeout = setTimeout( function (){
-				    //    alert('Failed to get Wiki resources');
-				    //}, 8000);
+				// ajax request to receive wiki links on articles that should be displayed in infowindow content
+			    $.ajax({
+			        url: wikiUrl,
+			        dataType: 'jsonp',
+			        success: function(response) {
+			        	// handle response with handleWiki function
+			        	handleWiki(response);
+			            //clearTimeout(wikiListRequestTimeout);
+			        },
+			        error: function (xhr, ajaxOptions, thrownError) {
+			        	// alert if ajax request was not executed correctly
+				        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiUrl);
+				    }
+			    });
 
-					// ajax request to receive wiki links on articles that should be displayed in infowindow content
-				    $.ajax({
-				        url: wikiUrl,
+			    // function to handle ajax request
+			    // parameter:
+			    //		data - data received from wiki, contatins list of articles for particular city.
+			    var handleWiki = function(data) {
+		    		var articleList = data[1];
+		    		var wikiArticleList = '';
+
+		    		// iterate through all articles and add them into a list thta will be displayed in infowindow
+		            for(var i = 0, l = articleList.length; i < l; i++)
+		                wikiArticleList += '<li><a href="http://en.wikipedia.org/wiki/' + articleList[i] + '">' + articleList[i] + '</a></li>';
+
+		            // variable will be used to search brief information about each city in wikipedia
+		            var article = articleList[0];
+		            // cities Pushkin and Versailles have not standard names in wiki
+		            // so implement logic to search further information using correct data
+		            if (city === 'Pushkin')
+		            	article = articleList[7];
+		            if (city === 'Versailles')
+		            	article = articleList[1];
+		            // url to search brief information about each city in wikipedia
+		    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
+
+		    		var aboutCity = '';
+		    		// ajax request to receive brief information about each city in wikipedia that should be displayed in infowindow content
+					$.ajax({
+				        url: wikiAboutUrl,
 				        dataType: 'jsonp',
 				        success: function(response) {
-				        	// handle response with handleWiki function
-				        	handleWiki(response);
-				            //clearTimeout(wikiListRequestTimeout);
+				        	// handle response with handleWikiAbout function
+				        	handleWikiAbout(response);
+				            //clearTimeout(wikiArticleRequestTimeout);
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
 				        	// alert if ajax request was not executed correctly
-					        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiUrl);
+					        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiAboutUrl);
 					    }
 				    });
 
-				    // function to handle ajax request
-				    // parameter:
-				    //		data - data received from wiki, contatins list of articles for particular city.
-				    var handleWiki = function(data) {
-			    		var articleList = data[1];
-			    		var wikiArticleList = '';
+					// function to handle ajax request
+			    	// parameter:
+			    	//		data - data received from wiki, contatins list of articles for particular city.
+					var handleWikiAbout = function(data) {
+						// extract brief information from response
+						articleObjectKeys = Object.keys(data.query.pages);
+						key = articleObjectKeys[0];
+						wikiArticle = data.query.pages[key].extract;
 
-			    		// iterate through all articles and add them into a list thta will be displayed in infowindow
-			            for(var i = 0, l = articleList.length; i < l; i++)
-			                wikiArticleList += '<li><a href="http://en.wikipedia.org/wiki/' + articleList[i] + '">' + articleList[i] + '</a></li>';
+						// create content to be displayed in infowindow
+						// it include:
+						//	information about visit
+						//	brief information about city from wikipedia
+						//	list of links on articles about city and around it in wikipedia
+						var content = '<div id="iw-container" class="iw-container">' +
+			            	          	'<div class="iw-title">' + loc.continent + ', ' + loc.country + ', ' + loc.city + '</div>' +
+			            	          	'<hr class="line">' +
+			                  		  	'<div class="iw-content">' +
+			                      	  		'<div class="iw-subTitle">Visit info</div>' +
+			                      	  		'<span class="hotel">' +
+							    				'<span class="glyphicon glyphicon-home"></span>' +
+							    				'<strong> Hotel: </strong>' +
+							    				'<span>' + loc.hotel + '</span>' +
+							    			'</span>' +
+							    			'<br>' +
+							    			'<span class="address">' +
+												'<span class="glyphicon glyphicon-book"></span>' +
+							    				'<strong> Hotel address: </strong>' +
+							    				'<span>' + loc.address + '</span>' +
+							    			'</span>' +
+							    			'<br>' +
+							    			'<span class="company">' +
+							    				'<span class="glyphicon glyphicon-user"></span>' +
+							    				'<strong> Company: </strong>' +
+							    				'<span>' + loc.company + '</span>' +
+							    			'</span>' +
+							    			'<hr class="line">' +
+							    			'<div class="iw-subTitle">About ' + loc.city + '</div>' +
+							    			wikiArticle +
+							    			'<hr class="line">' +
+							    			'<div class="iw-subTitle">Other wikipedia articles</div>' +
+							    			'<ul>' + wikiArticleList + '</ul>' +
+							    		'</div>' +
+			                    	  	'<div class="iw-bottom-gradient"></div>' +
+			                  		  '</div>';
+			            loc.iw_content = content;
 
-			            // variable will be used to search brief information about each city in wikipedia
-			            var article = articleList[0];
-			            // cities Pushkin and Versailles have not standard names in wiki
-			            // so implement logic to search further information using correct data
-			            if (city === 'Pushkin')
-			            	article = articleList[7];
-			            if (city === 'Versailles')
-			            	article = articleList[1];
-			            // url to search brief information about each city in wikipedia
-			    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
-
-						// previous error handler function
-						// don't remove it for further investigation
-						//var wikiArticleRequestTimeout = setTimeout( function (){
-						//	alert('Failed to get Wiki resources');
-					    //}, 8000);
-
-			    		var aboutCity = '';
-			    		// ajax request to receive brief information about each city in wikipedia that should be displayed in infowindow content
-						$.ajax({
-					        url: wikiAboutUrl,
-					        dataType: 'jsonp',
-					        success: function(response) {
-					        	// handle response with handleWikiAbout function
-					        	handleWikiAbout(response);
-					            //clearTimeout(wikiArticleRequestTimeout);
-					        },
-					        error: function (xhr, ajaxOptions, thrownError) {
-					        	// alert if ajax request was not executed correctly
-						        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiAboutUrl);
-						    }
-					    });
-
-						// function to handle ajax request
-				    	// parameter:
-				    	//		data - data received from wiki, contatins list of articles for particular city.
-						var handleWikiAbout = function(data) {
-							// extract brief information from response
-							articleObjectKeys = Object.keys(data.query.pages);
-							key = articleObjectKeys[0];
-							wikiArticle = data.query.pages[key].extract;
-
-							// create content to be displayed in infowindow
-							// it include:
-							//	information about visit
-							//	brief information about city from wikipedia
-							//	list of links on articles about city and around it in wikipedia
-							var content = '<div id="iw-container" class="iw-container">' +
-				            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
-				            	          	'<hr class="line">' +
-				                  		  	'<div class="iw-content">' +
-				                      	  		'<div class="iw-subTitle">Visit info</div>' +
-				                      	  		'<span class="hotel">' +
-								    				'<span class="glyphicon glyphicon-home"></span>' +
-								    				'<strong> Hotel: </strong>' +
-								    				'<span>' + loc.hotel() + '</span>' +
-								    			'</span>' +
-								    			'<br>' +
-								    			'<span class="address">' +
-													'<span class="glyphicon glyphicon-book"></span>' +
-								    				'<strong> Hotel address: </strong>' +
-								    				'<span>' + loc.address() + '</span>' +
-								    			'</span>' +
-								    			'<br>' +
-								    			'<span class="company">' +
-								    				'<span class="glyphicon glyphicon-user"></span>' +
-								    				'<strong> Company: </strong>' +
-								    				'<span>' + loc.company() + '</span>' +
-								    			'</span>' +
-								    			'<hr class="line">' +
-								    			'<div class="iw-subTitle">About ' + loc.city() + '</div>' +
-								    			wikiArticle +
-								    			'<hr class="line">' +
-								    			'<div class="iw-subTitle">Other wikipedia articles</div>' +
-								    			'<ul>' + wikiArticleList + '</ul>' +
-								    		'</div>' +
-				                    	  	'<div class="iw-bottom-gradient"></div>' +
-				                  		  '</div>';
-
-			                // a new Info Window is created and set content
-							var infowindow = new google.maps.InfoWindow({
-							   	content: content,
-							    maxWidth: 350
-							});
-
-							// this event expects a click on a marker
-							// when this event is fired the Info Window is opened.
-							google.maps.event.addListener(marker, 'click', function() {
-								model.layer.setMap(null);
-								infowindow.open(map, marker);
-							});
-
-							// event that closes the Info Window with a click on the map
-							google.maps.event.addListener(map, 'click', function() {
-								infowindow.close();
-							});
-						};
-				    };
-				});
+			            // this event expects a click on a marker
+						// when this event is fired the Info Window is opened.
+			            google.maps.event.addListener(marker, 'click', function() {
+						    //return function() {
+						    	model.layer.setMap(null);
+						        infowindow.setContent(content); //set the content
+						        infowindow.open(model.map, marker);
+						});
+					};
+			    };
 			};
 
 		    self.initMap();
@@ -903,21 +954,12 @@ var initAll = function() {
 			model.locations.forEach(function(locationItem) {
 				self.locationsList.push(new Location(locationItem));
 			});
-
 			self.clickMarker(model.map, model.layer);
-			self.addInfoWindow(model.map);
+			self.addAutocomplete();
 		};
 
 		// initialize map, markes, infowindow and all neccessary observables
 		self.initialize();
-
-		// set big photo width and height according to avalaible area to display
-		/*self.photosWidth = ko.computed(function() {
-	    	if (self.windowWidth() > 600)
-				return (self.windowWidth() - 370);
-			else
-	    		return (self.windowWidth() - 60);
-	    });*/
 
 	    // filter locations array to display in right sidebar accordiny to search input value
 	    // if search is empty - display all locations
@@ -940,6 +982,8 @@ var initAll = function() {
 		        return self.locationsList();
 		    // else if search is not empty
 		    } else {
+		    	// close infowindow
+		    	infowindow.close();
 		    	// set all markers invisible (later we will display only required markers)
 		    	ko.utils.arrayForEach(self.locationsList(), function (loc) {
 		    		loc.marker().setVisible(false);
@@ -993,11 +1037,7 @@ var initAll = function() {
 			model.map.setZoom(12);
 			model.layer.setMap(null);
 			google.maps.event.trigger(marker, 'click');
-			// toggle anomation of marker and layer that fill in visited country
-			if (marker.getAnimation() !== null)
-	   			marker.setAnimation(null);
-	  		else
-	    		marker.setAnimation(google.maps.Animation.BOUNCE);
+			self.toggleHiddenRight();
 		};
 
 		// function to restore map to initial state:
@@ -1009,6 +1049,10 @@ var initAll = function() {
 			model.map.setCenter(myLatLng);
 			model.map.setZoom(3);
 			model.layer.setMap(model.map);
+			infowindow.close();
+			for (var loc in model.locations)
+				if (model.locations[loc].marker.getAnimation() !== null)
+	   				model.locations[loc].marker.setAnimation(null);
 		};
 
 		// show photos in left sidebar according to selected location
@@ -1019,14 +1063,6 @@ var initAll = function() {
 	    	self.currentLocation = location;
 	    	self.currentPhotos([]);
 	    	self.currentBigPhoto();
-
-	    	// previous error handler function
-			// don't remove it for further investigation
-			//var flickrCollectionRequestTimeout = setTimeout(function() {
-			//	console.log('fail in flickrCollectionRequestTimeout');
-			//    alert('Failed to get Flickr resources');
-			//}, 8000);
-
 
 			// url to use Flickr API to receive all my albums
 			var photosets = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=c69f4fb5685159e37196cb8b2b5273cb&user_id=136434920%40N04&format=json&nojsoncallback=1';
@@ -1071,13 +1107,6 @@ var initAll = function() {
 			//		city - city of choosen location
 			//		photosetId - id of photoset from which we will display photos
 			var getPhotos = function(city, photosetId) {
-
-				// previous error handler function
-				// don't remove it for further investigation
-				//var flickrPhotosRequestTimeout = setTimeout(function() {
-			    //	console.log('fail in flickrPhotosRequestTimeout');
-			    //    alert('Failed to get Flickr resources');
-			    //}, 8000);
 
 				// url to use Flickr API to receive all photos
 				var photos = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=c69f4fb5685159e37196cb8b2b5273cb&photoset_id=' + photosetId + '&user_id=136434920%40N04&format=json&nojsoncallback=1';

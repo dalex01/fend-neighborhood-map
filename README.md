@@ -33,6 +33,7 @@ Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborho
   - city
   - year of visit
   - month of visit
+2. Autocomplete functionality is implemented
 
 ###TODO
 1. Menu button in right menu should be fixed during scrolling
@@ -56,4 +57,4 @@ Here is link to the map: http://dalex01.github.io/frontend-nanodegree-neighborho
 3. Install all required gulp modules
 4. Change locations in main.js in model variable
 5. Place your photo on flickr and sort it by album (name of album should be the same as name of visited city)
-6. Change links in main.js in variables 'photosets' (line 1022 or about it) and 'photos' (line 1073 or about it)
+6. Change links in main.js in variables 'photosets' (line 1067 or about it) and 'photos' (line 1111 or about it)
