@@ -690,9 +690,11 @@ var initAll = function() {
 			    self.addMarkers(model.map);		// add markers on map according to locations in model
 			};
 
+			// function to add autocomplete functionality
 			self.addAutocomplete = function() {
 				var input = document.getElementById("pac-input");
 				var autocompleteArray = [];
+				// create list of values to show in autocomplete window
 				for (var loc in model.locations) {
 					autocompleteArray.push(model.locations[loc].continent);
 					autocompleteArray.push(model.locations[loc].country);
@@ -700,10 +702,19 @@ var initAll = function() {
 					autocompleteArray.push(model.locations[loc].month);
 					autocompleteArray.push(model.locations[loc].year);
 				}
+				// leave only unique values
 				autocompleteArray = autocompleteArray.filter(function(value, index, self) {
  					return self.indexOf(value) === index;
 				});
-				new Awesomplete(input, {list: autocompleteArray});
+				// create autocomplete object
+				new Awesomplete(input, {
+								 		list: autocompleteArray,
+								 		filter: Awesomplete.FILTER_STARTSWITH
+									   });
+				// add event to set search query if some suggestion is selected
+				window.addEventListener("awesomplete-select", function(e){
+					self.searchQuery(e.text);
+				});
 			};
 
 			// function to add markers on map
@@ -730,16 +741,8 @@ var initAll = function() {
 			        	marker.setIcon('img/friends.png');
 			        }
 
-					// this event expects a click on a marker
-					// when this event is fired the Info Window is opened.
+					// generate content of infowindow and create appropriate event if marker is clicked
 					self.addInfoWindowContent(model.locations[loc], marker);
-					//google.maps.event.addListener(marker, 'click', function(content) {
-					//    return function() {
-					//    	model.layer.setMap(null);
-					//        infowindow.setContent(content); //set the content
-					//        infowindow.open(map, this);
-					//    };
-					//}());
 
 					// event that closes the Info Window with a click on the map
 					google.maps.event.addListener(map, 'click', function() {
@@ -833,12 +836,6 @@ var initAll = function() {
 				// url that will be used to request for links for particular city to display them in infowindow content
 				var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 
-				// previous error handler function
-				// don't remove it for further investigation
-			    //var wikiListRequestTimeout = setTimeout( function (){
-			    //    alert('Failed to get Wiki resources');
-			    //}, 8000);
-
 				// ajax request to receive wiki links on articles that should be displayed in infowindow content
 			    $.ajax({
 			        url: wikiUrl,
@@ -875,12 +872,6 @@ var initAll = function() {
 		            	article = articleList[1];
 		            // url to search brief information about each city in wikipedia
 		    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
-
-					// previous error handler function
-					// don't remove it for further investigation
-					//var wikiArticleRequestTimeout = setTimeout( function (){
-					//	alert('Failed to get Wiki resources');
-				    //}, 8000);
 
 		    		var aboutCity = '';
 		    		// ajax request to receive brief information about each city in wikipedia that should be displayed in infowindow content
@@ -944,6 +935,9 @@ var initAll = function() {
 			                    	  	'<div class="iw-bottom-gradient"></div>' +
 			                  		  '</div>';
 			            loc.iw_content = content;
+
+			            // this event expects a click on a marker
+						// when this event is fired the Info Window is opened.
 			            google.maps.event.addListener(marker, 'click', function() {
 						    //return function() {
 						    	model.layer.setMap(null);
@@ -966,14 +960,6 @@ var initAll = function() {
 
 		// initialize map, markes, infowindow and all neccessary observables
 		self.initialize();
-
-		// set big photo width and height according to avalaible area to display
-		/*self.photosWidth = ko.computed(function() {
-	    	if (self.windowWidth() > 600)
-				return (self.windowWidth() - 370);
-			else
-	    		return (self.windowWidth() - 60);
-	    });*/
 
 	    // filter locations array to display in right sidebar accordiny to search input value
 	    // if search is empty - display all locations
@@ -1051,11 +1037,7 @@ var initAll = function() {
 			model.map.setZoom(12);
 			model.layer.setMap(null);
 			google.maps.event.trigger(marker, 'click');
-			// toggle anomation of marker and layer that fill in visited country
-			if (marker.getAnimation() !== null)
-	   			marker.setAnimation(null);
-	  		else
-	    		marker.setAnimation(google.maps.Animation.BOUNCE);
+			self.toggleHiddenRight();
 		};
 
 		// function to restore map to initial state:
@@ -1081,14 +1063,6 @@ var initAll = function() {
 	    	self.currentLocation = location;
 	    	self.currentPhotos([]);
 	    	self.currentBigPhoto();
-
-	    	// previous error handler function
-			// don't remove it for further investigation
-			//var flickrCollectionRequestTimeout = setTimeout(function() {
-			//	console.log('fail in flickrCollectionRequestTimeout');
-			//    alert('Failed to get Flickr resources');
-			//}, 8000);
-
 
 			// url to use Flickr API to receive all my albums
 			var photosets = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=c69f4fb5685159e37196cb8b2b5273cb&user_id=136434920%40N04&format=json&nojsoncallback=1';
@@ -1133,13 +1107,6 @@ var initAll = function() {
 			//		city - city of choosen location
 			//		photosetId - id of photoset from which we will display photos
 			var getPhotos = function(city, photosetId) {
-
-				// previous error handler function
-				// don't remove it for further investigation
-				//var flickrPhotosRequestTimeout = setTimeout(function() {
-			    //	console.log('fail in flickrPhotosRequestTimeout');
-			    //    alert('Failed to get Flickr resources');
-			    //}, 8000);
 
 				// url to use Flickr API to receive all photos
 				var photos = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=c69f4fb5685159e37196cb8b2b5273cb&photoset_id=' + photosetId + '&user_id=136434920%40N04&format=json&nojsoncallback=1';
