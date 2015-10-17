@@ -7,29 +7,29 @@
 
 html,
 body {
-  	height: 100%;
-  	margin: 0;
-  	padding: 0;
-  	min-width: 330px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-width: 330px;
 }
 
-#map {
-  	position:absolute;
-  	bottom:0;
-  	top:0;
-  	left:0;
-  	right:0;
+.map {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .controls {
-  	margin-top: 10px;
-  	border: 1px solid transparent;
-  	border-radius: 2px 0 0 2px;
-  	box-sizing: border-box;
-  	-moz-box-sizing: border-box;
-  	height: 30px;
-  	outline: none;
-  	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 30px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .icon-list {
@@ -49,37 +49,33 @@ icon-list:hover {
 
 /********** Search **********/
 
-#search {
+.search {
 	background-color: transparent;
 	z-index: 99;
 }
 
-#pac-input {
-  	background-color: #fff;
-  	font-family: Roboto;
-  	font-size: 15px;
-  	font-weight: 300;
-  	padding: 0 11px 0 13px;
-  	text-overflow: ellipsis;
-  	width: 100%;
-  	opacity: 0.6;
+.pac-input {
+  background-color: #fff;
+  font: 300 15px Roboto;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 100%;
+  opacity: 0.6;
 	filter: alpha(opacity=60);
 }
 
-#pac-input:focus {
-  	border-color: #4d90fe;
-  	opacity: 1.0;
-  	filter: alpha(opacity=100);
+.pac-input:focus {
+  border-color: #4d90fe;
+  opacity: 1.0;
+  filter: alpha(opacity=100);
 }
 
 /********** Right sidebar **********/
 
-#info {
+.info {
 	float: right;
 	background-color: #fff;
-  	font-family: Roboto;
-  	font-size: 15px;
-  	font-weight: 300;
+  font: 300 15px Roboto;
 	right: 15px;
 	width: 300px;
 	height: auto;
@@ -95,17 +91,17 @@ icon-list:hover {
 }
 
 .location:hover {
-	background-color: #F1F1F1;
+	background-color: #f1f1f1;
 }
 
 .country {
 	font-weight: bold;
 	font-size: 1.4em;
-	color: #FF0000;
+	color: #ff0000;
 }
 
 .city {
-	color: #72DD5D;
+	color: #72dd5d;
 	font-weight: bold;
 }
 
@@ -114,17 +110,17 @@ icon-list:hover {
 }
 
 .headerLocations {
-	color: #8F8F8F;
+	color: #8f8f8f;
 	font-weight: normal;
 	text-align: right;
 }
 
 .line {
 	margin: 2px;
-    border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
 .fullmap {
@@ -132,9 +128,9 @@ icon-list:hover {
 }
 
 .menu-hidden-right {
-    transform: translate3d(17.5em, 0, 0);
-    transition: transform 0.5s;
-    opacity: 0.6;
+  transform: translate3d(17.5em, 0, 0);
+  transition: transform 0.5s;
+  opacity: 0.6;
 	filter: alpha(opacity=60);
 }
 
@@ -143,37 +139,37 @@ icon-list:hover {
 }
 
 .rotated-text {
-    display: inline-block;
-    overflow: hidden;
-    width: 3em;
-    margin-top: 90px;
+  display: inline-block;
+  overflow: hidden;
+  width: 3em;
+  margin-top: 90px;
 }
 .rotated-text__inner {
-    display: inline-block;
-    white-space: nowrap;
-    /* this is for shity "non IE" browsers
-       that dosn't support writing-mode */
-    -webkit-transform: translate(1.1em,0) rotate(90deg);
-       -moz-transform: translate(1.1em,0) rotate(90deg);
-         -o-transform: translate(1.1em,0) rotate(90deg);
-            transform: translate(1.1em,0) rotate(90deg);
-    -webkit-transform-origin: 0 0;
-       -moz-transform-origin: 0 0;
-         -o-transform-origin: 0 0;
-            transform-origin: 0 0;
-   /* IE9+ */
-   -ms-transform: none;
-   -ms-transform-origin: none;
-   /* IE8+ */
-   -ms-writing-mode: tb-rl;
-   /* IE7 and below */
-   *writing-mode: tb-rl;
+  display: inline-block;
+  white-space: nowrap;
+  /* this is for shity "non IE" browsers
+     that dosn't support writing-mode */
+  -webkit-transform: translate(1.1em,0) rotate(90deg);
+     -moz-transform: translate(1.1em,0) rotate(90deg);
+       -o-transform: translate(1.1em,0) rotate(90deg);
+          transform: translate(1.1em,0) rotate(90deg);
+  -webkit-transform-origin: 0 0;
+     -moz-transform-origin: 0 0;
+       -o-transform-origin: 0 0;
+          transform-origin: 0 0;
+  /* IE9+ */
+  -ms-transform: none;
+  -ms-transform-origin: none;
+  /* IE8+ */
+  -ms-writing-mode: tb-rl;
+  /* IE7 and below */
+  *writing-mode: tb-rl;
 }
 
 .rotated-text__inner:before {
-    content: "";
-    float: left;
-    margin-top: 100%;
+  content: "";
+  float: left;
+  margin-top: 100%;
 }
 
 .hidden {
@@ -181,7 +177,7 @@ icon-list:hover {
 }
 
 .showDetails {
-	color: #0090FF;
+	color: #0090ff;
 	border-bottom: 1px dotted;
 	font-size: 0.8em;
 }
@@ -199,11 +195,9 @@ icon-list:hover {
 
 /********** Left sidebar **********/
 
-#photos {
+.photos {
 	background-color: #fff;
-  	font-family: Roboto;
-  	font-size: 15px;
-  	font-weight: 300;
+	font-family: 300 15px Roboto;
 	left: 45px;
 	width: 300px;
 	height: auto;
@@ -215,29 +209,27 @@ icon-list:hover {
 }
 
 .headerPhoto {
-	color: #8F8F8F;
+	color: #8f8f8f;
 	font-weight: normal;
 	text-align: center;
 }
 
 .menu-hidden-left {
-    transform: translate3d(-300em, 0, 0);
-    transition: transform 0.5s;
+  transform: translate3d(-300em, 0, 0);
+  transition: transform 0.5s;
 }
 
-.photoList
-{
-    overflow-x:scroll;
-    overflow-y:hidden;
-    height:100px;
-    width:100%;
-    padding: 5px 15px;
+.photoList {
+  overflow-x:scroll;
+  overflow-y:hidden;
+  height:100px;
+  width:100%;
+  padding: 5px 15px;
 }
 
-.photo
-{
-    padding:0;
-    height:100px;
+.photo {
+  padding:0;
+  height:100px;
 }
 
 .list-inline {
@@ -248,7 +240,6 @@ icon-list:hover {
 	height: calc(100%-120px);
 	margin: 10px;
 	text-align: center;
-	vertical-align: center;
 }
 
 .photoHeaderWrapper {
@@ -257,7 +248,7 @@ icon-list:hover {
 
 .photoCloseWrapper {
 	display: inline-block;
-	float: right;
+	/*float: right;*/
 	padding-right: 40px;
 }
 
@@ -266,9 +257,9 @@ Styles for info windows
 Source: http://en.marnoto.com/2014/09/5-formas-de-personalizar-infowindow.html
 */
 
-#iw-container .iw-content {
-    max-height: 190px;
-    overflow-y: auto;
+.iw-content {
+  max-height: 190px;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 360px) {
@@ -304,13 +295,13 @@ Source: http://en.marnoto.com/2014/09/5-formas-de-personalizar-infowindow.html
 }
 
 .iw-bottom-gradient {
-    position: absolute;
-    width: 326px;
-    height: 15px;
-    bottom: 10px;
-    right: 18px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  position: absolute;
+  width: 326px;
+  height: 15px;
+  bottom: 10px;
+  right: 18px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
 }

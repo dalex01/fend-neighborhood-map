@@ -843,7 +843,7 @@ var initAll = function() {
 							//	information about visit
 							//	brief information about city from wikipedia
 							//	list of links on articles about city and around it in wikipedia
-							var content = '<div id="iw-container">' +
+							var content = '<div id="iw-container" class="iw-container">' +
 				            	          	'<div class="iw-title">' + loc.continent() + ', ' + loc.country() + ', ' + loc.city() + '</div>' +
 				            	          	'<hr class="line">' +
 				                  		  	'<div class="iw-content">' +
