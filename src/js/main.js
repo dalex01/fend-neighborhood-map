@@ -714,17 +714,16 @@ var initAll = function() {
 			        	marker.setIcon('img/friends.png');
 			        }
 
-//					self.addInfoWindowContent(model.locations[loc]);
-
 					// this event expects a click on a marker
 					// when this event is fired the Info Window is opened.
-					google.maps.event.addListener(marker, 'click', function() {
-						if (model.locations[loc].iw_content === '')
-							self.addInfoWindowContent(model.locations[loc])();
-						model.layer.setMap(null);
-						infowindow.setContent(model.locations[loc].iw_content);
-						infowindow.open(map, marker);
-					});
+					self.addInfoWindowContent(model.locations[loc], marker);
+					//google.maps.event.addListener(marker, 'click', function(content) {
+					//    return function() {
+					//    	model.layer.setMap(null);
+					//        infowindow.setContent(content); //set the content
+					//        infowindow.open(map, this);
+					//    };
+					//}());
 
 					// event that closes the Info Window with a click on the map
 					google.maps.event.addListener(map, 'click', function() {
@@ -812,150 +811,131 @@ var initAll = function() {
 			// function to infowindows and fill them with appropriate content
 			// parameter:
 			// 		map - map where marker is displayed
-			self.addInfoWindowContent = function(loc) {
-				return (function() {
-				// iterate through all locations to create infowindow for each marker
+			self.addInfoWindowContent = function(loc, marker) {
+				var city = loc.city;
 
-				//ko.utils.arrayForEach(self.locationsList(), function (loc) {
-					//var marker = loc.marker();
-					var city = loc.city;
+				// url that will be used to request for links for particular city to display them in infowindow content
+				var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 
-					// url that will be used to request for links for particular city to display them in infowindow content
-					var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
+				// previous error handler function
+				// don't remove it for further investigation
+			    //var wikiListRequestTimeout = setTimeout( function (){
+			    //    alert('Failed to get Wiki resources');
+			    //}, 8000);
+
+				// ajax request to receive wiki links on articles that should be displayed in infowindow content
+			    $.ajax({
+			        url: wikiUrl,
+			        dataType: 'jsonp',
+			        success: function(response) {
+			        	// handle response with handleWiki function
+			        	handleWiki(response);
+			            //clearTimeout(wikiListRequestTimeout);
+			        },
+			        error: function (xhr, ajaxOptions, thrownError) {
+			        	// alert if ajax request was not executed correctly
+				        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiUrl);
+				    }
+			    });
+
+			    // function to handle ajax request
+			    // parameter:
+			    //		data - data received from wiki, contatins list of articles for particular city.
+			    var handleWiki = function(data) {
+		    		var articleList = data[1];
+		    		var wikiArticleList = '';
+
+		    		// iterate through all articles and add them into a list thta will be displayed in infowindow
+		            for(var i = 0, l = articleList.length; i < l; i++)
+		                wikiArticleList += '<li><a href="http://en.wikipedia.org/wiki/' + articleList[i] + '">' + articleList[i] + '</a></li>';
+
+		            // variable will be used to search brief information about each city in wikipedia
+		            var article = articleList[0];
+		            // cities Pushkin and Versailles have not standard names in wiki
+		            // so implement logic to search further information using correct data
+		            if (city === 'Pushkin')
+		            	article = articleList[7];
+		            if (city === 'Versailles')
+		            	article = articleList[1];
+		            // url to search brief information about each city in wikipedia
+		    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
 
 					// previous error handler function
 					// don't remove it for further investigation
-				    //var wikiListRequestTimeout = setTimeout( function (){
-				    //    alert('Failed to get Wiki resources');
+					//var wikiArticleRequestTimeout = setTimeout( function (){
+					//	alert('Failed to get Wiki resources');
 				    //}, 8000);
 
-					// ajax request to receive wiki links on articles that should be displayed in infowindow content
-				    $.ajax({
-				        url: wikiUrl,
+		    		var aboutCity = '';
+		    		// ajax request to receive brief information about each city in wikipedia that should be displayed in infowindow content
+					$.ajax({
+				        url: wikiAboutUrl,
 				        dataType: 'jsonp',
 				        success: function(response) {
-				        	// handle response with handleWiki function
-				        	handleWiki(response);
-				            //clearTimeout(wikiListRequestTimeout);
+				        	// handle response with handleWikiAbout function
+				        	handleWikiAbout(response);
+				            //clearTimeout(wikiArticleRequestTimeout);
 				        },
 				        error: function (xhr, ajaxOptions, thrownError) {
 				        	// alert if ajax request was not executed correctly
-					        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiUrl);
+					        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiAboutUrl);
 					    }
 				    });
 
-				    // function to handle ajax request
-				    // parameter:
-				    //		data - data received from wiki, contatins list of articles for particular city.
-				    var handleWiki = function(data) {
-			    		var articleList = data[1];
-			    		var wikiArticleList = '';
+					// function to handle ajax request
+			    	// parameter:
+			    	//		data - data received from wiki, contatins list of articles for particular city.
+					var handleWikiAbout = function(data) {
+						// extract brief information from response
+						articleObjectKeys = Object.keys(data.query.pages);
+						key = articleObjectKeys[0];
+						wikiArticle = data.query.pages[key].extract;
 
-			    		// iterate through all articles and add them into a list thta will be displayed in infowindow
-			            for(var i = 0, l = articleList.length; i < l; i++)
-			                wikiArticleList += '<li><a href="http://en.wikipedia.org/wiki/' + articleList[i] + '">' + articleList[i] + '</a></li>';
-
-			            // variable will be used to search brief information about each city in wikipedia
-			            var article = articleList[0];
-			            // cities Pushkin and Versailles have not standard names in wiki
-			            // so implement logic to search further information using correct data
-			            if (city === 'Pushkin')
-			            	article = articleList[7];
-			            if (city === 'Versailles')
-			            	article = articleList[1];
-			            // url to search brief information about each city in wikipedia
-			    		var wikiAboutUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + article;
-
-						// previous error handler function
-						// don't remove it for further investigation
-						//var wikiArticleRequestTimeout = setTimeout( function (){
-						//	alert('Failed to get Wiki resources');
-					    //}, 8000);
-
-			    		var aboutCity = '';
-			    		// ajax request to receive brief information about each city in wikipedia that should be displayed in infowindow content
-						$.ajax({
-					        url: wikiAboutUrl,
-					        dataType: 'jsonp',
-					        success: function(response) {
-					        	// handle response with handleWikiAbout function
-					        	handleWikiAbout(response);
-					            //clearTimeout(wikiArticleRequestTimeout);
-					        },
-					        error: function (xhr, ajaxOptions, thrownError) {
-					        	// alert if ajax request was not executed correctly
-						        alert(xhr.status + ' failed to get Wiki resources for city ' + city + '\nUrl requested: \n' + wikiAboutUrl);
-						    }
-					    });
-
-						// function to handle ajax request
-				    	// parameter:
-				    	//		data - data received from wiki, contatins list of articles for particular city.
-						var handleWikiAbout = function(data) {
-							// extract brief information from response
-							articleObjectKeys = Object.keys(data.query.pages);
-							key = articleObjectKeys[0];
-							wikiArticle = data.query.pages[key].extract;
-
-							// create content to be displayed in infowindow
-							// it include:
-							//	information about visit
-							//	brief information about city from wikipedia
-							//	list of links on articles about city and around it in wikipedia
-							var content = '<div id="iw-container" class="iw-container">' +
-				            	          	'<div class="iw-title">' + loc.continent + ', ' + loc.country + ', ' + loc.city + '</div>' +
-				            	          	'<hr class="line">' +
-				                  		  	'<div class="iw-content">' +
-				                      	  		'<div class="iw-subTitle">Visit info</div>' +
-				                      	  		'<span class="hotel">' +
-								    				'<span class="glyphicon glyphicon-home"></span>' +
-								    				'<strong> Hotel: </strong>' +
-								    				'<span>' + loc.hotel + '</span>' +
-								    			'</span>' +
-								    			'<br>' +
-								    			'<span class="address">' +
-													'<span class="glyphicon glyphicon-book"></span>' +
-								    				'<strong> Hotel address: </strong>' +
-								    				'<span>' + loc.address + '</span>' +
-								    			'</span>' +
-								    			'<br>' +
-								    			'<span class="company">' +
-								    				'<span class="glyphicon glyphicon-user"></span>' +
-								    				'<strong> Company: </strong>' +
-								    				'<span>' + loc.company + '</span>' +
-								    			'</span>' +
-								    			'<hr class="line">' +
-								    			'<div class="iw-subTitle">About ' + loc.city + '</div>' +
-								    			wikiArticle +
-								    			'<hr class="line">' +
-								    			'<div class="iw-subTitle">Other wikipedia articles</div>' +
-								    			'<ul>' + wikiArticleList + '</ul>' +
-								    		'</div>' +
-				                    	  	'<div class="iw-bottom-gradient"></div>' +
-				                  		  '</div>';
-							infowindow.setContent(content);
-				            loc.iw_content = content;
-/*			                // a new Info Window is created and set content
-							var infowindow = new google.maps.InfoWindow({
-							   	content: content,
-							    maxWidth: 350
-							});
-
-							// this event expects a click on a marker
-							// when this event is fired the Info Window is opened.
-							google.maps.event.addListener(marker, 'click', function() {
-								model.layer.setMap(null);
-								infowindow.open(map, marker);
-							});
-
-							// event that closes the Info Window with a click on the map
-							google.maps.event.addListener(map, 'click', function() {
-								infowindow.close();
-							});
-*/
-						};
-				    };
-				});
+						// create content to be displayed in infowindow
+						// it include:
+						//	information about visit
+						//	brief information about city from wikipedia
+						//	list of links on articles about city and around it in wikipedia
+						var content = '<div id="iw-container" class="iw-container">' +
+			            	          	'<div class="iw-title">' + loc.continent + ', ' + loc.country + ', ' + loc.city + '</div>' +
+			            	          	'<hr class="line">' +
+			                  		  	'<div class="iw-content">' +
+			                      	  		'<div class="iw-subTitle">Visit info</div>' +
+			                      	  		'<span class="hotel">' +
+							    				'<span class="glyphicon glyphicon-home"></span>' +
+							    				'<strong> Hotel: </strong>' +
+							    				'<span>' + loc.hotel + '</span>' +
+							    			'</span>' +
+							    			'<br>' +
+							    			'<span class="address">' +
+												'<span class="glyphicon glyphicon-book"></span>' +
+							    				'<strong> Hotel address: </strong>' +
+							    				'<span>' + loc.address + '</span>' +
+							    			'</span>' +
+							    			'<br>' +
+							    			'<span class="company">' +
+							    				'<span class="glyphicon glyphicon-user"></span>' +
+							    				'<strong> Company: </strong>' +
+							    				'<span>' + loc.company + '</span>' +
+							    			'</span>' +
+							    			'<hr class="line">' +
+							    			'<div class="iw-subTitle">About ' + loc.city + '</div>' +
+							    			wikiArticle +
+							    			'<hr class="line">' +
+							    			'<div class="iw-subTitle">Other wikipedia articles</div>' +
+							    			'<ul>' + wikiArticleList + '</ul>' +
+							    		'</div>' +
+			                    	  	'<div class="iw-bottom-gradient"></div>' +
+			                  		  '</div>';
+			            loc.iw_content = content;
+			            google.maps.event.addListener(marker, 'click', function() {
+						    //return function() {
+						    	model.layer.setMap(null);
+						        infowindow.setContent(content); //set the content
+						        infowindow.open(model.map, marker);
+						});
+					};
+			    };
 			};
 
 		    self.initMap();
@@ -966,7 +946,6 @@ var initAll = function() {
 			});
 
 			self.clickMarker(model.map, model.layer);
-			//self.addInfoWindow(model.map);
 		};
 
 		// initialize map, markes, infowindow and all neccessary observables
@@ -1073,6 +1052,9 @@ var initAll = function() {
 			model.map.setZoom(3);
 			model.layer.setMap(model.map);
 			infowindow.close();
+			for (var loc in model.locations)
+				if (model.locations[loc].marker.getAnimation() !== null)
+	   				model.locations[loc].marker.setAnimation(null);
 		};
 
 		// show photos in left sidebar according to selected location
