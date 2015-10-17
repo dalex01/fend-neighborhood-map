@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<link rel="stylesheet" href="./components/bootstrap/dist/css/bootstrap.css">-->
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="./components/bootstrap/dist/css/bootstrap.css">
+    <!--<link rel="stylesheet" href="css/bootstrap.css">-->
     <link rel="stylesheet" href="css/style.css">
     <title>Visited locations</title>
   </head>
@@ -13,10 +13,10 @@
     <div class="container-fluid">
     	<!-- DIV to display search field -->
     	<div class="row">
-    		<div id="search" class="col-md-12">
+    		<div id="search" class="col-md-12 search">
     			<input
     				id="pac-input"
-    				class="controls"
+    				class="controls pac-input"
     				type="text"
     				placeholder="Search Box: enter Continent, Country, City, Year or Month of visit to filter location"
     				data-bind="textInput: searchQuery"
@@ -27,7 +27,7 @@
 		<div class="row">
 			<div
 				id="info"
-				class="col-md-4 controls"
+				class="col-md-4 controls info"
 				data-bind="css: {'menu-hidden-right' : isHiddenRight},
 						   style: { height: infoHeight()+'px'}"
 			>
@@ -53,10 +53,8 @@
 		<div class="row">
 			<div
 				id="photos"
-				class="controls"
-				data-bind="css: {'menu-hidden-left' : isHiddenLeft},
-						   style: { height: photosHeight()+'px',
-						   			width: photosWidth()+'px'}"
+				class="col-md-8 controls photos"
+				data-bind="css: {'menu-hidden-left' : isHiddenLeft}"
 			>
 				<div class="wrapper">
 					<div class="photoHeaderWrapper">
@@ -89,7 +87,7 @@
     	</div>
 	</div>
 	<!-- DIV to display map -->
-	<div id="map"></div>
+	<div id="map" class="map"></div>
 
 	<!-- template to display location in right sidebar -->
 	<script type="text/html" id="location-template">
@@ -149,11 +147,11 @@
 		</li>
     </script>
 	<!-- This script was used initially to load map async. Leave here for future investigations -->
-    <!--<script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./components/knockout/dist/knockout.js"></script>
-    <script src="./js/main.js"></script>-->
-    <script src="./js/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initAll&libraries=places"></script>
+    <script src="./components/jquery/dist/jquery.min.js"></script>
+	<script src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="./components/knockout/dist/knockout.js"></script>
+    <script src="./js/main.js"></script>
+    <!--<script src="./js/app.js"></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdMJrr7wQ0qDTLeonuPwB5jlcJqVzX_kQ&callback=initAll&libraries=places" async defer></script>
   </body>
 </html>

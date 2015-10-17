@@ -601,24 +601,24 @@ var initAll = function() {
 	var Location = function (data) {
 		var self = this;
 
-		this.continent = ko.observable(data.continent);
-		this.country = ko.observable(data.country);
-		this.city = ko.observable(data.city);
-		this.type = ko.observable(data.type);
-		this.month = ko.observable(data.month);
-		this.year = ko.observable(data.year);
-		this.lat = ko.observable(data.lat);
-		this.lng = ko.observable(data.lng);
-		this.hotel = ko.observable(data.hotel);
-		this.address = ko.observable(data.address);
-		this.photos = ko.observableArray([]);
-		this.show = ko.observable(data.show);
-		this.marker = ko.observable(data.marker);
-		this.company = ko.observable(data.company);
-		this.isHiddenDetails = ko.observable(true);
-		this.iwContent = ko.observable(data.iw_content);
+		self.continent = ko.observable(data.continent);
+		self.country = ko.observable(data.country);
+		self.city = ko.observable(data.city);
+		self.type = ko.observable(data.type);
+		self.month = ko.observable(data.month);
+		self.year = ko.observable(data.year);
+		self.lat = ko.observable(data.lat);
+		self.lng = ko.observable(data.lng);
+		self.hotel = ko.observable(data.hotel);
+		self.address = ko.observable(data.address);
+		self.photos = ko.observableArray([]);
+		self.show = ko.observable(data.show);
+		self.marker = ko.observable(data.marker);
+		self.company = ko.observable(data.company);
+		self.isHiddenDetails = ko.observable(true);
+		self.iwContent = ko.observable(data.iw_content);
 		this.showDetails = function() {
-			this.isHiddenDetails(!self.isHiddenDetails());
+			self.isHiddenDetails(!self.isHiddenDetails());
 		};
 	};
 
@@ -902,7 +902,7 @@ var initAll = function() {
 							//	information about visit
 							//	brief information about city from wikipedia
 							//	list of links on articles about city and around it in wikipedia
-							var content = '<div id="iw-container">' +
+							var content = '<div id="iw-container" class="iw-container">' +
 				            	          	'<div class="iw-title">' + loc.continent + ', ' + loc.country + ', ' + loc.city + '</div>' +
 				            	          	'<hr class="line">' +
 				                  		  	'<div class="iw-content">' +
@@ -973,12 +973,12 @@ var initAll = function() {
 		self.initialize();
 
 		// set big photo width and height according to avalaible area to display
-		self.photosWidth = ko.computed(function() {
-	    	if (self.windowWidth() > 700)
+		/*self.photosWidth = ko.computed(function() {
+	    	if (self.windowWidth() > 600)
 				return (self.windowWidth() - 370);
 			else
 	    		return (self.windowWidth() - 60);
-	    });
+	    });*/
 
 	    // filter locations array to display in right sidebar accordiny to search input value
 	    // if search is empty - display all locations
